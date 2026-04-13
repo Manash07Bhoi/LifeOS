@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Manrope:wght@500;600&amp;family=Space_Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#25252d",
+                    "on-surface": "#f9f5fd",
+                    "tertiary-fixed": "#ff90a2",
+                    "inverse-surface": "#fcf8ff",
+                    "on-tertiary-fixed-variant": "#77002a",
+                    "error-dim": "#d73357",
+                    "on-secondary-fixed": "#003a42",
+                    "on-secondary-container": "#e8fbff",
+                    "on-primary-container": "#230075",
+                    "secondary-dim": "#00d4ec",
+                    "tertiary-fixed-dim": "#ff7891",
+                    "surface-container-high": "#1f1f26",
+                    "tertiary-dim": "#df215c",
+                    "secondary-container": "#006875",
+                    "on-secondary": "#004d57",
+                    "on-primary-fixed-variant": "#2d008e",
+                    "surface-dim": "#0e0e13",
+                    "surface-container": "#19191f",
+                    "primary-fixed-dim": "#9780ff",
+                    "surface-tint": "#b1a1ff",
+                    "outline": "#76747b",
+                    "primary-container": "#a491ff",
+                    "tertiary-container": "#ee2e65",
+                    "on-background": "#f9f5fd",
+                    "error": "#ff6e84",
+                    "secondary-fixed": "#26e6ff",
+                    "inverse-primary": "#613de3",
+                    "surface": "#0e0e13",
+                    "on-primary": "#2f0095",
+                    "on-surface-variant": "#acaab1",
+                    "primary": "#b1a1ff",
+                    "surface-container-lowest": "#000000",
+                    "surface-bright": "#2c2b33",
+                    "background": "#0e0e13",
+                    "on-tertiary-container": "#000000",
+                    "error-container": "#a70138",
+                    "on-primary-fixed": "#000000",
+                    "secondary-fixed-dim": "#00d7f0",
+                    "surface-container-highest": "#25252d",
+                    "primary-dim": "#7757fa",
+                    "on-secondary-fixed-variant": "#005964",
+                    "primary-fixed": "#a491ff",
+                    "on-tertiary": "#480016",
+                    "outline-variant": "#48474d",
+                    "on-error-container": "#ffb2b9",
+                    "inverse-on-surface": "#55545b",
+                    "tertiary": "#ff6d8a",
+                    "surface-container-low": "#131319",
+                    "on-error": "#490013",
+                    "secondary": "#00e3fd",
+                    "on-tertiary-fixed": "#390010"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(14, 14, 19, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glow-violet:active {
+            box-shadow: 0 0 20px rgba(124, 92, 255, 0.6);
+            border-color: #7C5CFF;
+        }
+        .glow-cyan:active {
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
+            border-color: #00E5FF;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body min-h-screen selection:bg-primary-dim selection:text-white">
+<!-- Top Navigation Anchor -->
+<nav class="fixed top-0 w-full z-50 bg-[#0e0e13]/80 backdrop-blur-xl border-b border-white/5 flex justify-between items-center px-6 h-16 shadow-[0_0_15px_rgba(124,92,255,0.1)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#7C5CFF]" data-icon="terminal">terminal</span>
+<span class="font-headline font-black tracking-tighter uppercase text-xl text-[#7C5CFF] drop-shadow-[0_0_8px_rgba(124,92,255,0.5)]">NEURAL_OS</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-4 font-label text-[10px] tracking-[0.3em] uppercase">
+<a class="text-[#f9f5fd]/60 hover:text-[#00E5FF] transition-colors" href="#">DASHBOARD</a>
+<a class="text-[#00E5FF]" href="#">COMMAND</a>
+<a class="text-[#f9f5fd]/60 hover:text-[#00E5FF] transition-colors" href="#">NETWORK</a>
+</div>
+<div class="w-8 h-8 rounded-full border border-primary/30 overflow-hidden active:scale-95 transition-transform">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="futuristic cybernetic male avatar with glowing violet implants and sleek dark tech suit" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7wjlX8l-0d2YBJHesakOEEBP7xTOSEZmkhsHE9WdHYbAh4b5aeiOIcIZC-xuoOOFey3c2aBBw_P-AW4_I5iNLjFuk7UsXyn41JhWwTS_Fz02cEJYNqlD_d5zfc7wo8cH8q0xtEgDrIOTUJXwyVBZzvRqx93acf_wZv0-fJ74Ss_3jgbf6S91qYBs-XGIsps3rl78aCPf5NMxy_8VTzoWAhN68yX5ATZkYhy0zwqhPoHwewN-KMjwO9xioDWy3ueou7O7Auu-alJg"/>
+</div>
+</div>
+</nav>
+<!-- Background Command Screen (The Context) -->
+<main class="pt-24 pb-32 px-6 max-w-5xl mx-auto">
+<header class="mb-12">
+<h1 class="font-headline font-black text-4xl md:text-6xl tracking-[-0.05em] leading-none mb-4 bg-gradient-to-r from-on-surface to-on-surface-variant bg-clip-text text-transparent">SYSTEM_OVERVIEW</h1>
+<p class="font-label text-secondary tracking-[0.2em] text-[10px] uppercase">Active Neural Link: Stable</p>
+</header>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<div class="glass-panel p-6 rounded-xl col-span-2">
+<div class="flex justify-between items-start mb-8">
+<div>
+<p class="font-label text-[10px] text-white/40 tracking-[0.3em] mb-1">COGNITIVE LOAD</p>
+<p class="font-headline text-3xl font-black text-on-surface">42.8%</p>
+</div>
+<span class="material-symbols-outlined text-primary-dim" data-icon="insights">insights</span>
+</div>
+<div class="h-32 flex items-end gap-2">
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[40%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[60%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[35%]"></div>
+<div class="flex-1 bg-primary/40 rounded-t-lg h-[85%] border-t-2 border-primary"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[50%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[45%]"></div>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-xl flex flex-col justify-between overflow-hidden relative">
+<div class="relative z-10">
+<p class="font-label text-[10px] text-white/40 tracking-[0.3em] mb-1">UPTIME</p>
+<p class="font-headline text-2xl font-black">14H 22M</p>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-9xl" data-icon="timer">timer</span>
+</div>
+</div>
+</div>
+<div class="glass-panel p-8 rounded-xl flex items-center justify-between">
+<div class="flex gap-4 items-center">
+<div class="w-12 h-12 rounded-full bg-secondary-container/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="bolt">bolt</span>
+</div>
+<div>
+<h3 class="font-headline text-lg font-bold">Protocol Active</h3>
+<p class="text-sm text-on-surface-variant">Flow state detected in sector 7-G</p>
+</div>
+</div>
+<button class="font-label text-[10px] tracking-widest bg-white/5 px-6 py-3 rounded-full border border-white/10 hover:bg-white/10 transition-all uppercase">Analyze</button>
+</div>
+</main>
+<!-- Modal Backdrop -->
+<div class="fixed inset-0 bg-surface/80 backdrop-blur-md z-[60]"></div>
+<!-- Quick Action Drawer (Slide-up Panel) -->
+<div class="fixed bottom-0 left-0 right-0 z-[70] flex justify-center px-4 pb-4">
+<div class="w-full max-w-2xl bg-[#0e0e13]/60 backdrop-blur-3xl rounded-t-[2.5rem] border-t border-x border-white/10 p-8 pt-4 shadow-[0_-20px_50px_rgba(124,92,255,0.15)]">
+<!-- Pull Handle -->
+<div class="w-12 h-1.5 bg-white/10 rounded-full mx-auto mb-8"></div>
+<div class="flex justify-between items-center mb-8">
+<div>
+<h2 class="font-headline text-2xl font-black tracking-tight">QUICK_ACTIONS</h2>
+<p class="font-label text-[10px] text-white/40 tracking-[0.3em] uppercase">Executive Command Interface</p>
+</div>
+<button class="w-10 h-10 rounded-full glass-panel flex items-center justify-center active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+</button>
+</div>
+<!-- Action Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+<!-- Action 1 -->
+<button class="group flex flex-col items-center justify-center p-6 rounded-xl glass-panel glow-violet active:scale-95 transition-all duration-300">
+<div class="w-12 h-12 mb-4 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="add_task">add_task</span>
+</div>
+<span class="font-label text-[10px] text-center tracking-[0.1em] text-on-surface uppercase font-bold">Add Goal</span>
+</button>
+<!-- Action 2 -->
+<button class="group flex flex-col items-center justify-center p-6 rounded-xl glass-panel glow-cyan active:scale-95 transition-all duration-300">
+<div class="w-12 h-12 mb-4 rounded-full bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-secondary text-2xl" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+<span class="font-label text-[10px] text-center tracking-[0.1em] text-on-surface uppercase font-bold">Start Focus</span>
+</button>
+<!-- Action 3 -->
+<button class="group flex flex-col items-center justify-center p-6 rounded-xl glass-panel glow-violet active:scale-95 transition-all duration-300">
+<div class="w-12 h-12 mb-4 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="published_with_changes">published_with_changes</span>
+</div>
+<span class="font-label text-[10px] text-center tracking-[0.1em] text-on-surface uppercase font-bold">Add Habit</span>
+</button>
+<!-- Action 4 -->
+<button class="group flex flex-col items-center justify-center p-6 rounded-xl glass-panel glow-cyan active:scale-95 transition-all duration-300">
+<div class="w-12 h-12 mb-4 rounded-full bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
+<span class="material-symbols-outlined text-secondary text-2xl" data-icon="monitoring">monitoring</span>
+</div>
+<span class="font-label text-[10px] text-center tracking-[0.1em] text-on-surface uppercase font-bold">View Analytics</span>
+</button>
+</div>
+<!-- Footer Meta -->
+<div class="mt-8 pt-6 border-t border-white/5 flex justify-center">
+<p class="font-label text-[9px] text-white/20 tracking-[0.4em] uppercase">System Latency: 4ms • Neural OS v.2.4.0</p>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-md rounded-full border border-white/10 bg-[#0e0e13]/40 backdrop-blur-3xl shadow-[0_0_20px_rgba(124,92,255,0.2)] flex justify-around items-center p-2 z-[80]">
+<a class="flex items-center justify-center text-[#f9f5fd]/40 w-12 h-12 hover:text-[#00E5FF] transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+</a>
+<a class="flex items-center justify-center text-[#f9f5fd]/40 w-12 h-12 hover:text-[#00E5FF] transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</a>
+<a class="flex items-center justify-center bg-[#7C5CFF] text-[#0e0e13] rounded-full w-12 h-12 shadow-[0_0_15px_#7C5CFF] transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</a>
+<a class="flex items-center justify-center text-[#f9f5fd]/40 w-12 h-12 hover:text-[#00E5FF] transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="target">target</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LIFE_OS | System Information</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800;900&amp;family=Manrope:wght@500;600&amp;family=Space+Grotesk:wght@300;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "error": "#ff6e84",
+                "primary": "#b1a1ff",
+                "inverse-on-surface": "#55545b",
+                "secondary-fixed": "#26e6ff",
+                "surface-container-lowest": "#000000",
+                "on-primary-fixed-variant": "#2d008e",
+                "tertiary-fixed-dim": "#ff7891",
+                "on-primary": "#2f0095",
+                "primary-fixed": "#a491ff",
+                "outline-variant": "#48474d",
+                "on-secondary-fixed": "#003a42",
+                "surface": "#0e0e13",
+                "on-surface-variant": "#acaab1",
+                "secondary-dim": "#00d4ec",
+                "on-secondary-container": "#e8fbff",
+                "inverse-primary": "#613de3",
+                "secondary-fixed-dim": "#00d7f0",
+                "primary-dim": "#7757fa",
+                "surface-container-low": "#131319",
+                "on-background": "#f9f5fd",
+                "inverse-surface": "#fcf8ff",
+                "tertiary-fixed": "#ff90a2",
+                "surface-container-highest": "#25252d",
+                "surface-container": "#19191f",
+                "on-primary-fixed": "#000000",
+                "surface-bright": "#2c2b33",
+                "on-tertiary-container": "#000000",
+                "tertiary": "#ff6d8a",
+                "surface-variant": "#25252d",
+                "secondary-container": "#006875",
+                "on-primary-container": "#230075",
+                "surface-container-high": "#1f1f26",
+                "on-tertiary-fixed": "#390010",
+                "primary-container": "#a491ff",
+                "on-secondary-fixed-variant": "#005964",
+                "on-error-container": "#ffb2b9",
+                "error-container": "#a70138",
+                "error-dim": "#d73357",
+                "on-error": "#490013",
+                "on-tertiary-fixed-variant": "#77002a",
+                "primary-fixed-dim": "#9780ff",
+                "on-secondary": "#004d57",
+                "surface-tint": "#b1a1ff",
+                "tertiary-dim": "#df215c",
+                "secondary": "#00e3fd",
+                "outline": "#76747b",
+                "tertiary-container": "#ee2e65",
+                "on-tertiary": "#480016",
+                "background": "#0e0e13",
+                "surface-dim": "#0e0e13",
+                "on-surface": "#f9f5fd"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "1.5rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Plus Jakarta Sans"],
+                "body": ["Manrope"],
+                "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .glass-panel {
+        background: rgba(37, 37, 45, 0.4);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .neural-glow {
+        box-shadow: 0 0 20px rgba(124, 92, 255, 0.15);
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        background-color: #0e0e13;
+        color: #f9f5fd;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body selection:bg-primary/30">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#0e0e13]/40 backdrop-blur-xl border-b border-white/10 shadow-[0_0_15px_rgba(124,92,255,0.1)] flex justify-between items-center px-6 h-20">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#7C5CFF]" data-icon="settings_input_component">settings_input_component</span>
+<h1 class="font-['Plus_Jakarta_Sans'] font-black tracking-[-0.05em] text-[#7C5CFF] uppercase text-2xl">LIFE_OS</h1>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-8 font-label text-[10px] tracking-[0.3em] uppercase">
+<a class="text-[#f9f5fd]/60 hover:text-[#00E5FF] transition-all" href="#">Node</a>
+<a class="text-[#f9f5fd]/60 hover:text-[#00E5FF] transition-all" href="#">Pulse</a>
+<a class="text-[#00E5FF]" href="#">System</a>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border border-white/10 overflow-hidden active:scale-95 transition-transform cursor-pointer">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a digital human with neon violet neural patterns glowing on their skin, futuristic cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBB1Q3_TlspMYOFjPpQ_uIDny8RPT9Ondk8bn-lRrbDKLrNO2K1u4vFQ-jKaC9mmXBKYBXT3C1X42wjF2moh0ePRxJdrB-gjT1sdhr137Xz7JJtzIJYbxvDDILU4Ttoz-VSnnmvxK4viIW6qeWB0zqWNjrZBcSTix5JDOoQnD8YnPA-BtrKNpmQnoScG4rblE6SJ9L847bFtPm96fmlV2j5PD3_AKAwyh7WLVxeYVJ7OTYiDDdDwJh8nuTBopMmN7MOub9zwduQsTc"/>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-40 px-6 max-w-4xl mx-auto min-h-screen">
+<!-- Hero Branding Section -->
+<section class="flex flex-col items-center text-center mb-16">
+<div class="relative mb-8">
+<div class="absolute inset-0 bg-primary blur-[60px] opacity-20 rounded-full"></div>
+<div class="relative w-32 h-32 glass-panel rounded-3xl flex items-center justify-center border border-white/10 neural-glow">
+<span class="material-symbols-outlined text-6xl text-primary" data-icon="terminal" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+</div>
+<h2 class="font-headline font-black text-5xl md:text-7xl tracking-tighter text-on-background mb-4 uppercase">LifeOS</h2>
+<div class="inline-block px-4 py-1 glass-panel border border-primary/20 rounded-full">
+<p class="font-label text-[10px] tracking-[0.3em] text-secondary uppercase">v1.0.42-STABLE</p>
+</div>
+<p class="mt-8 text-on-surface-variant text-lg max-w-lg leading-relaxed">
+                A high-performance neural operating system designed for human optimization.
+            </p>
+</section>
+<!-- Technical Specification Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Kernel Card -->
+<div class="glass-panel p-8 rounded-xl flex flex-col justify-between hover:bg-white/5 transition-all duration-300 group">
+<div>
+<p class="font-label text-[10px] tracking-[0.3em] text-primary mb-4 uppercase">Core Infrastructure</p>
+<h3 class="font-headline font-extrabold text-3xl mb-2">Kernel Version</h3>
+</div>
+<div class="flex items-end justify-between mt-12">
+<span class="font-label text-4xl text-on-background">4.8.2</span>
+<span class="material-symbols-outlined text-primary/40 group-hover:text-primary transition-colors" data-icon="memory">memory</span>
+</div>
+</div>
+<!-- Architecture Card -->
+<div class="glass-panel p-8 rounded-xl flex flex-col justify-between hover:bg-white/5 transition-all duration-300 group border-l-4 border-l-secondary">
+<div>
+<p class="font-label text-[10px] tracking-[0.3em] text-secondary mb-4 uppercase">System Framework</p>
+<h3 class="font-headline font-extrabold text-3xl mb-2">Architecture</h3>
+</div>
+<div class="flex items-end justify-between mt-12">
+<span class="font-label text-2xl text-on-background tracking-tight">Neural_Mesh_v2</span>
+<span class="material-symbols-outlined text-secondary/40 group-hover:text-secondary transition-colors" data-icon="hub">hub</span>
+</div>
+</div>
+<!-- Credits Card (Full Width) -->
+<div class="md:col-span-2 glass-panel p-8 rounded-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[80px] -mr-32 -mt-32"></div>
+<div class="relative z-10">
+<p class="font-label text-[10px] tracking-[0.3em] text-tertiary mb-4 uppercase">Development Source</p>
+<h3 class="font-headline font-extrabold text-4xl mb-4">The Cybernetic Architect</h3>
+<div class="h-px w-full bg-white/5 my-6"></div>
+<div class="flex flex-wrap gap-4 text-on-surface-variant font-body">
+<span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Quantum Logic</span>
+<span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Bio-Sync Module</span>
+<span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Neural Interface</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Metadata Section -->
+<section class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="p-4 rounded-xl border border-white/5 flex flex-col">
+<span class="font-label text-[8px] tracking-[0.2em] text-outline uppercase mb-1">Status</span>
+<span class="text-secondary-fixed text-sm font-semibold">SYNCHRONIZED</span>
+</div>
+<div class="p-4 rounded-xl border border-white/5 flex flex-col">
+<span class="font-label text-[8px] tracking-[0.2em] text-outline uppercase mb-1">Latency</span>
+<span class="text-on-surface text-sm font-semibold">0.42ms</span>
+</div>
+<div class="p-4 rounded-xl border border-white/5 flex flex-col">
+<span class="font-label text-[8px] tracking-[0.2em] text-outline uppercase mb-1">Uptime</span>
+<span class="text-on-surface text-sm font-semibold">1,248 HRS</span>
+</div>
+<div class="p-4 rounded-xl border border-white/5 flex flex-col">
+<span class="font-label text-[8px] tracking-[0.2em] text-outline uppercase mb-1">Entropy</span>
+<span class="text-error text-sm font-semibold">NOMINAL</span>
+</div>
+</section>
+<!-- Decorative Background Element -->
+<div class="fixed bottom-0 right-0 -z-10 opacity-20 pointer-events-none p-12 overflow-hidden">
+<div class="font-label text-[20vw] leading-none text-white/5 select-none font-bold">INFO</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-8 pb-4 h-24 bg-[#0e0e13]/60 backdrop-blur-2xl border-t border-white/5 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] rounded-t-[2.5rem]">
+<button class="flex flex-col items-center justify-center text-[#f9f5fd]/40 p-4 hover:text-[#00E5FF] active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#f9f5fd]/40 p-4 hover:text-[#00E5FF] active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#f9f5fd]/40 p-4 hover:text-[#00E5FF] active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-[#7C5CFF] shadow-[0_0_20px_rgba(124,92,255,0.4)] text-white rounded-full p-4 mb-4 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="info" style="font-variation-settings: 'FILL' 1;">info</span>
+</button>
+</nav>
+</body></html>

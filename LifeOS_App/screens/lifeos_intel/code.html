@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;700;800&amp;family=Manrope:wght@300;400;600&amp;family=Space+Grotesk:wght@300;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#acaab1",
+                    "background": "#0e0e13",
+                    "surface": "#0e0e13",
+                    "on-primary": "#2f0095",
+                    "on-error": "#490013",
+                    "surface-container-high": "#1f1f26",
+                    "surface-variant": "#25252d",
+                    "on-secondary": "#004d57",
+                    "on-tertiary-fixed": "#390010",
+                    "tertiary-container": "#ee2e65",
+                    "inverse-on-surface": "#55545b",
+                    "surface-container-highest": "#25252d",
+                    "on-secondary-fixed-variant": "#005964",
+                    "error-dim": "#d73357",
+                    "secondary-container": "#006875",
+                    "surface-tint": "#b1a1ff",
+                    "secondary-dim": "#00d4ec",
+                    "on-primary-fixed": "#000000",
+                    "on-secondary-fixed": "#003a42",
+                    "primary-fixed-dim": "#9780ff",
+                    "surface-dim": "#0e0e13",
+                    "on-tertiary": "#480016",
+                    "on-surface": "#f9f5fd",
+                    "tertiary-fixed-dim": "#ff7891",
+                    "secondary": "#00e3fd",
+                    "surface-container-lowest": "#000000",
+                    "on-tertiary-fixed-variant": "#77002a",
+                    "tertiary-dim": "#df215c",
+                    "tertiary": "#ff6d8a",
+                    "primary": "#b1a1ff",
+                    "surface-container": "#19191f",
+                    "primary-container": "#a491ff",
+                    "on-tertiary-container": "#000000",
+                    "on-primary-container": "#230075",
+                    "tertiary-fixed": "#ff90a2",
+                    "inverse-primary": "#613de3",
+                    "primary-dim": "#7757fa",
+                    "inverse-surface": "#fcf8ff",
+                    "surface-container-low": "#131319",
+                    "error": "#ff6e84",
+                    "error-container": "#a70138",
+                    "on-background": "#f9f5fd",
+                    "outline": "#76747b",
+                    "outline-variant": "#48474d",
+                    "secondary-fixed": "#26e6ff",
+                    "on-primary-fixed-variant": "#2d008e",
+                    "on-secondary-container": "#e8fbff",
+                    "secondary-fixed-dim": "#00d7f0",
+                    "primary-fixed": "#a491ff",
+                    "on-error-container": "#ffb2b9",
+                    "surface-bright": "#2c2b33"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(25, 25, 31, 0.4);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+      }
+      .neon-glow-primary {
+        filter: drop-shadow(0 0 8px rgba(124, 92, 255, 0.6));
+      }
+      .neon-glow-secondary {
+        filter: drop-shadow(0 0 8px rgba(0, 227, 253, 0.6));
+      }
+      .mask-chart {
+        mask-image: linear-gradient(to top, transparent, black 40%);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#0e0e13]/80 backdrop-blur-xl border-b border-white/10 flex justify-between items-center px-6 py-4 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full border border-primary/30 overflow-hidden relative group cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="User profile avatar with a futuristic cyan HUD overlay, high-tech interface aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx61kOyB_m58n8jUBviJpyGRXsTKEmLkln9_23kAQKH_JiBZC2RlyMbSRWCYNADWzzpHxRl5hGsPVzkk8_24i552yY2exkTBIbZ5UF5qcykOUvZ1lUUpcvYyY-15dj_U8bRYEyIr8dxO3WmU9YjpNnMSvPAasawwPy7Ft1V-T_RAv8j5s3b43DHPkmtfCsnypyXSqK0dqJMPkuHvLgWXaPXQ22hxhDDh3vUxc6hOn9d1h6DeawLtMxG-6cLrOFy12om71kdZbDA4k"/>
+<div class="absolute inset-0 bg-primary/20 mix-blend-overlay"></div>
+</div>
+<h1 class="font-headline font-black tracking-tighter uppercase text-2xl text-[#7C5CFF] drop-shadow-[0_0_8px_rgba(124,92,255,0.8)]">LIFE_OS_v1.0</h1>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex gap-8 font-label text-[12px] uppercase tracking-widest text-slate-500">
+<span class="hover:text-[#ff6d8a] transition-colors duration-300 cursor-pointer">Terminal</span>
+<span class="text-[#00e3fd] cursor-pointer">Analytics</span>
+<span class="hover:text-[#ff6d8a] transition-colors duration-300 cursor-pointer">Network</span>
+</div>
+<button class="material-symbols-outlined text-[#7C5CFF] hover:text-[#ff6d8a] transition-colors duration-300 active:scale-95">terminal</button>
+</div>
+</header>
+<main class="pt-28 pb-32 px-6 max-w-7xl mx-auto space-y-10">
+<!-- Hero Header -->
+<section class="flex flex-col md:flex-row justify-between items-end gap-6 border-l-2 border-primary/20 pl-6">
+<div class="space-y-1">
+<p class="font-label text-secondary text-sm tracking-[0.3em] uppercase">System Diagnostic</p>
+<h2 class="font-headline font-extrabold text-5xl md:text-7xl tracking-tighter">PERFORMANCE <span class="text-on-surface-variant/30">INSIGHTS</span></h2>
+</div>
+<div class="font-label text-right">
+<p class="text-on-surface-variant text-xs uppercase tracking-widest">Last Sync</p>
+<p class="text-xl font-bold tracking-tighter">14:02:59 <span class="text-primary">UTC</span></p>
+</div>
+</section>
+<!-- Bento Analytics Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Main Chart Card -->
+<div class="md:col-span-8 glass-card rounded-xl p-8 border border-white/5 relative overflow-hidden flex flex-col justify-between h-[450px]">
+<div class="flex justify-between items-start z-10">
+<div>
+<h3 class="font-headline text-2xl font-bold">Weekly Focus Variance</h3>
+<p class="text-on-surface-variant font-body">Deep work efficiency over 7-day cycle</p>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-highest px-3 py-1 rounded-full border border-white/10">
+<span class="w-2 h-2 rounded-full bg-primary neon-glow-primary"></span>
+<span class="font-label text-[10px] uppercase tracking-widest text-on-surface">Live Stream</span>
+</div>
+</div>
+<!-- Custom SVG Line Graph -->
+<div class="absolute inset-0 top-24 px-8 opacity-60">
+<svg class="w-full h-full" viewbox="0 0 800 200">
+<defs>
+<lineargradient id="lineGrad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#b1a1ff" stop-opacity="0.5"></stop>
+<stop offset="100%" stop-color="#b1a1ff" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path class="neon-glow-primary" d="M0,150 Q100,50 200,120 T400,60 T600,140 T800,40" fill="none" stroke="#7C5CFF" stroke-width="4"></path>
+<path d="M0,150 Q100,50 200,120 T400,60 T600,140 T800,40 V200 H0 Z" fill="url(#lineGrad)"></path>
+<!-- Data Points -->
+<circle cx="200" cy="120" fill="#0e0e13" r="6" stroke="#b1a1ff" stroke-width="2"></circle>
+<circle cx="400" cy="60" fill="#0e0e13" r="6" stroke="#b1a1ff" stroke-width="2"></circle>
+<circle cx="800" cy="40" fill="#0e0e13" r="6" stroke="#b1a1ff" stroke-width="2"></circle>
+</svg>
+</div>
+<div class="grid grid-cols-7 gap-2 z-10 pt-4 border-t border-white/5 font-label text-[10px] uppercase tracking-tighter text-on-surface-variant/60">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+</div>
+<!-- Stats Column -->
+<div class="md:col-span-4 space-y-6">
+<!-- Circular Progress Card -->
+<div class="glass-card rounded-xl p-6 border border-white/5 flex items-center justify-between">
+<div class="space-y-1">
+<p class="font-label text-xs text-on-surface-variant uppercase tracking-widest">Goal Progress</p>
+<p class="font-headline text-3xl font-black">84<span class="text-primary">%</span></p>
+</div>
+<div class="relative w-20 h-20">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="40" cy="40" fill="transparent" r="32" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-secondary neon-glow-secondary" cx="40" cy="40" fill="transparent" r="32" stroke="currentColor" stroke-dasharray="201" stroke-dashoffset="32" stroke-width="6"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-xl">bolt</span>
+</div>
+</div>
+</div>
+<!-- Habits Card -->
+<div class="glass-card rounded-xl p-6 border border-white/5 h-[280px] flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<h4 class="font-headline font-bold">Habit Matrix</h4>
+<span class="material-symbols-outlined text-on-surface-variant/40">more_vert</span>
+</div>
+<div class="flex items-end justify-between h-32 gap-3">
+<div class="w-full bg-surface-container-highest rounded-t-md relative group h-[40%]">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-md h-full group-hover:bg-primary-dim transition-all"></div>
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 font-label text-[8px] opacity-0 group-hover:opacity-100 transition-opacity">M</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-t-md relative group h-[70%]">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-md h-full group-hover:bg-primary-dim transition-all"></div>
+</div>
+<div class="w-full bg-surface-container-highest rounded-t-md relative group h-[95%]">
+<div class="absolute bottom-0 w-full bg-secondary rounded-t-md h-full group-hover:bg-secondary-dim transition-all neon-glow-secondary"></div>
+</div>
+<div class="w-full bg-surface-container-highest rounded-t-md relative group h-[60%]">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-md h-full group-hover:bg-primary-dim transition-all"></div>
+</div>
+<div class="w-full bg-surface-container-highest rounded-t-md relative group h-[85%]">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-md h-full group-hover:bg-primary-dim transition-all"></div>
+</div>
+</div>
+<div class="flex justify-between items-center text-xs font-label uppercase tracking-widest text-on-surface-variant">
+<span>Consistency</span>
+<span class="text-secondary">Optimal</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Lower Analytics Section -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="glass-card rounded-xl p-6 border border-white/5 flex gap-5 items-center">
+<div class="w-14 h-14 rounded-xl bg-primary-container/10 flex items-center justify-center text-primary border border-primary/20">
+<span class="material-symbols-outlined text-3xl">insights</span>
+</div>
+<div>
+<p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Cognitive Load</p>
+<p class="text-2xl font-bold tracking-tighter">Balanced</p>
+</div>
+</div>
+<div class="glass-card rounded-xl p-6 border border-white/5 flex gap-5 items-center">
+<div class="w-14 h-14 rounded-xl bg-secondary-container/10 flex items-center justify-center text-secondary border border-secondary/20">
+<span class="material-symbols-outlined text-3xl">emergency_home</span>
+</div>
+<div>
+<p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Environment</p>
+<p class="text-2xl font-bold tracking-tighter">98.4% STABLE</p>
+</div>
+</div>
+<div class="glass-card rounded-xl p-6 border border-white/5 flex gap-5 items-center">
+<div class="w-14 h-14 rounded-xl bg-tertiary-container/10 flex items-center justify-center text-tertiary border border-tertiary/20">
+<span class="material-symbols-outlined text-3xl">bolt</span>
+</div>
+<div>
+<p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Energy Output</p>
+<p class="text-2xl font-bold tracking-tighter">High Yield</p>
+</div>
+</div>
+</div>
+<!-- Decorative UI Element: Data Stream -->
+<div class="w-full py-8 overflow-hidden opacity-20 pointer-events-none border-y border-white/5">
+<div class="flex gap-12 animate-infinite-scroll whitespace-nowrap font-label text-[10px] tracking-[0.5em] text-on-surface-variant uppercase">
+<span>Core.Stability.Nominal</span>
+<span>//</span>
+<span>Active.Neural.Syncing...99%</span>
+<span>//</span>
+<span>Memory.Allocation.Optimized</span>
+<span>//</span>
+<span>Latency: 0.002ms</span>
+<span>//</span>
+<span>Life.OS.Status: Running</span>
+<span>//</span>
+<span>Uptime: 432:12:09</span>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] md:w-auto md:min-w-[400px] z-50 bg-[#19191f]/40 backdrop-blur-2xl rounded-2xl border border-white/5 flex justify-around items-center px-4 py-3 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)]">
+<div class="flex items-center justify-center text-slate-400 p-3 hover:bg-white/5 transition-all cursor-pointer rounded-xl active:scale-90 duration-200">
+<span class="material-symbols-outlined">grid_view</span>
+</div>
+<div class="flex items-center justify-center bg-gradient-to-br from-[#7C5CFF] to-[#7757fa] text-white rounded-xl p-3 shadow-[0_0_15px_rgba(124,92,255,0.5)] active:scale-90 duration-200 cursor-default">
+<span class="material-symbols-outlined">insights</span>
+</div>
+<div class="flex items-center justify-center text-slate-400 p-3 hover:bg-white/5 transition-all cursor-pointer rounded-xl active:scale-90 duration-200">
+<span class="material-symbols-outlined">emergency_home</span>
+</div>
+<div class="flex items-center justify-center text-slate-400 p-3 hover:bg-white/5 transition-all cursor-pointer rounded-xl active:scale-90 duration-200">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<div class="flex items-center justify-center text-slate-400 p-3 hover:bg-white/5 transition-all cursor-pointer rounded-xl active:scale-90 duration-200">
+<span class="material-symbols-outlined">settings_input_component</span>
+</div>
+</nav>
+<!-- Background Decoration -->
+<div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+<div class="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] bg-primary/10 blur-[150px] rounded-full"></div>
+<div class="absolute top-[40%] -right-[10%] w-[50%] h-[50%] bg-secondary/5 blur-[120px] rounded-full"></div>
+</div>
+</body></html>

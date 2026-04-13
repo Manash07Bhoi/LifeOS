@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Manrope:wght@500;600&amp;family=Space_Grotesk:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#48474d",
+                    "tertiary-container": "#ee2e65",
+                    "secondary-fixed-dim": "#00d7f0",
+                    "on-error": "#490013",
+                    "inverse-primary": "#613de3",
+                    "surface-variant": "#25252d",
+                    "on-secondary-fixed": "#003a42",
+                    "on-primary-container": "#230075",
+                    "tertiary-fixed": "#ff90a2",
+                    "inverse-on-surface": "#55545b",
+                    "on-primary-fixed": "#000000",
+                    "secondary-container": "#006875",
+                    "surface-container-highest": "#25252d",
+                    "surface-bright": "#2c2b33",
+                    "error-dim": "#d73357",
+                    "surface-container-lowest": "#000000",
+                    "secondary": "#00e3fd",
+                    "on-error-container": "#ffb2b9",
+                    "on-tertiary-container": "#000000",
+                    "surface-container-low": "#131319",
+                    "on-background": "#f9f5fd",
+                    "surface": "#0e0e13",
+                    "on-secondary-container": "#e8fbff",
+                    "primary": "#b1a1ff",
+                    "surface-container-high": "#1f1f26",
+                    "on-surface-variant": "#acaab1",
+                    "inverse-surface": "#fcf8ff",
+                    "on-surface": "#f9f5fd",
+                    "on-secondary-fixed-variant": "#005964",
+                    "surface-tint": "#b1a1ff",
+                    "surface-dim": "#0e0e13",
+                    "primary-fixed-dim": "#9780ff",
+                    "primary-fixed": "#a491ff",
+                    "on-tertiary-fixed-variant": "#77002a",
+                    "on-tertiary-fixed": "#390010",
+                    "primary-dim": "#7757fa",
+                    "surface-container": "#19191f",
+                    "outline": "#76747b",
+                    "tertiary-dim": "#df215c",
+                    "background": "#0e0e13",
+                    "secondary-fixed": "#26e6ff",
+                    "on-secondary": "#004d57",
+                    "tertiary-fixed-dim": "#ff7891",
+                    "error-container": "#a70138",
+                    "on-primary-fixed-variant": "#2d008e",
+                    "tertiary": "#ff6d8a",
+                    "error": "#ff6e84",
+                    "on-primary": "#2f0095",
+                    "primary-container": "#a491ff",
+                    "secondary-dim": "#00d4ec",
+                    "on-tertiary": "#480016"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(14, 14, 19, 0.4);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+        }
+        .glow-cyan {
+            filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.6));
+        }
+        .glow-violet {
+            filter: drop-shadow(0 0 12px rgba(124, 92, 255, 0.4));
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- Global Navigation Overlay -->
+<div class="fixed inset-0 z-[100] glass-panel flex flex-col items-center justify-center p-6 overflow-hidden">
+<!-- Top Navigation Bar (Shared Component Logic) -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 w-full bg-slate-950/40 backdrop-blur-xl border-b border-white/5 shadow-[0_0_15px_rgba(124,92,255,0.1)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-violet-500 text-2xl" data-icon="terminal">terminal</span>
+<h1 class="text-xl font-black tracking-tighter text-violet-500 drop-shadow-[0_0_8px_rgba(124,92,255,0.8)] font-headline uppercase">NEURAL_OS</h1>
+</div>
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-200 active:scale-90 group">
+<span class="material-symbols-outlined text-on-surface group-hover:text-error transition-colors" data-icon="close">close</span>
+</button>
+</header>
+<!-- Background Atmospheric Element -->
+<div class="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="absolute -bottom-[20%] -right-[10%] w-[50%] h-[50%] bg-secondary/5 blur-[100px] rounded-full pointer-events-none"></div>
+<!-- Main Menu Cluster -->
+<div class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
+<!-- Dashboard Item (Active) -->
+<button class="flex flex-col items-start p-8 rounded-xl border border-white/10 bg-white/5 transition-all duration-300 hover:bg-white/10 active:scale-95 text-left group">
+<div class="w-14 h-14 mb-6 rounded-lg bg-secondary/10 flex items-center justify-center glow-cyan">
+<span class="material-symbols-outlined text-secondary text-4xl fill-icon" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+</div>
+<div class="space-y-1">
+<span class="font-label text-[10px] tracking-[0.3em] uppercase text-secondary font-bold">ACTIVE MODULE</span>
+<h2 class="text-3xl font-headline font-black text-on-surface tracking-tighter uppercase">Dashboard</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed max-w-[240px]">Unified visualization of bio-metrics, task loads, and temporal health metrics.</p>
+</div>
+</button>
+<!-- Command Center -->
+<button class="flex flex-col items-start p-8 rounded-xl border border-white/5 bg-transparent transition-all duration-300 hover:bg-white/5 hover:border-white/10 active:scale-95 text-left group">
+<div class="w-14 h-14 mb-6 rounded-lg bg-white/5 flex items-center justify-center group-hover:glow-violet transition-all">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary text-4xl" data-icon="terminal">terminal</span>
+</div>
+<div class="space-y-1">
+<span class="font-label text-[10px] tracking-[0.3em] uppercase text-slate-500">READY TO EXECUTE</span>
+<h2 class="text-3xl font-headline font-black text-on-surface tracking-tighter uppercase group-hover:text-primary transition-colors">Command Center</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed max-w-[240px]">High-level orchestration of active protocols and rapid action deployment.</p>
+</div>
+</button>
+<!-- Intelligence -->
+<button class="flex flex-col items-start p-8 rounded-xl border border-white/5 bg-transparent transition-all duration-300 hover:bg-white/5 hover:border-white/10 active:scale-95 text-left group">
+<div class="w-14 h-14 mb-6 rounded-lg bg-white/5 flex items-center justify-center group-hover:glow-violet transition-all">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary text-4xl" data-icon="psychology">psychology</span>
+</div>
+<div class="space-y-1">
+<span class="font-label text-[10px] tracking-[0.3em] uppercase text-slate-500">ANALYZING STREAM</span>
+<h2 class="text-3xl font-headline font-black text-on-surface tracking-tighter uppercase group-hover:text-primary transition-colors">Intelligence</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed max-w-[240px]">Neural-link data processing and predictive behavior forecasting modules.</p>
+</div>
+</button>
+<!-- Protocols -->
+<button class="flex flex-col items-start p-8 rounded-xl border border-white/5 bg-transparent transition-all duration-300 hover:bg-white/5 hover:border-white/10 active:scale-95 text-left group">
+<div class="w-14 h-14 mb-6 rounded-lg bg-white/5 flex items-center justify-center group-hover:glow-violet transition-all">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary text-4xl" data-icon="layers">layers</span>
+</div>
+<div class="space-y-1">
+<span class="font-label text-[10px] tracking-[0.3em] uppercase text-slate-500">SYSTEM FLOWS</span>
+<h2 class="text-3xl font-headline font-black text-on-surface tracking-tighter uppercase group-hover:text-primary transition-colors">Protocols</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed max-w-[240px]">Structured lifestyle algorithms and automated routine management.</p>
+</div>
+</button>
+<!-- System Settings -->
+<button class="flex flex-col items-start p-8 rounded-xl border border-white/5 bg-transparent transition-all duration-300 hover:bg-white/5 hover:border-white/10 active:scale-95 text-left group">
+<div class="w-14 h-14 mb-6 rounded-lg bg-white/5 flex items-center justify-center group-hover:glow-violet transition-all">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary text-4xl" data-icon="settings">settings</span>
+</div>
+<div class="space-y-1">
+<span class="font-label text-[10px] tracking-[0.3em] uppercase text-slate-500">CORE CONFIG</span>
+<h2 class="text-3xl font-headline font-black text-on-surface tracking-tighter uppercase group-hover:text-primary transition-colors">System Settings</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed max-w-[240px]">Hardware synchronization, encryption keys, and interface preferences.</p>
+</div>
+</button>
+<!-- Quick Access / Exit (Asymmetric Card) -->
+<div class="flex flex-col justify-between p-8 rounded-xl border border-primary/20 bg-primary/5 relative overflow-hidden group">
+<div class="relative z-10">
+<span class="font-label text-[10px] tracking-[0.3em] uppercase text-primary font-bold">SYSTEM STATUS</span>
+<div class="flex items-center gap-2 mt-2">
+<div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div>
+<span class="text-on-surface font-headline font-extrabold uppercase tracking-tight">ALL SYSTEMS NOMINAL</span>
+</div>
+</div>
+<div class="relative z-10 mt-12 flex justify-between items-center">
+<div class="text-[10px] font-label text-slate-500">UPTIME: 428:12:05</div>
+<button class="px-4 py-2 bg-on-surface text-background font-headline font-black text-[10px] tracking-[0.2em] uppercase rounded hover:bg-primary transition-colors">LOGOUT_SESSION</button>
+</div>
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<img class="w-full h-full object-cover grayscale" data-alt="abstract technological data flow lines and glowing digital particles in deep space aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB843WV_RVd8SmIgOvfDLnjvwjGT1oHgkU90PwUP6NEJQxU1d6Wr4okaD3VDAlC0Yaf2IGKovUMjtv2GmNeAF1u5f4BelPqS0ahL-YDHSBogka7ARDHKNCb7hPSbFkJXevK0Qf9Vr2_J4QfQkxtFTIvRECsZK8FtN70pG1pwOgFzYB3CacXb4JySMMg7HBO4q372QlFAIvYAfANo-E-X5C_Nur363Lalkha08DpXEDaXHZb-tTB5ZZZ1__LzG4_zVDXRw-iMwhdDRc"/>
+</div>
+</div>
+</div>
+<!-- System Metadata Footer -->
+<footer class="fixed bottom-10 w-full flex flex-col items-center gap-2">
+<div class="flex items-center gap-8 font-label text-[10px] tracking-[0.4em] text-slate-500 uppercase">
+<span class="hover:text-on-surface cursor-pointer transition-colors">v4.0.2_STABLE</span>
+<span class="text-violet-500">●</span>
+<span class="hover:text-on-surface cursor-pointer transition-colors">ENCRYPTED_LINK</span>
+<span class="text-violet-500">●</span>
+<span class="hover:text-on-surface cursor-pointer transition-colors">USER_01_AUTH</span>
+</div>
+</footer>
+<!-- Bottom Navigation Shell (Suppressing as per Task Goal: Overlay Priority) -->
+<!-- Only displaying as per instruction context, but keeping invisible/minimal for navigation focus -->
+</div>
+<!-- Background Content (Simulating the App behind the blur) -->
+<main class="min-h-screen bg-background flex items-center justify-center p-12 -z-10">
+<div class="w-full max-w-6xl space-y-12 opacity-20 grayscale pointer-events-none">
+<h1 class="text-6xl font-headline font-black text-on-surface tracking-tighter uppercase">DASHBOARD_LIVE</h1>
+<div class="grid grid-cols-3 gap-6">
+<div class="h-64 bg-surface-container rounded-xl"></div>
+<div class="h-64 bg-surface-container rounded-xl"></div>
+<div class="h-64 bg-surface-container rounded-xl"></div>
+</div>
+</div>
+</main>
+</body></html>

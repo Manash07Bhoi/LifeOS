@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS - System Reset Success</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Manrope:wght@500;600&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ff6e84",
+                        "primary": "#b1a1ff",
+                        "inverse-on-surface": "#55545b",
+                        "secondary-fixed": "#26e6ff",
+                        "surface-container-lowest": "#000000",
+                        "on-primary-fixed-variant": "#2d008e",
+                        "tertiary-fixed-dim": "#ff7891",
+                        "on-primary": "#2f0095",
+                        "primary-fixed": "#a491ff",
+                        "outline-variant": "#48474d",
+                        "on-secondary-fixed": "#003a42",
+                        "surface": "#0e0e13",
+                        "on-surface-variant": "#acaab1",
+                        "secondary-dim": "#00d4ec",
+                        "on-secondary-container": "#e8fbff",
+                        "inverse-primary": "#613de3",
+                        "secondary-fixed-dim": "#00d7f0",
+                        "primary-dim": "#7757fa",
+                        "surface-container-low": "#131319",
+                        "on-background": "#f9f5fd",
+                        "inverse-surface": "#fcf8ff",
+                        "tertiary-fixed": "#ff90a2",
+                        "surface-container-highest": "#25252d",
+                        "surface-container": "#19191f",
+                        "on-primary-fixed": "#000000",
+                        "surface-bright": "#2c2b33",
+                        "on-tertiary-container": "#000000",
+                        "tertiary": "#ff6d8a",
+                        "surface-variant": "#25252d",
+                        "secondary-container": "#006875",
+                        "on-primary-container": "#230075",
+                        "surface-container-high": "#1f1f26",
+                        "on-tertiary-fixed": "#390010",
+                        "primary-container": "#a491ff",
+                        "on-secondary-fixed-variant": "#005964",
+                        "on-error-container": "#ffb2b9",
+                        "error-container": "#a70138",
+                        "error-dim": "#d73357",
+                        "on-error": "#490013",
+                        "on-tertiary-fixed-variant": "#77002a",
+                        "primary-fixed-dim": "#9780ff",
+                        "on-secondary": "#004d57",
+                        "surface-tint": "#b1a1ff",
+                        "tertiary-dim": "#df215c",
+                        "secondary": "#00e3fd",
+                        "outline": "#76747b",
+                        "tertiary-container": "#ee2e65",
+                        "on-tertiary": "#480016",
+                        "background": "#0e0e13",
+                        "surface-dim": "#0e0e13",
+                        "on-surface": "#f9f5fd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Manrope"],
+                        "label": ["Space Grotesk"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neural-glow {
+            box-shadow: 0 0 40px rgba(124, 92, 255, 0.15);
+        }
+        .text-glow {
+            text-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container/30 overflow-hidden">
+<!-- Background Atmospheric Elements -->
+<div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/5 blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-secondary/5 blur-[100px]"></div>
+<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0e0e13_80%)]"></div>
+</div>
+<!-- Top Navigation Anchor (Suppressing Navigation for Focus) -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-20 w-full bg-[#0e0e13]/40 backdrop-blur-xl border-b border-white/10 shadow-[0_0_15px_rgba(124,92,255,0.1)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#7C5CFF]" data-icon="settings_input_component">settings_input_component</span>
+<h1 class="text-2xl font-black tracking-[-0.05em] text-[#7C5CFF] uppercase font-headline">LIFE_OS</h1>
+</div>
+<div class="w-10 h-10 rounded-full border border-white/10 bg-surface-container overflow-hidden">
+<img alt="User Neural Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a futuristic digital avatar with subtle glowing data points on skin, dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARX9WI5PLRmC1wEV1KTZ8rF952oDpVbMEH66xaIeCjBD9Sa_7pSQJAlYybyNML6bbcIa76H4lwdiaHDoALrSebAbeMAOHcTCwnRdZQLY1Y38h3BMYQFy-FRKBwjryRwo5BdJLwFSPWw3sDE06J2zN8T06lESq6cDhMURW9JQ7SJTW7fgLSZYexI4if8xNB46zUue-1Wt4WmVZSptDmazxyt3uukcDbO6YtGp5NvRXBV_aTmNL0y7ssyN50-5XnqJxBxa0X5Tr77C0"/>
+</div>
+</header>
+<!-- Success Content Canvas -->
+<main class="relative z-10 min-h-screen flex items-center justify-center p-6">
+<div class="max-w-2xl w-full text-center space-y-12">
+<!-- Central Visual Anchor -->
+<div class="relative flex justify-center items-center">
+<div class="absolute w-64 h-64 bg-secondary/10 rounded-full blur-3xl"></div>
+<div class="relative w-48 h-48 rounded-full flex items-center justify-center bg-surface-container-high border border-white/5 neural-glow">
+<div class="absolute inset-2 rounded-full border border-secondary/20 animate-pulse"></div>
+<span class="material-symbols-outlined text-secondary text-7xl font-light" data-icon="check_circle" style="font-variation-settings: 'wght' 200;">check_circle</span>
+</div>
+</div>
+<!-- Message Block -->
+<div class="space-y-4">
+<div class="flex items-center justify-center gap-4">
+<div class="h-px w-8 bg-white/10"></div>
+<span class="font-label text-[10px] tracking-[0.3em] text-secondary-dim uppercase">Status: 200 OK</span>
+<div class="h-px w-8 bg-white/10"></div>
+</div>
+<h2 class="font-headline font-black text-4xl md:text-6xl tracking-tight text-on-surface leading-tight uppercase">
+                    SYSTEM_RESET_COMPLETE
+                </h2>
+<p class="font-body text-xl text-on-surface-variant max-w-lg mx-auto leading-relaxed">
+                    Your LifeOS environment has been returned to its factory state. All neural links and data fragments have been safely decommissioned.
+                </p>
+</div>
+<!-- Bento Status Indicators (Technical Metadata) -->
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-xl mx-auto pt-4">
+<div class="bg-white/5 backdrop-blur-md rounded-xl p-4 border border-white/5 flex flex-col items-start gap-2">
+<span class="font-label text-[10px] tracking-[0.2em] text-white/40 uppercase">Storage</span>
+<span class="font-label text-sm text-secondary font-bold">0.00 GB</span>
+</div>
+<div class="bg-white/5 backdrop-blur-md rounded-xl p-4 border border-white/5 flex flex-col items-start gap-2">
+<span class="font-label text-[10px] tracking-[0.2em] text-white/40 uppercase">Latency</span>
+<span class="font-label text-sm text-secondary font-bold">0.4 MS</span>
+</div>
+<div class="hidden md:flex bg-white/5 backdrop-blur-md rounded-xl p-4 border border-white/5 flex-col items-start gap-2">
+<span class="font-label text-[10px] tracking-[0.2em] text-white/40 uppercase">Integrity</span>
+<span class="font-label text-sm text-secondary font-bold text-glow">VERIFIED</span>
+</div>
+</div>
+<!-- Action CTA -->
+<div class="pt-8">
+<button class="group relative px-12 py-5 rounded-full bg-primary overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_30px_rgba(124,92,255,0.4)]">
+<div class="absolute inset-0 bg-gradient-to-r from-primary to-primary-dim"></div>
+<div class="relative flex items-center gap-3">
+<span class="font-label text-sm font-bold tracking-[0.2em] text-on-primary-fixed uppercase">INITIALIZE_NEW_PATH</span>
+<span class="material-symbols-outlined text-on-primary-fixed text-lg transition-transform duration-300 group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</button>
+</div>
+</div>
+</main>
+<!-- Bottom Ornament (Abstract Grid) -->
+<div class="fixed bottom-0 left-0 w-full h-[265px] pointer-events-none opacity-20">
+<div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_bottom,black,transparent_70%)]"></div>
+</div>
+<!-- Hidden Navigation Shell (Suppressed for focused success state) -->
+<!-- Rule applied: Navigation suppressed for Task-Focused/Success screens -->
+</body></html>
