@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Protocol Established</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Manrope:wght@500;600&amp;family=Space_Grotesk:wght@300;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#55545b",
+                    "surface-variant": "#25252d",
+                    "primary-container": "#a491ff",
+                    "on-tertiary-fixed-variant": "#77002a",
+                    "on-secondary-fixed-variant": "#005964",
+                    "tertiary-container": "#ee2e65",
+                    "secondary": "#00e3fd",
+                    "surface-container-highest": "#25252d",
+                    "on-tertiary-container": "#000000",
+                    "on-secondary-container": "#e8fbff",
+                    "on-primary-fixed": "#000000",
+                    "tertiary-dim": "#df215c",
+                    "tertiary-fixed-dim": "#ff7891",
+                    "secondary-fixed": "#26e6ff",
+                    "on-primary-fixed-variant": "#2d008e",
+                    "inverse-surface": "#fcf8ff",
+                    "surface-container-high": "#1f1f26",
+                    "on-secondary": "#004d57",
+                    "tertiary": "#ff6d8a",
+                    "on-primary": "#2f0095",
+                    "surface-tint": "#b1a1ff",
+                    "outline-variant": "#48474d",
+                    "secondary-dim": "#00d4ec",
+                    "on-error-container": "#ffb2b9",
+                    "surface-container-low": "#131319",
+                    "surface-container-lowest": "#000000",
+                    "surface-dim": "#0e0e13",
+                    "on-secondary-fixed": "#003a42",
+                    "tertiary-fixed": "#ff90a2",
+                    "on-tertiary": "#480016",
+                    "secondary-container": "#006875",
+                    "inverse-primary": "#613de3",
+                    "surface": "#0e0e13",
+                    "primary-fixed": "#a491ff",
+                    "primary": "#b1a1ff",
+                    "on-surface-variant": "#acaab1",
+                    "on-tertiary-fixed": "#390010",
+                    "error": "#ff6e84",
+                    "surface-bright": "#2c2b33",
+                    "error-container": "#a70138",
+                    "outline": "#76747b",
+                    "on-error": "#490013",
+                    "background": "#0e0e13",
+                    "on-background": "#f9f5fd",
+                    "on-primary-container": "#230075",
+                    "surface-container": "#19191f",
+                    "secondary-fixed-dim": "#00d7f0",
+                    "error-dim": "#d73357",
+                    "primary-fixed-dim": "#9780ff",
+                    "primary-dim": "#7757fa",
+                    "on-surface": "#f9f5fd"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(25, 25, 31, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .neural-glow {
+            box-shadow: 0 0 20px rgba(124, 92, 255, 0.15);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body selection:bg-primary/30">
+<!-- Top Navigation (Shell Implementation) -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/40 backdrop-blur-xl border-b border-white/10 shadow-[0_0_15px_rgba(124,92,255,0.1)] flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-variant flex items-center justify-center border border-primary/20">
+<img alt="User Neural Profile" class="w-full h-full object-cover" data-alt="Close up portrait of a high-tech digital avatar with violet glowing circuit patterns on skin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXdNZoTrfZGe7mO5UAblTAMB7lPTXYv0oGdZZ2LV3TPvmxXSJYyNvIfMBQeVaA6BP6DUWv_IBFLdrEp4FzfhGLcQKp4F9Ek4CxoH-U4rICvM8U9Q9WGsELTNqOlLelOsrhdPGjfjxtYKNrmkzuUkrbg2lTrVsl4s9Edza8ml7Ob2EHrfEDF-8oAWrBJSFElhYQRk84iyM9IO6kdy2Bg1IzxmANP7N0fUCsgqh-DfXBrOr_92KuwKjB9YdjPjrhYcQ8J8gzBLf2jRQ"/>
+</div>
+<h1 class="font-headline font-black tracking-tighter text-2xl uppercase text-[#7C5CFF] italic">LifeOS</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-label text-xs tracking-[0.3em] uppercase text-[#00E5FF] transition-colors" href="#">Core</a>
+<a class="font-label text-xs tracking-[0.3em] uppercase text-slate-400 hover:text-[#7C5CFF] transition-colors" href="#">Neural</a>
+<a class="font-label text-xs tracking-[0.3em] uppercase text-slate-400 hover:text-[#7C5CFF] transition-colors" href="#">Sync</a>
+</nav>
+<span class="material-symbols-outlined text-[#7C5CFF] cursor-pointer active:scale-95 duration-200" data-icon="sensors">sensors</span>
+</div>
+</header>
+<!-- Success Toast Layer (Absolute Priority) -->
+<div class="fixed top-24 left-1/2 -translate-x-1/2 z-[100] w-full max-w-md px-4 pointer-events-none">
+<div class="glass-panel neural-glow rounded-xl p-4 flex items-center justify-between border-l-4 border-l-[#7C5CFF] pointer-events-auto">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/20 text-primary">
+<span class="material-symbols-outlined" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="font-label text-[10px] tracking-[0.3em] uppercase text-primary mb-0.5">System Notification</p>
+<p class="font-headline font-extrabold text-sm tracking-tight text-on-background">PROTOCOL ESTABLISHED</p>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-on-background transition-colors p-1">
+<span class="material-symbols-outlined text-lg" data-icon="close">close</span>
+</button>
+</div>
+</div>
+<!-- Background Dimming Overlay -->
+<div class="fixed inset-0 bg-background/40 backdrop-blur-[2px] z-40 pointer-events-none"></div>
+<!-- Dashboard Content (Dimmed) -->
+<main class="pt-28 pb-32 px-6 max-w-7xl mx-auto space-y-8 opacity-60 grayscale-[0.2]">
+<!-- Hero Section -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="lg:col-span-2 glass-panel rounded-xl p-8 relative overflow-hidden group">
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-primary/10 rounded-full blur-[100px] group-hover:bg-primary/20 transition-all"></div>
+<h2 class="font-headline font-black text-5xl mb-2 tracking-tighter text-on-background">Neural Link: <span class="text-primary">ACTIVE</span></h2>
+<p class="font-body text-lg text-on-surface-variant max-w-md">Cognitive load balanced at 24%. All biometric sensors reporting optimal throughput for current task cycle.</p>
+<div class="mt-8 flex gap-4">
+<button class="bg-primary hover:bg-primary-dim text-on-primary font-label text-xs tracking-[0.2em] uppercase px-8 py-3 rounded-full transition-all shadow-[0_0_20px_rgba(124,92,255,0.4)] active:scale-95">Optimize</button>
+<button class="glass-panel text-on-background font-label text-xs tracking-[0.2em] uppercase px-8 py-3 rounded-full hover:bg-white/5 transition-all">Telemetry</button>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-6 flex flex-col justify-between">
+<div>
+<span class="font-label text-[10px] tracking-[0.3em] uppercase text-secondary">Efficiency Matrix</span>
+<h3 class="font-headline font-extrabold text-2xl mt-1">98.4<span class="text-sm font-label ml-1 text-on-surface-variant">%</span></h3>
+</div>
+<!-- Mini Gauge Simulation -->
+<div class="h-24 w-full flex items-end gap-1">
+<div class="w-full bg-secondary/20 h-[60%] rounded-t-sm"></div>
+<div class="w-full bg-secondary/20 h-[40%] rounded-t-sm"></div>
+<div class="w-full bg-secondary/40 h-[80%] rounded-t-sm"></div>
+<div class="w-full bg-secondary/20 h-[50%] rounded-t-sm"></div>
+<div class="w-full bg-secondary h-[100%] rounded-t-sm shadow-[0_0_15px_rgba(0,229,255,0.3)]"></div>
+<div class="w-full bg-secondary/20 h-[70%] rounded-t-sm"></div>
+<div class="w-full bg-secondary/20 h-[30%] rounded-t-sm"></div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Data -->
+<section class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-6">
+<!-- Data Item 1 -->
+<div class="md:col-span-2 lg:col-span-2 glass-panel rounded-xl p-6 hover:border-primary/30 transition-colors">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="memory">memory</span>
+<span class="text-[10px] font-label text-on-surface-variant tracking-widest">CPU.01</span>
+</div>
+<div class="space-y-1">
+<div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[42%]"></div>
+</div>
+<div class="flex justify-between text-[10px] font-label text-on-surface-variant">
+<span>CORE_TEMP</span>
+<span>42°C</span>
+</div>
+</div>
+</div>
+<!-- Data Item 2 -->
+<div class="md:col-span-2 lg:col-span-2 glass-panel rounded-xl p-6">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-secondary" data-icon="waves">waves</span>
+<span class="text-[10px] font-label text-on-surface-variant tracking-widest">REM_STATE</span>
+</div>
+<div class="space-y-1">
+<div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[88%] shadow-[0_0_10px_rgba(0,229,255,0.5)]"></div>
+</div>
+<div class="flex justify-between text-[10px] font-label text-on-surface-variant">
+<span>RECOVERY</span>
+<span>DEEP</span>
+</div>
+</div>
+</div>
+<!-- Asymmetric Large Card -->
+<div class="md:col-span-4 lg:col-span-2 row-span-2 glass-panel rounded-xl overflow-hidden flex flex-col">
+<div class="p-6">
+<span class="font-label text-[10px] tracking-[0.3em] uppercase text-tertiary">Priority Protocol</span>
+<h4 class="font-headline font-black text-xl mt-2 leading-tight">Neural Syncing in Progress...</h4>
+</div>
+<div class="flex-grow bg-surface-variant/30 flex items-center justify-center p-8">
+<div class="relative w-32 h-32">
+<div class="absolute inset-0 rounded-full border-4 border-dashed border-primary/20 animate-spin" style="animation-duration: 10s"></div>
+<div class="absolute inset-2 rounded-full border-2 border-primary shadow-[0_0_20px_rgba(124,92,255,0.4)]"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-4xl text-primary" data-icon="bolt" data-weight="fill">bolt</span>
+</div>
+</div>
+</div>
+<div class="p-4 bg-primary/5 border-t border-white/5">
+<p class="font-label text-[9px] text-center text-on-surface-variant tracking-widest">UPLINK STABLE • 4.2GB/S</p>
+</div>
+</div>
+<!-- Small Detail Card -->
+<div class="lg:col-span-1 glass-panel rounded-xl p-4 flex flex-col items-center justify-center gap-2 text-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="air">air</span>
+<span class="font-label text-[10px] text-on-surface-variant">O2_LVL</span>
+<span class="font-headline font-bold">100%</span>
+</div>
+<!-- Small Detail Card -->
+<div class="lg:col-span-1 glass-panel rounded-xl p-4 flex flex-col items-center justify-center gap-2 text-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="opacity">opacity</span>
+<span class="font-label text-[10px] text-on-surface-variant">HYD_BAL</span>
+<span class="font-headline font-bold text-secondary">82%</span>
+</div>
+<!-- Long Horizontal Detail -->
+<div class="md:col-span-2 lg:col-span-2 glass-panel rounded-xl p-6 flex items-center gap-6">
+<img alt="Planet Network" class="w-16 h-16 rounded-lg object-cover grayscale opacity-50" data-alt="Stylized digital globe with glowing data connection points and blue atmospheric luminescence" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAleV1BYAlCnq1tYY3ZTj1FgiWZyiJtZLElIe3mKAf_Lg7mYVwrqnLWjvI2zfcTOw4MlfzXCr2WHn19cpY3J_YlLfv4k3fDW0MAIsFKnxhZu3LLFm7D8c8Fz2PhiVMzRVW1TQ32gPVZ8GPIBoEqLx18qTeNh-lGVk9HUk2zgnjKcHNcMH1d_Ttlaa79Pc_kYE09J3Bhym4AS-Qm66R8u85btOSvH590Z_nmHF_mXmfa4m2MRroOWmCBKhCgRhtqCxUkdMbAfPiw5qY"/>
+<div class="flex flex-col">
+<span class="font-label text-[10px] text-on-surface-variant tracking-widest uppercase">Global Node</span>
+<span class="font-headline font-bold text-lg">NEURAL_MESH_04</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-8 w-full z-50 flex justify-around items-center px-4">
+<div class="bg-slate-900/60 backdrop-blur-2xl w-[90%] max-w-md rounded-full border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)] flex justify-around items-center p-2">
+<a class="flex items-center justify-center bg-[#7C5CFF] text-white rounded-full p-3 shadow-[0_0_20px_rgba(124,92,255,0.6)] scale-110 active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</a>
+<a class="flex items-center justify-center text-slate-400 p-3 hover:text-[#00E5FF] transition-all active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+</a>
+<a class="flex items-center justify-center text-slate-400 p-3 hover:text-[#00E5FF] transition-all active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="adjust">adjust</span>
+</a>
+<a class="flex items-center justify-center text-slate-400 p-3 hover:text-[#00E5FF] transition-all active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="cached">cached</span>
+</a>
+<a class="flex items-center justify-center text-slate-400 p-3 hover:text-[#00E5FF] transition-all active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+</a>
+</div>
+</nav>
+</body></html>

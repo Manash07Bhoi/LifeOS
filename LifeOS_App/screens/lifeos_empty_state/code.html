@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Empty State</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Manrope:wght@500;600&amp;family=Space_Grotesk:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#55545b",
+                    "surface-variant": "#25252d",
+                    "primary-container": "#a491ff",
+                    "on-tertiary-fixed-variant": "#77002a",
+                    "on-secondary-fixed-variant": "#005964",
+                    "tertiary-container": "#ee2e65",
+                    "secondary": "#00e3fd",
+                    "surface-container-highest": "#25252d",
+                    "on-tertiary-container": "#000000",
+                    "on-secondary-container": "#e8fbff",
+                    "on-primary-fixed": "#000000",
+                    "tertiary-dim": "#df215c",
+                    "tertiary-fixed-dim": "#ff7891",
+                    "secondary-fixed": "#26e6ff",
+                    "on-primary-fixed-variant": "#2d008e",
+                    "inverse-surface": "#fcf8ff",
+                    "surface-container-high": "#1f1f26",
+                    "on-secondary": "#004d57",
+                    "tertiary": "#ff6d8a",
+                    "on-primary": "#2f0095",
+                    "surface-tint": "#b1a1ff",
+                    "outline-variant": "#48474d",
+                    "secondary-dim": "#00d4ec",
+                    "on-error-container": "#ffb2b9",
+                    "surface-container-low": "#131319",
+                    "surface-container-lowest": "#000000",
+                    "surface-dim": "#0e0e13",
+                    "on-secondary-fixed": "#003a42",
+                    "tertiary-fixed": "#ff90a2",
+                    "on-tertiary": "#480016",
+                    "secondary-container": "#006875",
+                    "inverse-primary": "#613de3",
+                    "surface": "#0e0e13",
+                    "primary-fixed": "#a491ff",
+                    "primary": "#b1a1ff",
+                    "on-surface-variant": "#acaab1",
+                    "on-tertiary-fixed": "#390010",
+                    "error": "#ff6e84",
+                    "surface-bright": "#2c2b33",
+                    "error-container": "#a70138",
+                    "outline": "#76747b",
+                    "on-error": "#490013",
+                    "background": "#0e0e13",
+                    "on-background": "#f9f5fd",
+                    "on-primary-container": "#230075",
+                    "surface-container": "#19191f",
+                    "secondary-fixed-dim": "#00d7f0",
+                    "error-dim": "#d73357",
+                    "primary-fixed-dim": "#9780ff",
+                    "primary-dim": "#7757fa",
+                    "on-surface": "#f9f5fd"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(25, 25, 31, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neural-glow {
+            box-shadow: 0 0 40px rgba(124, 92, 255, 0.15);
+        }
+        .wireframe-shape {
+            background: radial-gradient(circle at center, rgba(124, 92, 255, 0.2) 0%, transparent 70%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/30 min-h-screen flex flex-col overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/40 backdrop-blur-xl border-b border-white/10 shadow-[0_0_15px_rgba(124,92,255,0.1)] flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-primary-dim/20 border border-primary/30 flex items-center justify-center">
+<img alt="User" class="w-full h-full object-cover opacity-80" data-alt="Abstract cybernetic user profile avatar with neon purple highlights and neural network patterns on a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0jf2y7jIAgY8enU3k1P2DXc9Acxj3ljwNEbJai_J8oQ3xfK3qChv5-OtHgZgZQnLzQW3ONWNbdClwYLtyWA8SLHFWvwSwRlbnbc8V0Gt2QjpDWfPduJcTfq6UacokZk4oZwOLuzT6Xeh_fFsAZb7CeizDgjv-mc_F7gCKNfRwM3GV5xKAnaF04Vk-FC4MzgLRl6ZY6gONTIlJyXLhenMdCiMG4RiGeh54A70QWldoMbjTb0ifAg1RyjuN4PGwVW-GIvuNuDFQSYM"/>
+</div>
+<h1 class="font-['Plus_Jakarta_Sans'] font-black tracking-tighter text-2xl uppercase text-[#7C5CFF]">
+                Life<span class="italic">OS</span>
+</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-400 hover:text-[#7C5CFF] transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined">sensors</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-6 pt-24 pb-32">
+<!-- Empty State Container -->
+<div class="max-w-2xl w-full flex flex-col items-center text-center space-y-12">
+<!-- Abstract 3D Wireframe Shape Simulation -->
+<div class="relative w-64 h-64 flex items-center justify-center">
+<div class="absolute inset-0 wireframe-shape rounded-full animate-pulse"></div>
+<div class="relative z-10 w-full h-full flex items-center justify-center">
+<!-- Geometric Construct (CSS Only) -->
+<div class="w-48 h-48 relative border border-primary/20 rotate-45 flex items-center justify-center">
+<div class="absolute inset-0 border border-secondary/20 -rotate-12"></div>
+<div class="absolute inset-4 border border-primary/40 rotate-12"></div>
+<div class="absolute inset-8 border border-secondary/40 -rotate-45"></div>
+<div class="w-4 h-4 bg-primary rounded-full neural-glow"></div>
+<!-- Decorative Lines -->
+<div class="absolute top-0 left-1/2 w-px h-full bg-gradient-to-b from-transparent via-primary/30 to-transparent"></div>
+<div class="absolute left-0 top-1/2 w-full h-px bg-gradient-to-r from-transparent via-secondary/30 to-transparent"></div>
+</div>
+</div>
+<!-- Floating Data Chips -->
+<div class="absolute -top-4 -right-4 glass-panel px-3 py-1 rounded-full border border-white/5">
+<span class="font-label text-[10px] tracking-[0.2em] uppercase text-primary">Status: Null</span>
+</div>
+<div class="absolute -bottom-2 -left-8 glass-panel px-3 py-1 rounded-full border border-white/5">
+<span class="font-label text-[10px] tracking-[0.2em] uppercase text-secondary">Protocol: Offline</span>
+</div>
+</div>
+<!-- Content Group -->
+<div class="space-y-4">
+<h2 class="font-headline font-black text-4xl md:text-5xl tracking-tighter text-on-surface uppercase">
+                    NO DATA DETECTED
+                </h2>
+<p class="font-body text-on-surface-variant text-lg max-w-md mx-auto">
+                    Initialize your first protocol to begin life optimization. Your neural dashboard is currently in a dormant state.
+                </p>
+</div>
+<!-- CTA Button -->
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-full blur opacity-25 group-hover:opacity-75 transition duration-500"></div>
+<button class="relative glass-panel px-10 py-5 rounded-full flex items-center gap-3 bg-surface border border-primary/30 hover:border-primary transition-all active:scale-95 duration-300">
+<span class="font-label text-sm tracking-[0.3em] font-bold text-on-surface uppercase">CREATE PROTOCOL</span>
+<span class="material-symbols-outlined text-primary">add_circle</span>
+</button>
+</div>
+<!-- Technical Metadata Footer -->
+<div class="grid grid-cols-3 gap-8 w-full pt-12 opacity-40">
+<div class="flex flex-col items-center">
+<span class="font-label text-[10px] tracking-[0.2em] text-outline-variant uppercase">Storage</span>
+<span class="font-label text-[10px] text-on-surface mt-1">0.00%</span>
+</div>
+<div class="flex flex-col items-center border-x border-white/5">
+<span class="font-label text-[10px] tracking-[0.2em] text-outline-variant uppercase">Last Sync</span>
+<span class="font-label text-[10px] text-on-surface mt-1">NEVER</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label text-[10px] tracking-[0.2em] text-outline-variant uppercase">Nodes</span>
+<span class="font-label text-[10px] text-on-surface mt-1">INACTIVE</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-8 w-full z-50 flex justify-around items-center px-4">
+<div class="bg-slate-900/60 backdrop-blur-2xl w-[90%] max-w-md rounded-full border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)] flex justify-around items-center p-2">
+<button class="flex items-center justify-center text-slate-400 p-3 hover:text-[#00E5FF] transition-all active:scale-90 duration-300 ease-out">
+<span class="material-symbols-outlined">terminal</span>
+</button>
+<button class="flex items-center justify-center bg-[#7C5CFF] text-white rounded-full p-3 shadow-[0_0_20px_rgba(124,92,255,0.6)] scale-110 active:scale-90 duration-300 ease-out">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<button class="flex items-center justify-center text-slate-400 p-3 hover:text-[#00E5FF] transition-all active:scale-90 duration-300 ease-out">
+<span class="material-symbols-outlined">adjust</span>
+</button>
+<button class="flex items-center justify-center text-slate-400 p-3 hover:text-[#00E5FF] transition-all active:scale-90 duration-300 ease-out">
+<span class="material-symbols-outlined">cached</span>
+</button>
+<button class="flex items-center justify-center text-slate-400 p-3 hover:text-[#00E5FF] transition-all active:scale-90 duration-300 ease-out">
+<span class="material-symbols-outlined">analytics</span>
+</button>
+</div>
+</nav>
+<!-- Decorative Corner Accents -->
+<div class="fixed top-24 left-6 pointer-events-none opacity-20 hidden lg:block">
+<div class="font-label text-[10px] tracking-[0.5em] uppercase vertical-text transform -rotate-90 origin-left">
+            Protocol: Omega-9
+        </div>
+</div>
+<div class="fixed bottom-24 right-6 pointer-events-none opacity-20 hidden lg:block">
+<div class="font-label text-[10px] tracking-[0.5em] uppercase vertical-text transform rotate-90 origin-right">
+            Neural Core v.4.0
+        </div>
+</div>
+</body></html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NEURAL_OS | SYSTEM_STATE</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Manrope:wght@500;600&amp;family=Space+Grotesk:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#25252d",
+                      "on-surface": "#f9f5fd",
+                      "tertiary-fixed": "#ff90a2",
+                      "inverse-surface": "#fcf8ff",
+                      "on-tertiary-fixed-variant": "#77002a",
+                      "error-dim": "#d73357",
+                      "on-secondary-fixed": "#003a42",
+                      "on-secondary-container": "#e8fbff",
+                      "on-primary-container": "#230075",
+                      "secondary-dim": "#00d4ec",
+                      "tertiary-fixed-dim": "#ff7891",
+                      "surface-container-high": "#1f1f26",
+                      "tertiary-dim": "#df215c",
+                      "secondary-container": "#006875",
+                      "on-secondary": "#004d57",
+                      "on-primary-fixed-variant": "#2d008e",
+                      "surface-dim": "#0e0e13",
+                      "surface-container": "#19191f",
+                      "primary-fixed-dim": "#9780ff",
+                      "surface-tint": "#b1a1ff",
+                      "outline": "#76747b",
+                      "primary-container": "#a491ff",
+                      "tertiary-container": "#ee2e65",
+                      "on-background": "#f9f5fd",
+                      "error": "#ff6e84",
+                      "secondary-fixed": "#26e6ff",
+                      "inverse-primary": "#613de3",
+                      "surface": "#0e0e13",
+                      "on-primary": "#2f0095",
+                      "on-surface-variant": "#acaab1",
+                      "primary": "#b1a1ff",
+                      "surface-container-lowest": "#000000",
+                      "surface-bright": "#2c2b33",
+                      "background": "#0e0e13",
+                      "on-tertiary-container": "#000000",
+                      "error-container": "#a70138",
+                      "on-primary-fixed": "#000000",
+                      "secondary-fixed-dim": "#00d7f0",
+                      "surface-container-highest": "#25252d",
+                      "primary-dim": "#7757fa",
+                      "on-secondary-fixed-variant": "#005964",
+                      "primary-fixed": "#a491ff",
+                      "on-tertiary": "#480016",
+                      "outline-variant": "#48474d",
+                      "on-error-container": "#ffb2b9",
+                      "inverse-on-surface": "#55545b",
+                      "tertiary": "#ff6d8a",
+                      "surface-container-low": "#131319",
+                      "on-error": "#490013",
+                      "secondary": "#00e3fd",
+                      "on-tertiary-fixed": "#390010"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "1.5rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Plus Jakarta Sans"],
+                      "body": ["Manrope"],
+                      "label": ["Space Grotesk"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(25, 25, 31, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .neural-glow {
+            text-shadow: 0 0 12px rgba(124, 92, 255, 0.6);
+        }
+        .cyan-glow {
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-dim selection:text-white">
+<!-- Top Navigation Shell -->
+<header class="fixed top-0 w-full z-50 bg-[#0e0e13]/80 backdrop-blur-xl border-b border-white/5 flex justify-between items-center px-6 h-16 shadow-[0_0_15px_rgba(124,92,255,0.1)]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#7C5CFF]" data-icon="terminal">terminal</span>
+<span class="font-headline font-black tracking-tighter uppercase text-xl text-[#7C5CFF] drop-shadow-[0_0_8px_rgba(124,92,255,0.5)]">NEURAL_OS</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-6 mr-6">
+<span class="font-label text-[10px] uppercase tracking-[0.3em] text-[#00E5FF]">System</span>
+<span class="font-label text-[10px] uppercase tracking-[0.3em] text-[#f9f5fd]/60">Archive</span>
+<span class="font-label text-[10px] uppercase tracking-[0.3em] text-[#f9f5fd]/60">Nodes</span>
+</div>
+<div class="w-8 h-8 rounded-full border border-primary/30 overflow-hidden">
+<img alt="User Profile" data-alt="cybernetic avatar portrait of a digital entity with glowing violet facial markings and sleek tech armor background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMM5s-Jd0aZikNo75fqZbWfbzybVOcwAQP8bSM_ycL_iQCsilrR5r5CgAmVgihOGCQ3lDnEEHp_gK6eXX-i23vto6gqg7cMDmc3LCG8Jw4Rhc8Ei039FwidXXVkm3wpFzb2713o9dMekYWlpht9RccxqocGUBC9CUj2m_cuomq_f1Y9-3-EvHz-mVlqpjJ_CeIcYHzbXq98hL2EWGk5KWfE-pvkaIa3Y_nOM3tOdPIxmCi1FH7QVJqiRPNCZWVcLKClDJxAsqm9KE"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-5xl mx-auto space-y-12">
+<!-- 1. Offline Mode Banner State -->
+<section class="w-full">
+<div class="glass-panel rounded-xl p-1 overflow-hidden relative group">
+<div class="absolute inset-0 bg-gradient-to-r from-[#7C5CFF]/10 via-transparent to-transparent opacity-50"></div>
+<div class="relative flex flex-col md:flex-row items-center justify-between px-6 py-4 gap-4">
+<div class="flex items-center gap-4">
+<div class="flex h-10 w-10 items-center justify-center rounded-full bg-surface-container border border-white/5">
+<span class="material-symbols-outlined text-[#7C5CFF] animate-pulse" data-icon="cloud_off">cloud_off</span>
+</div>
+<div>
+<h2 class="font-label text-[10px] uppercase tracking-[0.3em] text-[#7C5CFF] mb-1">Status Report</h2>
+<p class="font-headline font-extrabold text-lg tracking-tight uppercase">OFFLINE_MODE: LOCAL SYNC ACTIVE</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="h-1.5 w-24 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary-dim w-3/4 shadow-[0_0_10px_#7C5CFF]"></div>
+</div>
+<span class="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant">74% Buffered</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Content Area: System Diagnostics (Bento Grid) -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- 2. System Permission Card Prompt -->
+<div class="md:col-span-8 glass-panel rounded-xl p-8 relative overflow-hidden border-[#7C5CFF]/20">
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary-dim/10 blur-[100px] rounded-full"></div>
+<div class="relative z-10 max-w-lg">
+<div class="inline-block px-3 py-1 bg-[#00E5FF]/10 rounded-full border border-[#00E5FF]/20 mb-6">
+<span class="font-label text-[10px] uppercase tracking-[0.3em] text-[#00E5FF]">Optimization Required</span>
+</div>
+<h3 class="font-headline font-black text-4xl mb-4 leading-tight tracking-tighter uppercase">ENABLE_NEURAL_ALERTS?</h3>
+<p class="text-on-surface-variant text-lg mb-8 leading-relaxed">Permit the system to inject high-priority synaptic notifications directly into your workspace. Local sync ensures no data leak during offline states.</p>
+<div class="flex flex-wrap gap-4">
+<button class="px-10 py-4 rounded-full bg-primary-dim text-white font-headline font-extrabold tracking-tight uppercase hover:bg-primary transition-all duration-300 active:scale-95 shadow-[0_0_20px_rgba(124,92,255,0.4)]">
+                            ALLOW
+                        </button>
+<button class="px-10 py-4 rounded-full border border-white/10 text-on-surface-variant font-headline font-extrabold tracking-tight uppercase hover:bg-white/5 transition-all duration-300 active:scale-95">
+                            LATER
+                        </button>
+</div>
+</div>
+<div class="absolute bottom-0 right-0 p-8 opacity-20 pointer-events-none hidden md:block">
+<span class="material-symbols-outlined text-[120px]" data-icon="dynamic_feed">dynamic_feed</span>
+</div>
+</div>
+<!-- Secondary Info Panels -->
+<div class="md:col-span-4 space-y-6">
+<div class="glass-panel rounded-xl p-6">
+<h4 class="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant mb-4">Storage Matrix</h4>
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-medium">Core Buffer</span>
+<span class="text-sm font-label text-[#00E5FF]">12.4 GB</span>
+</div>
+<div class="w-full h-1 bg-surface-container rounded-full mb-6">
+<div class="h-full bg-[#00E5FF] w-[88%] shadow-[0_0_10px_#00E5FF]"></div>
+</div>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-xs" data-icon="encrypted">encrypted</span>
+<span>END-TO-END LOCAL ENCRYPTION</span>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-6 border-l-2 border-[#FF3D71]">
+<h4 class="font-label text-[10px] uppercase tracking-[0.3em] text-[#FF3D71] mb-2">Warning</h4>
+<p class="text-sm text-on-surface/80 leading-snug">Global node connection lost. System running on auxiliary power cell.</p>
+</div>
+</div>
+<!-- Visualization / Graphic Element -->
+<div class="md:col-span-12 glass-panel rounded-xl p-1 h-64 overflow-hidden group">
+<div class="w-full h-full relative">
+<img alt="Neural Network" class="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700" data-alt="abstract digital visualization of a neural network with glowing cyan data points and deep violet connections against a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkbbhGvohKXkBL8DsAAjmtFID_RN_9yo7-KFKX1dzv5Y8ThbyFeO6JcX3-qOWwl9njI15jh4RxW5WsvgBqtQTeP00Ed_BAuQ7eN4QZpTyO7Twrh474IsVm0i49MYZi88HKOYn4KP3u4yaP-s3AS6v68UqiKJB4CImxufqF0QGngm85QENUcNoQZQnX8iwgYMkT5qGlNPokwD7G001Sa1rS22qJQC0cWuRuFWr563O-SrSGxpR2ts9SNSAnm1gYLFft2_mVHtJb2LE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#0e0e13] to-transparent"></div>
+<div class="absolute bottom-6 left-8">
+<span class="font-label text-[10px] uppercase tracking-[0.3em] text-[#00E5FF] block mb-2">Sync Topology</span>
+<h4 class="font-headline font-black text-2xl tracking-tighter uppercase">LOCAL_CLUSTER_01</h4>
+</div>
+<div class="absolute top-6 right-8 flex gap-2">
+<div class="w-2 h-2 rounded-full bg-[#00E5FF] animate-pulse"></div>
+<div class="w-2 h-2 rounded-full bg-[#00E5FF]/30"></div>
+<div class="w-2 h-2 rounded-full bg-[#00E5FF]/30"></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-md rounded-full bg-[#0e0e13]/40 backdrop-blur-3xl border border-white/10 shadow-[0_0_20px_rgba(124,92,255,0.2)] flex justify-around items-center p-2 z-50">
+<div class="flex items-center justify-center text-[#f9f5fd]/40 w-12 h-12 hover:text-[#00E5FF] transition-colors active:scale-90">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+</div>
+<div class="flex items-center justify-center text-[#f9f5fd]/40 w-12 h-12 hover:text-[#00E5FF] transition-colors active:scale-90">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</div>
+<div class="flex items-center justify-center bg-[#7C5CFF] text-[#0e0e13] rounded-full w-12 h-12 shadow-[0_0_15px_#7C5CFF] active:scale-90">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</div>
+<div class="flex items-center justify-center text-[#f9f5fd]/40 w-12 h-12 hover:text-[#00E5FF] transition-colors active:scale-90">
+<span class="material-symbols-outlined" data-icon="target">target</span>
+</div>
+</nav>
+<!-- Background Subtle Aura -->
+<div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none">
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary-dim/5 blur-[120px] rounded-full"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/5 blur-[100px] rounded-full"></div>
+</div>
+</body></html>
