@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#acaab1",
+                    "background": "#0e0e13",
+                    "surface": "#0e0e13",
+                    "on-primary": "#2f0095",
+                    "on-error": "#490013",
+                    "surface-container-high": "#1f1f26",
+                    "surface-variant": "#25252d",
+                    "on-secondary": "#004d57",
+                    "on-tertiary-fixed": "#390010",
+                    "tertiary-container": "#ee2e65",
+                    "inverse-on-surface": "#55545b",
+                    "surface-container-highest": "#25252d",
+                    "on-secondary-fixed-variant": "#005964",
+                    "error-dim": "#d73357",
+                    "secondary-container": "#006875",
+                    "surface-tint": "#b1a1ff",
+                    "secondary-dim": "#00d4ec",
+                    "on-primary-fixed": "#000000",
+                    "on-secondary-fixed": "#003a42",
+                    "primary-fixed-dim": "#9780ff",
+                    "surface-dim": "#0e0e13",
+                    "on-tertiary": "#480016",
+                    "on-surface": "#f9f5fd",
+                    "tertiary-fixed-dim": "#ff7891",
+                    "secondary": "#00e3fd",
+                    "surface-container-lowest": "#000000",
+                    "on-tertiary-fixed-variant": "#77002a",
+                    "tertiary-dim": "#df215c",
+                    "tertiary": "#ff6d8a",
+                    "primary": "#b1a1ff",
+                    "surface-container": "#19191f",
+                    "primary-container": "#a491ff",
+                    "on-tertiary-container": "#000000",
+                    "on-primary-container": "#230075",
+                    "tertiary-fixed": "#ff90a2",
+                    "inverse-primary": "#613de3",
+                    "primary-dim": "#7757fa",
+                    "inverse-surface": "#fcf8ff",
+                    "surface-container-low": "#131319",
+                    "error": "#ff6e84",
+                    "error-container": "#a70138",
+                    "on-background": "#f9f5fd",
+                    "outline": "#76747b",
+                    "outline-variant": "#48474d",
+                    "secondary-fixed": "#26e6ff",
+                    "on-primary-fixed-variant": "#2d008e",
+                    "on-secondary-container": "#e8fbff",
+                    "secondary-fixed-dim": "#00d7f0",
+                    "primary-fixed": "#a491ff",
+                    "on-error-container": "#ffb2b9",
+                    "surface-bright": "#2c2b33"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(25, 25, 31, 0.4);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+        }
+        .neon-glow-primary:focus-within {
+            box-shadow: 0 0 20px rgba(124, 92, 255, 0.3);
+            border-color: #b1a1ff;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#0e0e13]/80 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+<div class="flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-3">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+<h1 class="font-headline font-black tracking-tighter uppercase text-[#7C5CFF] text-2xl drop-shadow-[0_0_8px_rgba(124,92,255,0.8)]">
+                    LIFE_OS_v1.0
+                </h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#7C5CFF]">terminal</span>
+<div class="w-10 h-10 rounded-full bg-surface-container border border-primary/20 overflow-hidden">
+<img alt="User" class="w-full h-full object-cover" data-alt="User profile avatar with cyan holographic HUD overlay and glowing cybernetic details" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY3DXTL8jKEPx7vylDIh3sYwh6ibacrvlsPQNZKJZhBjLBqV7rN3F-UdTRm2AHkcWcE9l_pMlHxVRrmUGtvQE1FarSqpWBxi5NjcGKCxSgaUWml7BMRKlhIFKFNsKYkO6cUEStpXdmZOGht5_JBoWW6xuJiZO-NBNgrbK-zSQ052pz9yfPihPKRNy4TGLDrGFW4BpO1ibmYOjg5nHSoic6A0reeJ5hE4zzyT3lMoPzNGUZvzvLfLGWqPv6Ff682DfE2-K2Xflc3kc"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-32 pb-24 px-6 max-w-2xl mx-auto w-full">
+<header class="mb-10 space-y-2">
+<div class="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-label uppercase tracking-widest">
+                System Interface / Habit-Sync
+            </div>
+<h2 class="text-4xl font-headline font-extrabold tracking-tight text-on-surface">Configure Habit</h2>
+<p class="text-on-surface-variant max-w-md">Initialize a new neural pathway. Define the frequency and architectural parameters of your routine.</p>
+</header>
+<!-- Form Structure: Glassmorphic Card -->
+<div class="glass-panel border border-white/5 rounded-xl p-8 space-y-8 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)]">
+<!-- Habit Name Input -->
+<div class="space-y-3 group">
+<label class="block font-label text-xs uppercase tracking-[0.2em] text-on-surface-variant px-1">Habit Name</label>
+<div class="relative transition-all duration-300 neon-glow-primary rounded-xl border border-outline-variant bg-surface-container-lowest">
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-outline p-4 font-body text-lg" placeholder="e.g., REM Sleep Optimization" type="text"/>
+<div class="absolute right-4 top-1/2 -translate-y-1/2">
+<span class="material-symbols-outlined text-outline group-focus-within:text-primary">edit_note</span>
+</div>
+</div>
+</div>
+<!-- Frequency Selection -->
+<div class="space-y-4">
+<label class="block font-label text-xs uppercase tracking-[0.2em] text-on-surface-variant px-1">Frequency</label>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border border-primary bg-primary/10 text-primary transition-all shadow-[0_0_15px_rgba(124,92,255,0.2)]">
+<span class="material-symbols-outlined mb-2" data-weight="fill">calendar_today</span>
+<span class="font-label text-[10px] tracking-widest uppercase">Daily</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface-variant hover:border-primary/40 hover:text-on-surface transition-all">
+<span class="material-symbols-outlined mb-2">date_range</span>
+<span class="font-label text-[10px] tracking-widest uppercase">Weekly</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface-variant hover:border-primary/40 hover:text-on-surface transition-all">
+<span class="material-symbols-outlined mb-2">event_repeat</span>
+<span class="font-label text-[10px] tracking-widest uppercase">Monthly</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border border-outline-variant bg-surface-container-low text-on-surface-variant hover:border-primary/40 hover:text-on-surface transition-all">
+<span class="material-symbols-outlined mb-2">dashboard_customize</span>
+<span class="font-label text-[10px] tracking-widest uppercase">Custom</span>
+</button>
+</div>
+</div>
+<!-- Parameters (Bento Style Sub-grid) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-5 rounded-xl border border-outline-variant/30 space-y-3">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-secondary">alarm</span>
+<div class="h-2 w-12 bg-secondary-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-2/3 shadow-[0_0_8px_#00e3fd]"></div>
+</div>
+</div>
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Reminder Time</p>
+<p class="text-xl font-headline font-bold">06:45 <span class="text-xs font-normal text-outline">AM</span></p>
+</div>
+</div>
+<div class="bg-surface-container-low p-5 rounded-xl border border-outline-variant/30 space-y-3">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-tertiary">bolt</span>
+<span class="text-[10px] font-label text-tertiary px-2 py-0.5 rounded bg-tertiary/10">STREAK +5</span>
+</div>
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">Intensity Level</p>
+<p class="text-xl font-headline font-bold">OPTIMIZED</p>
+</div>
+</div>
+</div>
+<!-- Visual Feedback Row -->
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface-container-highest/30 border border-white/5">
+<div class="w-12 h-12 flex items-center justify-center rounded-lg bg-secondary/10">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">insights</span>
+</div>
+<div class="flex-grow">
+<p class="text-xs text-on-surface-variant font-medium">Estimated 84% probability of successful habit formation based on current OS load.</p>
+</div>
+</div>
+<!-- Action Button -->
+<div class="pt-4">
+<button class="w-full py-5 rounded-xl bg-gradient-to-br from-primary to-primary-dim text-white font-headline font-extrabold text-lg tracking-wider uppercase shadow-[0_8px_25px_rgba(124,92,255,0.4)] active:scale-95 transition-transform group relative overflow-hidden">
+<span class="relative z-10 flex items-center justify-center gap-2">
+                        Execute Configuration
+                        <span class="material-symbols-outlined">save</span>
+</span>
+<div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</button>
+<p class="text-center mt-6 font-label text-[10px] uppercase tracking-[0.3em] text-outline">Digital Signature Required</p>
+</div>
+</div>
+<!-- System Background Decor -->
+<div class="mt-12 opacity-30 pointer-events-none select-none">
+<div class="flex justify-between items-end border-t border-outline-variant pt-4">
+<div class="text-[8px] font-label text-outline space-y-1">
+<p>SYSTEM_ID: HABIT_ARCHITECT_v4</p>
+<p>COORDINATES: 37.7749° N, 122.4194° W</p>
+</div>
+<div class="text-right">
+<p class="text-[8px] font-label text-outline uppercase tracking-widest">Processing Layer 7...</p>
+<div class="flex gap-1 mt-1">
+<div class="w-1 h-1 bg-primary"></div>
+<div class="w-1 h-1 bg-primary"></div>
+<div class="w-1 h-1 bg-secondary"></div>
+<div class="w-1 h-1 bg-outline-variant"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Navigation suppressed for task-focused edit screen per "Relevance Check" rule -->
+</body></html>

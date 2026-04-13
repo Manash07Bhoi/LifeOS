@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS | Splash</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;700;800&amp;family=Manrope:wght@300;500&amp;family=Space+Grotesk:wght@300;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#acaab1",
+                      "background": "#0e0e13",
+                      "surface": "#0e0e13",
+                      "on-primary": "#2f0095",
+                      "on-error": "#490013",
+                      "surface-container-high": "#1f1f26",
+                      "surface-variant": "#25252d",
+                      "on-secondary": "#004d57",
+                      "on-tertiary-fixed": "#390010",
+                      "tertiary-container": "#ee2e65",
+                      "inverse-on-surface": "#55545b",
+                      "surface-container-highest": "#25252d",
+                      "on-secondary-fixed-variant": "#005964",
+                      "error-dim": "#d73357",
+                      "secondary-container": "#006875",
+                      "surface-tint": "#b1a1ff",
+                      "secondary-dim": "#00d4ec",
+                      "on-primary-fixed": "#000000",
+                      "on-secondary-fixed": "#003a42",
+                      "primary-fixed-dim": "#9780ff",
+                      "surface-dim": "#0e0e13",
+                      "on-tertiary": "#480016",
+                      "on-surface": "#f9f5fd",
+                      "tertiary-fixed-dim": "#ff7891",
+                      "secondary": "#00e3fd",
+                      "surface-container-lowest": "#000000",
+                      "on-tertiary-fixed-variant": "#77002a",
+                      "tertiary-dim": "#df215c",
+                      "tertiary": "#ff6d8a",
+                      "primary": "#b1a1ff",
+                      "surface-container": "#19191f",
+                      "primary-container": "#a491ff",
+                      "on-tertiary-container": "#000000",
+                      "on-primary-container": "#230075",
+                      "tertiary-fixed": "#ff90a2",
+                      "inverse-primary": "#613de3",
+                      "primary-dim": "#7757fa",
+                      "inverse-surface": "#fcf8ff",
+                      "surface-container-low": "#131319",
+                      "error": "#ff6e84",
+                      "error-container": "#a70138",
+                      "on-background": "#f9f5fd",
+                      "outline": "#76747b",
+                      "outline-variant": "#48474d",
+                      "secondary-fixed": "#26e6ff",
+                      "on-primary-fixed-variant": "#2d008e",
+                      "on-secondary-container": "#e8fbff",
+                      "secondary-fixed-dim": "#00d7f0",
+                      "primary-fixed": "#a491ff",
+                      "on-error-container": "#ffb2b9",
+                      "surface-bright": "#2c2b33"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "1.5rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Plus Jakarta Sans"],
+                      "body": ["Manrope"],
+                      "label": ["Space Grotesk"]
+              }
+            },
+          },
+        }
+      </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+body {
+    background-color: #0e0e13;
+    color: #f9f5fd;
+    font-family: "Manrope", sans-serif;
+    overflow: hidden
+    }
+.grain-overlay {
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCeDttRjLkyl2aCSVJx2C92k4gz_SDQfwBxsdRajm8kC980_R3PpAZ9o-ToYMWbwoiS3TnJZtGaxDSBZ_e73IShIOVDPrzZANzLUc_AaGqTLnB5iVWs6wADekORSw9mHSDLf595GCkdoD-gZvnvMZoEd0dSf6c6fUVNEZykw6f5usw7l6LNSTSQ2TLD1hMphFV8YYgKKq1_WrMgl01bbdUY7g-JpHBUG5PqEVSu3WZq-4L8saczQgoo3df414-v_LaiENqvh8aI3f0);
+    opacity: 0.03;
+    pointer-events: none
+    }
+.neon-glow-primary {
+    text-shadow: 0 0 20px rgba(124, 92, 255, 0.6), 0 0 40px rgba(124, 92, 255, 0.3)
+    }
+.vignette {
+    background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.8) 100%)
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex items-center justify-center min-h-screen relative">
+<!-- Background Architectural Layers -->
+<div class="absolute inset-0 overflow-hidden">
+<!-- Subtle Radial Light Bleed -->
+<div class="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-primary/5 blur-[120px]"></div>
+<div class="absolute bottom-[-5%] right-[-5%] w-[40%] h-[40%] rounded-full bg-secondary/5 blur-[100px]"></div>
+<!-- Texture and Vignette -->
+<div class="absolute inset-0 grain-overlay"></div>
+<div class="absolute inset-0 vignette"></div>
+</div>
+<!-- Main Content Canvas -->
+<main class="relative z-10 flex flex-col items-center gap-12 max-w-lg w-full px-8">
+<!-- Branding Identity Section -->
+<div class="flex flex-col items-center gap-6">
+<!-- Central Iconographic Anchor -->
+<div class="w-24 h-24 relative flex items-center justify-center">
+<!-- Outer Glass Ring -->
+<div class="absolute inset-0 rounded-full border border-primary/20 backdrop-blur-xl bg-surface-container/30"></div>
+<!-- Inner Pulse -->
+<div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary-dim shadow-[0_0_30px_rgba(124,92,255,0.4)] flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-4xl" data-icon="terminal">terminal</span>
+</div>
+</div>
+<!-- Core Typography Branding -->
+<div class="text-center">
+<h1 class="font-headline font-black text-6xl tracking-tighter uppercase text-on-surface leading-none neon-glow-primary">
+                    LIFE_OS_v1.0
+                </h1>
+<div class="mt-4 flex items-center justify-center gap-4">
+<div class="h-[1px] w-8 bg-gradient-to-r from-transparent to-outline-variant/50"></div>
+<p class="font-body font-light text-on-surface-variant tracking-[0.3em] uppercase text-xs">
+                        Command Your Life
+                    </p>
+<div class="h-[1px] w-8 bg-gradient-to-l from-transparent to-outline-variant/50"></div>
+</div>
+</div>
+</div>
+<!-- Semantic Interaction Layer (Hidden Navigation Context) -->
+<!-- Note: Navigation suppressed as per "The Destination Rule" for splash screen focus -->
+<!-- Status Indicator / System Readiness -->
+<div class="flex flex-col items-center gap-2">
+<div class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-high/40 border border-outline-variant/10 backdrop-blur-md">
+<span class="flex h-1.5 w-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label text-[10px] uppercase tracking-widest text-secondary">System Initializing</span>
+</div>
+<!-- Progress Visualizer (The Glow Ring concept) -->
+<div class="w-48 h-1 mt-6 bg-surface-container-lowest rounded-full overflow-hidden relative">
+<div class="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-primary to-transparent blur-[2px]"></div>
+<!-- Track -->
+<div class="h-full w-full bg-surface-container-high/20"></div>
+</div>
+</div>
+<!-- Decorative Asymmetry Background Image -->
+<div class="absolute -bottom-64 -left-32 w-96 h-96 opacity-20 blur-3xl pointer-events-none">
+<img alt="abstract" class="w-full h-full object-cover rounded-full" data-alt="abstract flowing waves of deep violet and cyan neon light against a dark obsidian background with high-end digital noise texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_4Ucv-TFUHnZ48ZGno_5Ry32NKv2Bqaiu_4ySNzb2J_aDvWXUZrXtfiOQ0YvQnm6f9Se_osi5C-DBoplcgC0FBeM4TWqkYY7e9cADedBTfwL6DrPbOYzGYpnAJWELLENKeqOVa2PiZyjz6aOAHGO45jU9qk8TOxC6a14orOIxosxXyq3zYf1l6fMa8-jJtZ6EUOPvl6pRxfX-yoyYoZ924L47g9YyqHwBT8r36LrnvQUg1WAjIARP3HQbyt1gsnld4z1i0RWAQrc"/>
+</div>
+</main>
+<!-- UI Interaction Hint -->
+<div class="absolute bottom-12 flex flex-col items-center gap-4 text-on-surface-variant/40">
+<span class="font-label text-[9px] uppercase tracking-[0.5em]">Click to initiate interface</span>
+<span class="material-symbols-outlined text-sm animate-bounce" data-icon="keyboard_double_arrow_down">keyboard_double_arrow_down</span>
+</div>
+</body></html>
