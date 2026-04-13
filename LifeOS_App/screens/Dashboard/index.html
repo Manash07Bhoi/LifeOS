@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LIFE_OS_v1.0 - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&amp;family=Manrope:wght@400;500;600&amp;family=Space_Grotesk:wght@300;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#acaab1",
+                    "background": "#0e0e13",
+                    "surface": "#0e0e13",
+                    "on-primary": "#2f0095",
+                    "on-error": "#490013",
+                    "surface-container-high": "#1f1f26",
+                    "surface-variant": "#25252d",
+                    "on-secondary": "#004d57",
+                    "on-tertiary-fixed": "#390010",
+                    "tertiary-container": "#ee2e65",
+                    "inverse-on-surface": "#55545b",
+                    "surface-container-highest": "#25252d",
+                    "on-secondary-fixed-variant": "#005964",
+                    "error-dim": "#d73357",
+                    "secondary-container": "#006875",
+                    "surface-tint": "#b1a1ff",
+                    "secondary-dim": "#00d4ec",
+                    "on-primary-fixed": "#000000",
+                    "on-secondary-fixed": "#003a42",
+                    "primary-fixed-dim": "#9780ff",
+                    "surface-dim": "#0e0e13",
+                    "on-tertiary": "#480016",
+                    "on-surface": "#f9f5fd",
+                    "tertiary-fixed-dim": "#ff7891",
+                    "secondary": "#00e3fd",
+                    "surface-container-lowest": "#000000",
+                    "on-tertiary-fixed-variant": "#77002a",
+                    "tertiary-dim": "#df215c",
+                    "tertiary": "#ff6d8a",
+                    "primary": "#b1a1ff",
+                    "surface-container": "#19191f",
+                    "primary-container": "#a491ff",
+                    "on-tertiary-container": "#000000",
+                    "on-primary-container": "#230075",
+                    "tertiary-fixed": "#ff90a2",
+                    "inverse-primary": "#613de3",
+                    "primary-dim": "#7757fa",
+                    "inverse-surface": "#fcf8ff",
+                    "surface-container-low": "#131319",
+                    "error": "#ff6e84",
+                    "error-container": "#a70138",
+                    "on-background": "#f9f5fd",
+                    "outline": "#76747b",
+                    "outline-variant": "#48474d",
+                    "secondary-fixed": "#26e6ff",
+                    "on-primary-fixed-variant": "#2d008e",
+                    "on-secondary-container": "#e8fbff",
+                    "secondary-fixed-dim": "#00d7f0",
+                    "primary-fixed": "#a491ff",
+                    "on-error-container": "#ffb2b9",
+                    "surface-bright": "#2c2b33"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(25, 25, 31, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glow-border:hover {
+            border-color: rgba(124, 92, 255, 0.3);
+            box-shadow: 0 0 15px rgba(124, 92, 255, 0.1);
+        }
+        .circular-progress {
+            background: radial-gradient(closest-side, #19191f 79%, transparent 80% 100%),
+                        conic-gradient(#7C5CFF 75%, #25252d 0);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#0e0e13]/80 backdrop-blur-xl border-b border-white/10 flex justify-between items-center px-6 py-4 w-full shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full border-2 border-secondary overflow-hidden">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="Cyberpunk style user profile avatar with cyan hud overlay and neon highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkT6iu0KhCvu7UBiSX2V3-5T8rr2oORYKs5Xcyl4pKvNHyypm8klWPQSFzo9LAkhbzBrDPKRtAFEeBtaQaVfmC73xbncN4WPx12ulXzU5Q1oWEZ3VCJhp9u3s--zqdm_EN7tlA4FBmN4xjL0gexb7-BfRReYkh7AiVf1pSgUNYiwd8ui6eZemrTa6JktIe_hlGyIXrgmWmfdag2nT4C8IpY3lZq-vRTvujNv8p3fGQTt414JbWeYU2oaXPR9fDh-qnOvoDLZ49CWI"/>
+</div>
+<h1 class="font-headline font-black tracking-tighter uppercase text-2xl text-[#7C5CFF] tracking-widest drop-shadow-[0_0_8px_rgba(124,92,255,0.8)]">LIFE_OS_v1.0</h1>
+</div>
+<button class="text-[#7C5CFF] hover:text-[#ff6d8a] transition-colors duration-300 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</button>
+</header>
+<main class="pt-28 px-6 max-w-7xl mx-auto">
+<!-- Hero Section / Asymmetric Greeting -->
+<section class="mb-12">
+<div class="flex flex-col md:flex-row justify-between items-end gap-6">
+<div class="max-w-xl">
+<span class="font-label text-secondary uppercase tracking-[0.3em] text-xs mb-2 block">System Status: Optimal</span>
+<h2 class="font-headline font-black text-5xl md:text-7xl leading-none tracking-tighter">
+                        NEURAL <span class="text-primary-dim">DASHBOARD</span>
+</h2>
+<p class="mt-6 text-on-surface-variant font-body text-lg leading-relaxed max-w-md">
+                        Your cognitive load is balanced. 4 priority protocols require attention.
+                    </p>
+</div>
+<div class="flex flex-col items-end">
+<div class="font-label text-4xl font-bold tracking-tight text-white">09:41</div>
+<div class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant">UTC Offset -05:00</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<!-- Focus Time Today (Large Card) -->
+<div class="md:col-span-2 glass-panel rounded-xl p-8 glow-border transition-all flex flex-col justify-between min-h-[320px]">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-label text-xs uppercase tracking-widest text-on-surface-variant mb-1">Focus Time Today</h3>
+<p class="font-headline font-bold text-3xl">6h 12m</p>
+</div>
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="bolt">bolt</span>
+</div>
+<div class="flex items-center gap-8">
+<div class="relative w-32 h-32 rounded-full circular-progress flex items-center justify-center shadow-[0_0_20px_rgba(124,92,255,0.2)]">
+<span class="font-label text-xl font-bold">82%</span>
+</div>
+<div class="flex-1 space-y-4">
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Deep Work</span>
+<span class="text-primary font-bold">4.5h</span>
+</div>
+<div class="w-full h-1 bg-surface-container rounded-full overflow-hidden">
+<div class="w-[75%] h-full bg-primary shadow-[0_0_8px_#b1a1ff]"></div>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Creative Flow</span>
+<span class="text-secondary font-bold">1.7h</span>
+</div>
+<div class="w-full h-1 bg-surface-container rounded-full overflow-hidden">
+<div class="w-[45%] h-full bg-secondary shadow-[0_0_8px_#00e3fd]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Goals (Square Card) -->
+<div class="glass-panel rounded-xl p-8 glow-border transition-all flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<h3 class="font-label text-xs uppercase tracking-widest text-on-surface-variant">Active Goals</h3>
+<span class="material-symbols-outlined text-secondary" data-icon="insights">insights</span>
+</div>
+<div>
+<div class="font-headline font-black text-6xl text-white mb-2">08</div>
+<div class="flex items-center gap-2 text-error text-xs font-label">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+<span>+2 vs LAST WEEK</span>
+</div>
+</div>
+</div>
+<!-- Habit Completion (Square Card) -->
+<div class="glass-panel rounded-xl p-8 glow-border transition-all flex flex-col justify-between bg-gradient-to-br from-transparent to-[#7C5CFF]/5">
+<div class="flex justify-between items-start">
+<h3 class="font-label text-xs uppercase tracking-widest text-on-surface-variant">Habit Completion %</h3>
+<span class="material-symbols-outlined text-tertiary" data-icon="grid_view">grid_view</span>
+</div>
+<div>
+<div class="font-headline font-black text-6xl text-on-surface mb-2">94<span class="text-2xl">%</span></div>
+<p class="text-[10px] font-label text-on-surface-variant uppercase tracking-widest leading-tight">Elite Performance Tier Reached</p>
+</div>
+</div>
+<!-- Recent Log (Horizontal Card) -->
+<div class="md:col-span-3 glass-panel rounded-xl p-6 glow-border transition-all">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-label text-xs uppercase tracking-widest text-on-surface-variant">Recent Protocols</h3>
+<button class="text-primary text-xs font-label uppercase tracking-widest hover:text-secondary transition-colors">Expand Log</button>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between py-3 border-b border-white/5 last:border-0">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+</div>
+<div>
+<div class="font-bold text-sm">Cognitive Optimization</div>
+<div class="text-xs text-on-surface-variant">Sequence 44-A Completed</div>
+</div>
+</div>
+<div class="font-label text-xs text-on-surface-variant">14:02</div>
+</div>
+<div class="flex items-center justify-between py-3 border-b border-white/5 last:border-0">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="biotech">biotech</span>
+</div>
+<div>
+<div class="font-bold text-sm">Biometric Sync</div>
+<div class="text-xs text-on-surface-variant">All vitals stable</div>
+</div>
+</div>
+<div class="font-label text-xs text-on-surface-variant">12:30</div>
+</div>
+</div>
+</div>
+<!-- Profile Overview (Side Card) -->
+<div class="glass-panel rounded-xl overflow-hidden glow-border transition-all">
+<div class="h-32 bg-cover bg-center" data-alt="Vibrant abstract digital art with flowing neon purple and blue lines representing neural networks" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCTY1yizpX10sMHMDV1y76gh63own8I-eIrFVkGGmFCFKnRYYsAIfupodsMHBMjjZsJGfG-78eb6ZViGP_6HGF7XXnwwK4gnf1JkdIa1f3ZTeY-_2WwS6n2sHeIZs0-V5pGzdsc7qmb6_9dlZzGZkvK5fpR0QIYPDitAsoq2OkNJ5BowZ2RC6CvsDlds87503Eeba0vhqiHQI8VNSWOaDHEr3yn09A0IFcLkKiw6i3WQrLi-dlRptHA3iwLhpzQoZVmngiEBsCrwZc')"></div>
+<div class="p-6">
+<h4 class="font-headline font-bold text-lg">Cyber_Nomad</h4>
+<p class="text-xs text-on-surface-variant font-label mb-4">Level 42 Architect</p>
+<div class="flex gap-2">
+<div class="px-2 py-1 bg-surface-variant rounded text-[10px] font-label uppercase tracking-tighter text-primary">Focused</div>
+<div class="px-2 py-1 bg-surface-variant rounded text-[10px] font-label uppercase tracking-tighter text-secondary">Synchronized</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] md:w-[60%] lg:w-[40%] z-50 flex justify-around items-center px-4 bg-[#19191f]/40 backdrop-blur-2xl rounded-2xl border border-white/5 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)]">
+<div class="flex items-center justify-center text-slate-400 p-3 hover:bg-white/5 transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+</div>
+<div class="flex items-center justify-center text-slate-400 p-3 hover:bg-white/5 transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+</div>
+<div class="flex items-center justify-center bg-gradient-to-br from-[#7C5CFF] to-[#7757fa] text-white rounded-xl p-3 shadow-[0_0_15px_rgba(124,92,255,0.5)] active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="emergency_home" style="font-variation-settings: 'FILL' 1;">emergency_home</span>
+</div>
+<div class="flex items-center justify-center text-slate-400 p-3 hover:bg-white/5 transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</div>
+<div class="flex items-center justify-center text-slate-400 p-3 hover:bg-white/5 transition-all active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+</div>
+</nav>
+</body></html>

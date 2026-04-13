@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LifeOS - Goal Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;700;800&amp;family=Manrope:wght@300;400;600&amp;family=Space+Grotesk:wght@300;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#acaab1",
+                    "background": "#0e0e13",
+                    "surface": "#0e0e13",
+                    "on-primary": "#2f0095",
+                    "on-error": "#490013",
+                    "surface-container-high": "#1f1f26",
+                    "surface-variant": "#25252d",
+                    "on-secondary": "#004d57",
+                    "on-tertiary-fixed": "#390010",
+                    "tertiary-container": "#ee2e65",
+                    "inverse-on-surface": "#55545b",
+                    "surface-container-highest": "#25252d",
+                    "on-secondary-fixed-variant": "#005964",
+                    "error-dim": "#d73357",
+                    "secondary-container": "#006875",
+                    "surface-tint": "#b1a1ff",
+                    "secondary-dim": "#00d4ec",
+                    "on-primary-fixed": "#000000",
+                    "on-secondary-fixed": "#003a42",
+                    "primary-fixed-dim": "#9780ff",
+                    "surface-dim": "#0e0e13",
+                    "on-tertiary": "#480016",
+                    "on-surface": "#f9f5fd",
+                    "tertiary-fixed-dim": "#ff7891",
+                    "secondary": "#00e3fd",
+                    "surface-container-lowest": "#000000",
+                    "on-tertiary-fixed-variant": "#77002a",
+                    "tertiary-dim": "#df215c",
+                    "tertiary": "#ff6d8a",
+                    "primary": "#b1a1ff",
+                    "surface-container": "#19191f",
+                    "primary-container": "#a491ff",
+                    "on-tertiary-container": "#000000",
+                    "on-primary-container": "#230075",
+                    "tertiary-fixed": "#ff90a2",
+                    "inverse-primary": "#613de3",
+                    "primary-dim": "#7757fa",
+                    "inverse-surface": "#fcf8ff",
+                    "surface-container-low": "#131319",
+                    "error": "#ff6e84",
+                    "error-container": "#a70138",
+                    "on-background": "#f9f5fd",
+                    "outline": "#76747b",
+                    "outline-variant": "#48474d",
+                    "secondary-fixed": "#26e6ff",
+                    "on-primary-fixed-variant": "#2d008e",
+                    "on-secondary-container": "#e8fbff",
+                    "secondary-fixed-dim": "#00d7f0",
+                    "primary-fixed": "#a491ff",
+                    "on-error-container": "#ffb2b9",
+                    "surface-bright": "#2c2b33"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "2xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Manrope"],
+                    "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); }
+        .glow-text { text-shadow: 0 0 10px rgba(124, 92, 255, 0.6); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#0e0e13]/80 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+<div class="flex justify-between items-center px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-secondary p-[1px]">
+<div class="w-full h-full rounded-full bg-surface-container flex items-center justify-center overflow-hidden">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="Stylized portrait of a person with a futuristic cyan HUD digital overlay glowing on their face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7f7rhlRsaaqM6jeUk_k0XKTspLJidROR4Aft23dvnwowcFyHoAGmGhwfHIjH2vbQX5U9t4FX9Zx52qmFpRajlSExwzG47MfdJZNEfFx3I6aURsbSuThgifLjkfQyYa1Jm3pe5gHl5W7EUF2azZFucsa013H1IvLon36z70pGvMFRN6jGn5-RofcR1BPtnjVlnIi9qbWAMI1Mp6SGE3XKHEIc1nQiytN99usaQxeC2oHRGH6i__RVI9ePebcY193fhYMaigbfPaQ8"/>
+</div>
+</div>
+<h1 class="font-headline font-black tracking-tighter uppercase text-2xl text-[#7C5CFF] tracking-widest drop-shadow-[0_0_8px_rgba(124,92,255,0.8)]">LIFE_OS_v1.0</h1>
+</div>
+<div class="flex gap-4">
+<button class="text-on-surface-variant hover:text-[#ff6d8a] transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+<button class="text-on-surface-variant hover:text-error transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-5xl mx-auto">
+<!-- Hero Visualization Section -->
+<section class="relative py-12 flex flex-col items-center">
+<!-- Cinematic Progress Ring -->
+<div class="relative w-72 h-72 md:w-96 md:h-96 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-high" cx="50%" cy="50%" fill="transparent" r="45%" stroke="currentColor" stroke-width="2"></circle>
+<circle class="drop-shadow-[0_0_15px_rgba(124,92,255,0.6)]" cx="50%" cy="50%" fill="transparent" r="45%" stroke="url(#gradient-ring)" stroke-dasharray="100 100" stroke-dashoffset="28" stroke-linecap="round" stroke-width="12"></circle>
+<defs>
+<lineargradient id="gradient-ring" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#b1a1ff"></stop>
+<stop offset="100%" stop-color="#00e3fd"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="absolute flex flex-col items-center text-center">
+<span class="font-label text-on-surface-variant text-sm uppercase tracking-widest mb-2">Completion</span>
+<span class="font-headline text-6xl md:text-8xl font-black text-on-surface tracking-tighter glow-text">72%</span>
+<span class="font-label text-secondary text-xs uppercase tracking-[0.2em] mt-2">Active Protocol</span>
+</div>
+</div>
+<!-- Header Content -->
+<div class="mt-12 text-left w-full">
+<div class="flex items-center gap-3 mb-4">
+<span class="px-3 py-1 bg-secondary-container/30 text-secondary text-[10px] font-label uppercase tracking-widest rounded-md border border-secondary/20">Critical path</span>
+<span class="font-label text-on-surface-variant text-[10px] uppercase tracking-widest">Est. Dec 2024</span>
+</div>
+<h2 class="font-headline text-4xl md:text-6xl font-black text-on-surface leading-none mb-6">NEURAL_INTERFACE_BETA_DEPLOY</h2>
+<p class="font-body text-on-surface-variant text-lg max-w-2xl leading-relaxed">
+                    Integration of the core processing unit with secondary visual sensory nodes. Finalizing the low-latency response protocols and sensory feedback loops.
+                </p>
+</div>
+</section>
+<!-- Subtasks Section -->
+<section class="mt-16 grid grid-cols-1 md:grid-cols-12 gap-8">
+<div class="md:col-span-8">
+<h3 class="font-label text-xs uppercase tracking-[0.3em] text-on-surface-variant mb-8 flex items-center gap-4">
+                    Subtask Matrix
+                    <div class="h-[1px] flex-grow bg-white/5"></div>
+</h3>
+<div class="space-y-4">
+<!-- Task Item 1: Complete -->
+<div class="glass p-6 rounded-2xl flex items-center justify-between border border-white/5 group hover:bg-white/[0.05] transition-all">
+<div class="flex items-center gap-6">
+<div class="w-8 h-8 rounded-full border border-primary flex items-center justify-center bg-primary/10">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-surface group-hover:text-primary transition-colors">Core Logic Synthesis</h4>
+<p class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">Completed 2 days ago</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">more_vert</span>
+</div>
+<!-- Task Item 2: Active -->
+<div class="glass p-6 rounded-2xl flex items-center justify-between border border-secondary/30 bg-secondary/5 group">
+<div class="flex items-center gap-6">
+<div class="w-8 h-8 rounded-full border-2 border-secondary flex items-center justify-center">
+<div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-surface">Visual Node Calibration</h4>
+<p class="font-label text-[10px] text-secondary uppercase tracking-widest mt-1">In progress · 48%</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg bg-surface-container hover:bg-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+<!-- Task Item 3: Pending -->
+<div class="glass p-6 rounded-2xl flex items-center justify-between border border-white/5 group hover:bg-white/[0.05] transition-all">
+<div class="flex items-center gap-6">
+<div class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center">
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-surface-variant group-hover:text-on-surface transition-colors">Response Latency Audit</h4>
+<p class="font-label text-[10px] text-on-surface-variant/50 uppercase tracking-widest mt-1">Scheduled: Week 42</p>
+</div>
+</div>
+</div>
+<!-- Task Item 4: Pending -->
+<div class="glass p-6 rounded-2xl flex items-center justify-between border border-white/5 group hover:bg-white/[0.05] transition-all">
+<div class="flex items-center gap-6">
+<div class="w-8 h-8 rounded-full border border-outline-variant flex items-center justify-center">
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-surface-variant group-hover:text-on-surface transition-colors">Security Patch 0.4.1</h4>
+<p class="font-label text-[10px] text-on-surface-variant/50 uppercase tracking-widest mt-1">Blocker: Core Logic</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Stats/Asymmetric Column -->
+<div class="md:col-span-4 space-y-6">
+<div class="bg-surface-container rounded-2xl p-8 border border-white/5 relative overflow-hidden">
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
+<h3 class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-6">Telemetry</h3>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="text-xs font-label text-on-surface-variant uppercase">Resource Load</span>
+<span class="text-xs font-label text-tertiary">92%</span>
+</div>
+<div class="h-1 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[92%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="text-xs font-label text-on-surface-variant uppercase">Uptime Ratio</span>
+<span class="text-xs font-label text-secondary">99.8%</span>
+</div>
+<div class="h-1 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[99%]"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="glass rounded-2xl p-8 border border-white/5">
+<h3 class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant mb-4">Collaborators</h3>
+<div class="flex -space-x-3">
+<img alt="Avatar 1" class="w-10 h-10 rounded-full border-2 border-background" data-alt="Cyberpunk profile picture of a person with glowing blue geometric tattoos on their neck" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvhASNg6pLlS8floqXszypvawut70_BfX7paLNOVtsRmvyTYa80p5-4olDLOsnVraJYw1N-CKhDfUmnsdZxgBUBMwHrV3TXriFTpaJzPwz9d99CIaJApIxeARCDz_lQGAUg-KC0Cj3q9yqoxQmGhnx41yyvlW96T3S67aFt3aa0QRSDesNOPHugXp5plXc_4jhYu-NMSalv5bM9FiDDOK-lN6Jcgnj-8GHqdPWvpVd_WVSrpkDWY1VcIrLW8GhQK4655hKFrARYP0"/>
+<img alt="Avatar 2" class="w-10 h-10 rounded-full border-2 border-background" data-alt="Futuristic portrait of a woman wearing high-tech visors reflecting a city grid" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB39zq8CIowWWypc_2Bq1NHrr6vhvqm_Fh4fszYpbxUO2302dbIg6kuTgvTxNnIrQ1JyYza8QSK-y5fozVSkSRPyb0sasMRrS36SiDJ60K1baKJ65j7oQZ09pgg_zJstQyobghdXO1jYoxQ7vLZBqTu4l3zCnSjVRp4lJRBVmhdy7zCSWqwV1pnxBKmsZn6hZoETw4lG93Bhew01RDsuiucL_v9UDK770YPZJdITUiShn1Bgwrhueb8BTFENP1ENdzM1e9Be1F4NU8"/>
+<img alt="Avatar 3" class="w-10 h-10 rounded-full border-2 border-background" data-alt="Profile of a digital technician wearing a black tactical jacket in a neon-lit room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHMgCPvD_2I4NX-hpxol5JL6eVbmGF5WxhyqLAaHALjoOeTnjWbVnnjgzW5PNOIv-O1Sk1VoC7GTJQne-duSO5CZbOX5YJjQ49qul-xRZkKZ7N3U_stGRkADhR10aSkhFFe5lsfrcPxojq3eRpXCRLdEygpqMVoNMn13KzfCt94ucqLQD5NMB8vgas5JLNW2dpWSFj61tCNF0bj5oqaLoZDEOegTX9yvlJMORJhR3yo23RYbpLBL30kNP-6oOx4Lii9oLvSpG87V0"/>
+<div class="w-10 h-10 rounded-full border-2 border-background bg-surface-variant flex items-center justify-center text-[10px] font-label text-on-surface-variant">+4</div>
+</div>
+<button class="w-full mt-6 py-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/5 font-label text-[10px] uppercase tracking-widest transition-all">Add Node</button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] md:w-auto md:min-w-[400px] z-50 rounded-2xl bg-[#19191f]/40 backdrop-blur-2xl border border-white/5 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)] px-4 py-2 flex justify-around md:gap-8 items-center">
+<a class="flex items-center justify-center text-slate-400 p-3 hover:bg-white/5 transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+</a>
+<a class="flex items-center justify-center bg-gradient-to-br from-[#7C5CFF] to-[#7757fa] text-white rounded-xl p-3 shadow-[0_0_15px_rgba(124,92,255,0.5)] active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="insights" style="font-variation-settings: 'FILL' 1;">insights</span>
+</a>
+<a class="flex items-center justify-center text-slate-400 p-3 hover:bg-white/5 transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="emergency_home">emergency_home</span>
+</a>
+<a class="flex items-center justify-center text-slate-400 p-3 hover:bg-white/5 transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</a>
+<a class="flex items-center justify-center text-slate-400 p-3 hover:bg-white/5 transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+</a>
+</nav>
+</body></html>

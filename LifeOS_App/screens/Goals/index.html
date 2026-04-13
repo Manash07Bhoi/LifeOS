@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&amp;family=Manrope:wght@400;500;700&amp;family=Space_Grotesk:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#acaab1",
+                    "background": "#0e0e13",
+                    "surface": "#0e0e13",
+                    "on-primary": "#2f0095",
+                    "on-error": "#490013",
+                    "surface-container-high": "#1f1f26",
+                    "surface-variant": "#25252d",
+                    "on-secondary": "#004d57",
+                    "on-tertiary-fixed": "#390010",
+                    "tertiary-container": "#ee2e65",
+                    "inverse-on-surface": "#55545b",
+                    "surface-container-highest": "#25252d",
+                    "on-secondary-fixed-variant": "#005964",
+                    "error-dim": "#d73357",
+                    "secondary-container": "#006875",
+                    "surface-tint": "#b1a1ff",
+                    "secondary-dim": "#00d4ec",
+                    "on-primary-fixed": "#000000",
+                    "on-secondary-fixed": "#003a42",
+                    "primary-fixed-dim": "#9780ff",
+                    "surface-dim": "#0e0e13",
+                    "on-tertiary": "#480016",
+                    "on-surface": "#f9f5fd",
+                    "tertiary-fixed-dim": "#ff7891",
+                    "secondary": "#00e3fd",
+                    "surface-container": "#19191f",
+                    "primary-container": "#a491ff",
+                    "on-tertiary-container": "#000000",
+                    "on-primary-container": "#230075",
+                    "tertiary-fixed": "#ff90a2",
+                    "inverse-primary": "#613de3",
+                    "primary-dim": "#7757fa",
+                    "inverse-surface": "#fcf8ff",
+                    "surface-container-low": "#131319",
+                    "error": "#ff6e84",
+                    "error-container": "#a70138",
+                    "on-background": "#f9f5fd",
+                    "outline": "#76747b",
+                    "outline-variant": "#48474d",
+                    "secondary-fixed": "#26e6ff",
+                    "on-primary-fixed-variant": "#2d008e",
+                    "on-secondary-container": "#e8fbff",
+                    "secondary-fixed-dim": "#00d7f0",
+                    "primary-fixed": "#a491ff",
+                    "on-error-container": "#ffb2b9",
+                    "surface-bright": "#2c2b33"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "body": [
+                            "Manrope"
+                    ],
+                    "label": [
+                            "Space Grotesk"
+                    ]
+            }
+        },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .glass-card {
+            background: rgba(25, 25, 31, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .neon-glow-primary {
+            box-shadow: 0 0 15px rgba(124, 92, 255, 0.4);
+        }
+        .neon-glow-secondary {
+            box-shadow: 0 0 15px rgba(0, 227, 253, 0.4);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#0e0e13]/80 backdrop-blur-xl border-b border-white/10 flex justify-between items-center px-6 py-4 shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-[#7C5CFF]">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Cyberpunk user profile avatar with neon cyan HUD elements and a dark metallic background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvQed3Y0xeTQ4198ePheG2TBGHjlfFEyz1xgntTZmrtfrCXYXglGYyS7ikvvsxo7Vd43Y_Et4gtqWatXxlirQz5e_rd635V7Q0eppeSDJ1YNJ7k12SBhx7F3OIQCx83B4ZBf6u_uyNsR1lcKg-TxUg0QvImrtWUr_Lr48ovByuPQFxUrFahVLgK-UkG5_9i-EawxQw90uzrp04NNxUmw73r_Gg2afKIrS2Ptr6Y_4mtVVJJNosn9utWmRI-p0HFBXz2Qm_46zdViw"/>
+</div>
+<h1 class="text-2xl font-black text-[#7C5CFF] tracking-widest drop-shadow-[0_0_8px_rgba(124,92,255,0.8)] font-headline uppercase">LIFE_OS_v1.0</h1>
+</div>
+<div class="flex gap-4">
+<button class="text-slate-500 hover:text-[#ff6d8a] transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-5xl mx-auto">
+<!-- Header Section -->
+<div class="mb-10">
+<p class="font-label text-secondary text-sm tracking-[0.2em] mb-2 uppercase">Core Objectives</p>
+<h2 class="font-headline font-black text-4xl md:text-5xl tracking-tighter text-on-surface uppercase italic">Current Missions</h2>
+</div>
+<!-- Intentional Asymmetry Layout: Goals Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
+<!-- Goal Card 1: Large Featured -->
+<div class="lg:col-span-8 glass-card rounded-xl p-8 flex flex-col justify-between group hover:border-[#7C5CFF]/30 transition-all duration-500">
+<div class="flex justify-between items-start mb-12">
+<div>
+<span class="font-label text-xs text-on-surface-variant uppercase tracking-widest bg-surface-variant px-3 py-1 rounded-full">High Priority</span>
+<h3 class="font-headline text-3xl font-extrabold mt-4 tracking-tight">Neural Interface Development</h3>
+</div>
+<span class="font-label text-primary text-2xl font-bold">72%</span>
+</div>
+<div class="space-y-4">
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary-dim to-primary rounded-full neon-glow-primary" style="width: 72%"></div>
+</div>
+<div class="flex justify-between font-label text-[10px] text-on-surface-variant uppercase tracking-widest">
+<span>Initiated: 2024.03.12</span>
+<span>Estimated Completion: 14 Days</span>
+</div>
+</div>
+</div>
+<!-- Goal Card 2: Secondary -->
+<div class="lg:col-span-4 glass-card rounded-xl p-6 flex flex-col justify-between hover:border-secondary/30 transition-all duration-500">
+<div>
+<span class="font-label text-xs text-secondary uppercase tracking-widest">Maintenance</span>
+<h3 class="font-headline text-xl font-bold mt-2">Physical Optimization</h3>
+</div>
+<div class="mt-8 space-y-4">
+<div class="flex justify-between items-end">
+<span class="font-label text-xs text-on-surface-variant uppercase">Daily Cycles</span>
+<span class="font-label text-secondary font-bold">45%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full neon-glow-secondary" style="width: 45%"></div>
+</div>
+</div>
+</div>
+<!-- Goal Card 3: System Task -->
+<div class="lg:col-span-4 glass-card rounded-xl p-6 flex flex-col justify-between hover:border-tertiary/30 transition-all duration-500">
+<div>
+<span class="font-label text-xs text-tertiary uppercase tracking-widest">Critical</span>
+<h3 class="font-headline text-xl font-bold mt-2">Archive Encryption</h3>
+</div>
+<div class="mt-8 space-y-4">
+<div class="flex justify-between items-end">
+<span class="font-label text-xs text-on-surface-variant uppercase">Integrity Check</span>
+<span class="font-label text-tertiary font-bold">91%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full shadow-[0_0_10px_rgba(255,109,138,0.4)]" style="width: 91%"></div>
+</div>
+</div>
+</div>
+<!-- Goal Card 4: Long Term -->
+<div class="lg:col-span-8 glass-card rounded-xl p-6 flex flex-col md:flex-row gap-6 items-center hover:border-primary/30 transition-all duration-500">
+<div class="w-full md:w-1/3 aspect-video rounded-lg overflow-hidden bg-surface-container">
+<img alt="Concept City" class="w-full h-full object-cover opacity-60" data-alt="A cinematic futuristic cityscape at night with bioluminescent towers and flying vehicles in a deep purple and cyan haze" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGlGvr0hFFIxWUYOaltIoS77Kv_MHdT3js8wwL4WMV6bKfsGTOozuXu0zLB1UCNAAzUqSWp6mKg8VdocQcJLDUNnNRbKitmWMOMPMZuv2N8bQpv4eZYn3bY973ukpC0RUcYy8MnTplCPvVdyFO6dFu7tFjkzmK7Ep74gkCaTjazgGJbnpFY_I6clKfNvQ_DEFwVUuaCP-5YqZ6sd5LP-o0HewRjB57vet37K3rEDrSxb0uD_T614iTCMx_AP2jao6MO28G6M_ArRI"/>
+</div>
+<div class="w-full md:w-2/3 flex flex-col justify-center">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline text-xl font-bold">Digital Estate Acquisition</h3>
+<span class="font-label text-primary-fixed-dim text-lg font-bold">12%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-dim rounded-full" style="width: 12%"></div>
+</div>
+<p class="text-on-surface-variant text-sm mt-4 italic font-body">"Expand operational footprint into Sector 7-G decentralized clusters."</p>
+</div>
+</div>
+<!-- Goal Card 5: Micro Task -->
+<div class="lg:col-span-6 glass-card rounded-xl p-6 flex items-center justify-between hover:bg-white/5 transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</div>
+<div>
+<h3 class="font-headline font-bold">Skill: Rust Lang</h3>
+<span class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">In Progress</span>
+</div>
+</div>
+<div class="text-right">
+<div class="font-label text-primary font-black text-xl italic">68%</div>
+</div>
+</div>
+<!-- Goal Card 6: Micro Task -->
+<div class="lg:col-span-6 glass-card rounded-xl p-6 flex items-center justify-between hover:bg-white/5 transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+</div>
+<div>
+<h3 class="font-headline font-bold">Market Analysis</h3>
+<span class="font-label text-[10px] text-on-surface-variant uppercase tracking-widest">Autonomous Sync</span>
+</div>
+</div>
+<div class="text-right">
+<div class="font-label text-secondary font-black text-xl italic">84%</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB: Add Goal -->
+<button class="fixed bottom-28 right-8 w-16 h-16 rounded-2xl bg-gradient-to-br from-secondary to-[#00a2b5] text-on-secondary shadow-[0_0_20px_rgba(0,227,253,0.5)] flex items-center justify-center group active:scale-90 transition-transform duration-200 z-50">
+<span class="material-symbols-outlined text-3xl font-bold" data-icon="add">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] z-50 flex justify-around items-center px-4 bg-[#19191f]/40 backdrop-blur-2xl rounded-2xl border border-white/5 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)]">
+<div class="flex items-center justify-center text-slate-400 p-3 hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+</div>
+<div class="flex items-center justify-center text-slate-400 p-3 hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+</div>
+<!-- Active Tab: Goal List maps to Home/Emergency Home usually in these OS concepts -->
+<div class="flex items-center justify-center bg-gradient-to-br from-[#7C5CFF] to-[#7757fa] text-white rounded-xl p-3 shadow-[0_0_15px_rgba(124,92,255,0.5)] active:scale-90 duration-200">
+<span class="material-symbols-outlined" data-icon="emergency_home">emergency_home</span>
+</div>
+<div class="flex items-center justify-center text-slate-400 p-3 hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</div>
+<div class="flex items-center justify-center text-slate-400 p-3 hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined" data-icon="settings_input_component">settings_input_component</span>
+</div>
+</nav>
+</body></html>
