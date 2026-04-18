@@ -1,0 +1,113 @@
+import 'package:flutter/material.dart';
+import '../../core/theme/app_theme.dart';
+import '../../shared/widgets/glass_card.dart';
+import '../../shared/widgets/neon_text.dart';
+import 'theme_preview_screen.dart';
+import 'about_screen.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import '../../data/models/goal.dart';
+import '../../data/models/habit.dart';
+import '../../data/models/focus_session.dart';
+import '../../data/models/command_history.dart';
+import '../../shared/components/confirmation_dialog.dart';
+import '../../shared/components/success_feedback_toast.dart';
+
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: const NeonText('SYSTEM CONFIGURATION', color: AppTheme.textPrimary, glow: false),
+        centerTitle: false,
+      ),
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.all(24.0),
+          children: [
+            const Text('APPEARANCE', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+            const SizedBox(height: 16),
+            GlassCard(
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.palette_outlined, color: AppTheme.primaryPurple),
+                    title: const Text('Theme Preview', style: TextStyle(color: AppTheme.textPrimary)),
+                    trailing: const Icon(Icons.chevron_right, color: AppTheme.textSecondary),
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => const ThemePreviewScreen()));
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 32),
+            const Text('DATA MANAGEMENT', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+            const SizedBox(height: 16),
+            GlassCard(
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.sd_storage_outlined, color: AppTheme.neonCyan),
+                    title: const Text('Export Local Data', style: TextStyle(color: AppTheme.textPrimary)),
+                    subtitle: const Text('Save Hive boxes to JSON', style: TextStyle(color: AppTheme.textSecondary)),
+                    trailing: const Icon(Icons.download, color: AppTheme.textSecondary),
+                    onTap: () {
+                      SuccessFeedbackToast.show(context, 'Data Export capability not available in core build.', isError: true);
+                    },
+                  ),
+                  const Divider(color: Colors.white12, height: 1),
+                  ListTile(
+                    leading: const Icon(Icons.warning_amber_rounded, color: AppTheme.neonPink),
+                    title: const Text('Purge System Data', style: TextStyle(color: AppTheme.textPrimary)),
+                    subtitle: const Text('Irreversible action', style: TextStyle(color: AppTheme.neonPink)),
+                    onTap: () {
+                      _showDataResetConfirm(context);
+                    },
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 32),
+            const Text('SYSTEM INFO', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+            const SizedBox(height: 16),
+            GlassCard(
+              child: ListTile(
+                leading: const Icon(Icons.info_outline, color: AppTheme.textSecondary),
+                title: const Text('About LifeOS', style: TextStyle(color: AppTheme.textPrimary)),
+                trailing: const Icon(Icons.chevron_right, color: AppTheme.textSecondary),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const AboutScreen()));
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showDataResetConfirm(BuildContext context) {
+    ConfirmationDialog.show(
+      context,
+      title: 'PURGE ALL DATA?',
+      message: 'This will delete all goals, habits, sessions, and command history. This cannot be undone.',
+      isDestructive: true,
+      confirmText: 'PURGE',
+    ).then((confirmed) async {
+      if (confirmed == true) {
+        await Hive.box<Goal>('goalsBox').clear();
+        await Hive.box<Habit>('habitsBox').clear();
+        await Hive.box<FocusSession>('sessionsBox').clear();
+        await Hive.box<CommandHistory>('commandHistoryBox').clear();
+
+        if (context.mounted) {
+          SuccessFeedbackToast.show(context, 'System memory purged successfully.');
+        }
+      }
+    });
+  }
+}
