@@ -6,6 +6,7 @@ import '../../shared/widgets/glass_card.dart';
 import '../../shared/widgets/neon_text.dart';
 import '../../providers/focus_provider.dart';
 import '../../providers/habits_provider.dart';
+import '../../data/models/focus_session.dart';
 
 class AnalyticsScreen extends ConsumerWidget {
   const AnalyticsScreen({super.key});
@@ -17,8 +18,6 @@ class AnalyticsScreen extends ConsumerWidget {
 
     int totalFocusMinutes = sessions.fold(0, (sum, session) => sum + session.durationMinutes);
     int totalHabitsCompleted = habits.fold(0, (sum, habit) => sum + habit.completionDates.length);
-
-    final List<FlSpot> focusSpots = _generateFocusSpots(sessions);
 
     return Scaffold(
       appBar: AppBar(
@@ -75,69 +74,96 @@ class AnalyticsScreen extends ConsumerWidget {
               const SizedBox(height: 32),
               const Text('FOCUS TRAJECTORY (LAST 7 DAYS)', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
               const SizedBox(height: 16),
-              GlassCard(
-                padding: const EdgeInsets.all(24),
-                child: SizedBox(
-                  height: 200,
-                  child: LineChart(
-                    LineChartData(
-                      gridData: FlGridData(
-                        show: true,
-                        drawVerticalLine: false,
-                        getDrawingHorizontalLine: (value) {
-                          return FlLine(
-                            color: AppTheme.textSecondary.withValues(alpha: 0.1),
-                            strokeWidth: 1,
-                          );
-                        },
-                      ),
-                      titlesData: FlTitlesData(
-                        show: true,
-                        rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                        topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                        bottomTitles: AxisTitles(
-                          sideTitles: SideTitles(
-                            showTitles: true,
-                            reservedSize: 22,
-                            interval: 1,
-                            getTitlesWidget: (value, meta) {
-                              return Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: Text('D${value.toInt()}', style: const TextStyle(color: AppTheme.textSecondary, fontSize: 10)),
-                              );
-                            },
+              if (sessions.isEmpty)
+                const GlassCard(
+                  padding: EdgeInsets.all(48),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.bar_chart, color: AppTheme.textSecondary, size: 48),
+                        SizedBox(height: 16),
+                        Text(
+                          'No Data Yet',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.textPrimary,
                           ),
                         ),
-                        leftTitles: AxisTitles(
-                          sideTitles: SideTitles(
-                            showTitles: true,
-                            interval: 30,
-                            getTitlesWidget: (value, meta) {
-                              return Text('${value.toInt()}', style: const TextStyle(color: AppTheme.textSecondary, fontSize: 10));
-                            },
-                            reservedSize: 28,
-                          ),
-                        ),
-                      ),
-                      borderData: FlBorderData(show: false),
-                      lineBarsData: [
-                        LineChartBarData(
-                          spots: focusSpots,
-                          isCurved: true,
-                          color: AppTheme.neonCyan,
-                          barWidth: 3,
-                          isStrokeCapRound: true,
-                          dotData: const FlDotData(show: false),
-                          belowBarData: BarAreaData(
-                            show: true,
-                            color: AppTheme.neonCyan.withValues(alpha: 0.1),
-                          ),
+                        SizedBox(height: 8),
+                        Text(
+                          'Complete sessions to see analytics',
+                          style: TextStyle(color: AppTheme.textSecondary),
                         ),
                       ],
                     ),
                   ),
+                )
+              else
+                GlassCard(
+                  padding: const EdgeInsets.all(24),
+                  child: SizedBox(
+                    height: 200,
+                    child: LineChart(
+                      LineChartData(
+                        gridData: FlGridData(
+                          show: true,
+                          drawVerticalLine: false,
+                          getDrawingHorizontalLine: (value) {
+                            return FlLine(
+                              color: AppTheme.textSecondary.withValues(alpha: 0.1),
+                              strokeWidth: 1,
+                            );
+                          },
+                        ),
+                        titlesData: FlTitlesData(
+                          show: true,
+                          rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                          topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                          bottomTitles: AxisTitles(
+                            sideTitles: SideTitles(
+                              showTitles: true,
+                              reservedSize: 22,
+                              interval: 1,
+                              getTitlesWidget: (value, meta) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: Text('D${value.toInt()}', style: const TextStyle(color: AppTheme.textSecondary, fontSize: 10)),
+                                );
+                              },
+                            ),
+                          ),
+                          leftTitles: AxisTitles(
+                            sideTitles: SideTitles(
+                              showTitles: true,
+                              interval: 30,
+                              getTitlesWidget: (value, meta) {
+                                return Text('${value.toInt()}', style: const TextStyle(color: AppTheme.textSecondary, fontSize: 10));
+                              },
+                              reservedSize: 28,
+                            ),
+                          ),
+                        ),
+                        borderData: FlBorderData(show: false),
+                        lineBarsData: [
+                          LineChartBarData(
+                            spots: _generateFocusSpots(sessions),
+                            isCurved: true,
+                            color: AppTheme.neonCyan,
+                            barWidth: 3,
+                            isStrokeCapRound: true,
+                            dotData: const FlDotData(show: false),
+                            belowBarData: BarAreaData(
+                              show: true,
+                              color: AppTheme.neonCyan.withValues(alpha: 0.1),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-              ),
               const SizedBox(height: 32),
               SizedBox(
                 width: double.infinity,
@@ -160,11 +186,30 @@ class AnalyticsScreen extends ConsumerWidget {
     );
   }
 
-  List<FlSpot> _generateFocusSpots(List<dynamic> sessions) {
-    if (sessions.isEmpty) {
-      return List.generate(7, (index) => FlSpot(index.toDouble(), 0));
+  List<FlSpot> _generateFocusSpots(List<FocusSession> sessions) {
+    // Generate real data aggregation for the last 7 days
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+
+    // Create a map to hold total minutes per day for the last 7 days
+    Map<int, int> dailyMinutes = {};
+    for (int i = 0; i < 7; i++) {
+      dailyMinutes[i] = 0; // Initialize with 0
     }
-    return List.generate(7, (index) => FlSpot(index.toDouble(), (index * 10.0 + (sessions.length * 5)) % 60));
+
+    for (var session in sessions) {
+      final sessionDay = DateTime(session.startTime.year, session.startTime.month, session.startTime.day);
+      final difference = today.difference(sessionDay).inDays;
+
+      // If the session is within the last 7 days (0 = today, 6 = 6 days ago)
+      if (difference >= 0 && difference < 7) {
+        // Map 0 -> today (index 6), 1 -> yesterday (index 5), ..., 6 -> 6 days ago (index 0)
+        final index = 6 - difference;
+        dailyMinutes[index] = (dailyMinutes[index] ?? 0) + session.durationMinutes;
+      }
+    }
+
+    return List.generate(7, (index) => FlSpot(index.toDouble(), dailyMinutes[index]?.toDouble() ?? 0.0));
   }
 }
 

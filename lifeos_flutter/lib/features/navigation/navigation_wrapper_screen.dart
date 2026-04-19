@@ -6,7 +6,7 @@ import '../goals/goals_screen.dart';
 import '../habits/habit_matrix_screen.dart';
 import '../analytics/analytics_screen.dart';
 import '../settings/settings_screen.dart';
-import '../../shared/widgets/quick_actions_panel.dart';
+import '../system/quick_actions_panel.dart';
 import '../goals/add_edit_goal_screen.dart';
 import '../habits/add_edit_habit_screen.dart';
 import '../focus/focus_screen.dart';

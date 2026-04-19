@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/theme/app_theme.dart';
 import '../../shared/widgets/glass_card.dart';
 import '../../shared/widgets/neon_text.dart';
@@ -11,12 +12,17 @@ import '../../data/models/focus_session.dart';
 import '../../data/models/command_history.dart';
 import '../../shared/components/confirmation_dialog.dart';
 import '../../shared/components/success_feedback_toast.dart';
+import '../../providers/goals_provider.dart';
+import '../../providers/habits_provider.dart';
+import '../../providers/focus_provider.dart';
+import '../../providers/command_provider.dart';
+import '../navigation/navigation_wrapper_screen.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -65,7 +71,7 @@ class SettingsScreen extends StatelessWidget {
                     title: const Text('Purge System Data', style: TextStyle(color: AppTheme.textPrimary)),
                     subtitle: const Text('Irreversible action', style: TextStyle(color: AppTheme.neonPink)),
                     onTap: () {
-                      _showDataResetConfirm(context);
+                      _showDataResetConfirm(context, ref);
                     },
                   ),
                 ],
@@ -90,7 +96,7 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  void _showDataResetConfirm(BuildContext context) {
+  void _showDataResetConfirm(BuildContext context, WidgetRef ref) {
     ConfirmationDialog.show(
       context,
       title: 'PURGE ALL DATA?',
@@ -99,14 +105,30 @@ class SettingsScreen extends StatelessWidget {
       confirmText: 'PURGE',
     ).then((confirmed) async {
       if (confirmed == true) {
+        // Step 1: Clear all Hive boxes
         await Hive.box<Goal>('goalsBox').clear();
         await Hive.box<Habit>('habitsBox').clear();
         await Hive.box<FocusSession>('sessionsBox').clear();
         await Hive.box<CommandHistory>('commandHistoryBox').clear();
+        await Hive.box('settingsBox').clear();
 
-        if (context.mounted) {
-          SuccessFeedbackToast.show(context, 'System memory purged successfully.');
-        }
+        // Step 2: Invalidate Riverpod Providers
+        ref.invalidate(goalsProvider);
+        ref.invalidate(habitsProvider);
+        ref.invalidate(focusProvider);
+        ref.invalidate(focusSessionsProvider);
+        ref.invalidate(commandProvider);
+
+        if (!context.mounted) return;
+
+        SuccessFeedbackToast.show(context, 'System memory purged successfully.');
+
+        // Step 3: Navigate user to clean state (Dashboard via NavigationWrapperScreen)
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => const NavigationWrapperScreen()),
+          (route) => false,
+        );
       }
     });
   }
