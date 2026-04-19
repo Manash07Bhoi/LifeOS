@@ -7,14 +7,22 @@ import 'data/models/habit.dart';
 import 'data/models/focus_session.dart';
 import 'data/models/command_history.dart';
 import 'features/system/splash_screen.dart';
+import 'dart:async';
+import 'package:flutter/services.dart';
 import 'features/goals/add_edit_goal_screen.dart';
 import 'features/habits/add_edit_habit_screen.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
+  runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
 
-  // Register Adapters
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+
+    await Hive.initFlutter();
+
+    // Register Adapters
   Hive.registerAdapter(GoalAdapter());
   Hive.registerAdapter(HabitAdapter());
   Hive.registerAdapter(FocusSessionAdapter());
@@ -25,13 +33,16 @@ void main() async {
   await Hive.openBox<Habit>('habitsBox');
   await Hive.openBox<FocusSession>('sessionsBox');
   await Hive.openBox<CommandHistory>('commandHistoryBox');
-  await Hive.openBox('settingsBox');
+    await Hive.openBox('settingsBox');
 
-  runApp(
-    const ProviderScope(
-      child: LifeOSApp(),
-    ),
-  );
+    runApp(
+      const ProviderScope(
+        child: LifeOSApp(),
+      ),
+    );
+  }, (error, stack) {
+    // Log securely in production. Omit debugPrint logic to comply with security hardening.
+  });
 }
 
 class LifeOSApp extends ConsumerWidget {

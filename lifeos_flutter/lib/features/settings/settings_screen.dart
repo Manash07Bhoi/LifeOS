@@ -118,6 +118,8 @@ class SettingsScreen extends ConsumerWidget {
         ref.invalidate(focusProvider);
         ref.invalidate(focusSessionsProvider);
         ref.invalidate(commandProvider);
+        // Note: settingsProvider and analyticsProvider do not technically exist as separate state notifiers in this codebase structure.
+        // focusSessionsProvider drives the analytics view entirely, so invalidating it serves the same purpose.
 
         if (!context.mounted) return;
 

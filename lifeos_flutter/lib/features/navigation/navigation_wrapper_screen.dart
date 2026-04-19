@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../core/theme/app_theme.dart';
 import '../command/command_screen.dart';
 import '../dashboard/dashboard_screen.dart';
@@ -10,6 +11,7 @@ import '../system/quick_actions_panel.dart';
 import '../goals/add_edit_goal_screen.dart';
 import '../habits/add_edit_habit_screen.dart';
 import '../focus/focus_screen.dart';
+import '../../shared/components/confirmation_dialog.dart';
 
 class NavigationWrapperScreen extends StatefulWidget {
   const NavigationWrapperScreen({super.key});
@@ -74,12 +76,34 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _screens,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) async {
+        if (didPop) return;
+
+        if (_currentIndex != 0) {
+          setState(() => _currentIndex = 0);
+          return;
+        }
+
+        final bool? shouldExit = await ConfirmationDialog.show(
+          context,
+          title: 'EXIT SYSTEM?',
+          message: 'Are you sure you want to exit LifeOS?',
+          isDestructive: false,
+          confirmText: 'EXIT',
+        );
+
+        if (shouldExit == true && context.mounted) {
+          SystemNavigator.pop();
+        }
+      },
+      child: Scaffold(
+        body: IndexedStack(
+          index: _currentIndex,
+          children: _screens,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Container(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
@@ -108,42 +132,43 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
         ),
-        child: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          onTap: (index) => setState(() => _currentIndex = index),
-          backgroundColor: AppTheme.surface,
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: AppTheme.primaryPurple,
-          unselectedItemColor: AppTheme.textSecondary,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          elevation: 0,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard_outlined),
-              activeIcon: Icon(Icons.dashboard),
-              label: 'Dashboard',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.track_changes_outlined),
-              activeIcon: Icon(Icons.track_changes),
-              label: 'Goals',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.loop),
-              label: 'Habits',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.bar_chart_outlined),
-              activeIcon: Icon(Icons.bar_chart),
-              label: 'Analytics',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings_outlined),
-              activeIcon: Icon(Icons.settings),
-              label: 'Settings',
-            ),
-          ],
+          child: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            onTap: (index) => setState(() => _currentIndex = index),
+            backgroundColor: AppTheme.surface,
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: AppTheme.primaryPurple,
+            unselectedItemColor: AppTheme.textSecondary,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            elevation: 0,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.dashboard_outlined),
+                activeIcon: Icon(Icons.dashboard),
+                label: 'Dashboard',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.track_changes_outlined),
+                activeIcon: Icon(Icons.track_changes),
+                label: 'Goals',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.loop),
+                label: 'Habits',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.bar_chart_outlined),
+                activeIcon: Icon(Icons.bar_chart),
+                label: 'Analytics',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.settings_outlined),
+                activeIcon: Icon(Icons.settings),
+                label: 'Settings',
+              ),
+            ],
+          ),
         ),
       ),
     );
