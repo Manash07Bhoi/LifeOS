@@ -23,6 +23,8 @@ class HabitAdapter extends TypeAdapter<Habit> {
       frequencyDays: fields[3] as int,
       completionDates: (fields[4] as List?)?.cast<DateTime>(),
       streak: fields[5] as int,
+      notes: fields[7] as String,
+      frequencyType: fields[8] as String,
       createdAt: fields[6] as DateTime?,
     );
   }
@@ -30,7 +32,7 @@ class HabitAdapter extends TypeAdapter<Habit> {
   @override
   void write(BinaryWriter writer, Habit obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -44,7 +46,11 @@ class HabitAdapter extends TypeAdapter<Habit> {
       ..writeByte(5)
       ..write(obj.streak)
       ..writeByte(6)
-      ..write(obj.createdAt);
+      ..write(obj.createdAt)
+      ..writeByte(7)
+      ..write(obj.notes)
+      ..writeByte(8)
+      ..write(obj.frequencyType);
   }
 
   @override

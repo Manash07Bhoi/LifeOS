@@ -42,9 +42,22 @@ class SettingsScreen extends ConsumerWidget {
                   ListTile(
                     leading: const Icon(Icons.palette_outlined, color: AppTheme.primaryPurple),
                     title: const Text('Theme Preview', style: TextStyle(color: AppTheme.textPrimary)),
+                    subtitle: const Text('Accent Color Selector', style: TextStyle(color: AppTheme.textSecondary)),
                     trailing: const Icon(Icons.chevron_right, color: AppTheme.textSecondary),
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: (_) => const ThemePreviewScreen()));
+                    },
+                  ),
+                  const Divider(color: Colors.white12, height: 1),
+                  SwitchListTile(
+                    activeTrackColor: AppTheme.neonCyan.withValues(alpha: 0.3),
+                    activeThumbColor: AppTheme.neonCyan,
+                    secondary: const Icon(Icons.animation, color: AppTheme.neonCyan),
+                    title: const Text('Animation Engine', style: TextStyle(color: AppTheme.textPrimary)),
+                    subtitle: const Text('High / Low Performance Toggle', style: TextStyle(color: AppTheme.textSecondary)),
+                    value: true,
+                    onChanged: (val) {
+                      SuccessFeedbackToast.show(context, 'Core animations locked to high-performance profile.', isError: false);
                     },
                   ),
                 ],

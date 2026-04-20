@@ -11,7 +11,9 @@ import '../system/quick_actions_panel.dart';
 import '../goals/add_edit_goal_screen.dart';
 import '../habits/add_edit_habit_screen.dart';
 import '../focus/focus_screen.dart';
+import '../profile/profile_screen.dart';
 import '../../shared/components/confirmation_dialog.dart';
+import 'dart:ui';
 
 class NavigationWrapperScreen extends StatefulWidget {
   const NavigationWrapperScreen({super.key});
@@ -28,7 +30,7 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
     const GoalsScreen(),
     const HabitMatrixScreen(),
     const AnalyticsScreen(),
-    const SettingsScreen(),
+    const ProfileScreen(),
   ];
 
   void _openQuickActions() {
@@ -99,12 +101,24 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
         }
       },
       child: Scaffold(
+        extendBody: true,
+        drawer: _buildDrawer(),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: Builder(
+            builder: (ctx) => IconButton(
+              icon: const Icon(Icons.menu, color: AppTheme.textPrimary),
+              onPressed: () => Scaffold.of(ctx).openDrawer(),
+            ),
+          ),
+        ),
         body: IndexedStack(
           index: _currentIndex,
           children: _screens,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
+        floatingActionButton: Container(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           boxShadow: [
@@ -127,50 +141,154 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-        ),
-          child: BottomNavigationBar(
-            currentIndex: _currentIndex,
-            onTap: (index) => setState(() => _currentIndex = index),
-            backgroundColor: AppTheme.surface,
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: AppTheme.primaryPurple,
-            unselectedItemColor: AppTheme.textSecondary,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            elevation: 0,
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.dashboard_outlined),
-                activeIcon: Icon(Icons.dashboard),
-                label: 'Dashboard',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.track_changes_outlined),
-                activeIcon: Icon(Icons.track_changes),
-                label: 'Goals',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.loop),
-                label: 'Habits',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.bar_chart_outlined),
-                activeIcon: Icon(Icons.bar_chart),
-                label: 'Analytics',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.settings_outlined),
-                activeIcon: Icon(Icons.settings),
-                label: 'Settings',
-              ),
-            ],
+        bottomNavigationBar: _buildModernBottomBar(),
+      ),
+    );
+  }
+
+  Widget _buildModernBottomBar() {
+    return Container(
+      margin: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
+      decoration: BoxDecoration(
+        color: AppTheme.surface.withValues(alpha: 0.8),
+        borderRadius: BorderRadius.circular(32),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.3),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
+          )
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(32),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildNavItem(Icons.dashboard_outlined, Icons.dashboard, 0),
+                _buildNavItem(Icons.track_changes_outlined, Icons.track_changes, 1),
+                const SizedBox(width: 48), // Space for FAB
+                _buildNavItem(Icons.bar_chart_outlined, Icons.bar_chart, 3),
+                _buildNavItem(Icons.person_outline, Icons.person, 4),
+              ],
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildNavItem(IconData icon, IconData activeIcon, int index) {
+    final isActive = _currentIndex == index;
+    return GestureDetector(
+      onTap: () => setState(() => _currentIndex = index),
+      behavior: HitTestBehavior.opaque,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOutExpo,
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: isActive ? AppTheme.primaryPurple.withValues(alpha: 0.2) : Colors.transparent,
+          shape: BoxShape.circle,
+          boxShadow: isActive
+              ? [
+                  BoxShadow(
+                    color: AppTheme.primaryPurple.withValues(alpha: 0.3),
+                    blurRadius: 15,
+                    spreadRadius: 2,
+                  )
+                ]
+              : [],
+        ),
+        child: Icon(
+          isActive ? activeIcon : icon,
+          color: isActive ? AppTheme.primaryPurple : AppTheme.textSecondary,
+          size: 28,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDrawer() {
+    return Drawer(
+      backgroundColor: Colors.transparent,
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+        child: Container(
+          color: AppTheme.background.withValues(alpha: 0.8),
+          child: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(24.0),
+                  child: Text(
+                    'SYSTEM\nMODULES',
+                    style: TextStyle(
+                      color: AppTheme.neonCyan,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 2,
+                    ),
+                  ),
+                ),
+                const Divider(color: Colors.white12),
+                _buildDrawerItem(Icons.dashboard, 'Dashboard', () {
+                  Navigator.pop(context);
+                  setState(() => _currentIndex = 0);
+                }),
+                _buildDrawerItem(Icons.track_changes, 'Goals', () {
+                  Navigator.pop(context);
+                  setState(() => _currentIndex = 1);
+                }),
+                _buildDrawerItem(Icons.loop, 'Habits', () {
+                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const HabitMatrixScreen()));
+                }),
+                _buildDrawerItem(Icons.timer, 'Focus Mode', () {
+                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const FocusScreen()));
+                }),
+                _buildDrawerItem(Icons.bar_chart, 'Analytics', () {
+                  Navigator.pop(context);
+                  setState(() => _currentIndex = 3);
+                }),
+                _buildDrawerItem(Icons.terminal, 'Command Terminal', () {
+                  Navigator.pop(context);
+                  _openCommandCenter();
+                }),
+                _buildDrawerItem(Icons.person, 'Profile', () {
+                  Navigator.pop(context);
+                  setState(() => _currentIndex = 4);
+                }),
+                const Spacer(),
+                const Divider(color: Colors.white12),
+                _buildDrawerItem(Icons.settings, 'Settings', () {
+                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsScreen()));
+                }),
+                const SizedBox(height: 24),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDrawerItem(IconData icon, String title, VoidCallback onTap) {
+    return ListTile(
+      leading: Icon(icon, color: AppTheme.textSecondary),
+      title: Text(
+        title,
+        style: const TextStyle(color: AppTheme.textPrimary, fontSize: 16),
+      ),
+      onTap: onTap,
     );
   }
 }
