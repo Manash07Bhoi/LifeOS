@@ -8,6 +8,7 @@ class CustomInputField extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final int maxLines;
+  final int maxLength;
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
   final FocusNode? focusNode;
@@ -20,6 +21,7 @@ class CustomInputField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.maxLines = 1,
+    this.maxLength = 255,
     this.onChanged,
     this.onSubmitted,
     this.focusNode,
@@ -39,11 +41,13 @@ class CustomInputField extends StatelessWidget {
         controller: controller,
         obscureText: isPassword,
         maxLines: maxLines,
+        maxLength: maxLength,
         onChanged: onChanged,
         onSubmitted: onSubmitted,
         focusNode: focusNode,
         style: const TextStyle(color: AppTheme.textPrimary),
         decoration: InputDecoration(
+          counterText: '',
           hintText: hintText,
           hintStyle: TextStyle(color: AppTheme.textSecondary.withValues(alpha: 0.5)),
           prefixIcon: prefixIcon,

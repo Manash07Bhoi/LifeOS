@@ -23,6 +23,7 @@ class GoalsScreen extends ConsumerWidget {
         centerTitle: false,
         actions: [
           IconButton(
+            tooltip: 'Add goal',
             icon: const Icon(Icons.add_circle_outline, color: AppTheme.neonCyan),
             onPressed: () {
               Navigator.push(

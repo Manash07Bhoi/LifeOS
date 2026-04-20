@@ -1,4 +1,3 @@
-import '../../providers/goals_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -9,40 +8,16 @@ import '../../providers/focus_provider.dart';
 import '../../providers/habits_provider.dart';
 import '../../data/models/focus_session.dart';
 
-import '../../shared/widgets/loading_skeleton.dart';
-
-class AnalyticsScreen extends ConsumerStatefulWidget {
+class AnalyticsScreen extends ConsumerWidget {
   const AnalyticsScreen({super.key});
 
   @override
-  ConsumerState<AnalyticsScreen> createState() => _AnalyticsScreenState();
-}
-
-class _AnalyticsScreenState extends ConsumerState<AnalyticsScreen> {
-  bool _isLoading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(milliseconds: 300), () {
-      if (mounted) setState(() => _isLoading = false);
-    });
-  }
-
-
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final sessions = ref.watch(focusSessionsProvider);
     final habits = ref.watch(habitsProvider);
-    final goals = ref.watch(goalsProvider);
 
     int totalFocusMinutes = sessions.fold(0, (sum, session) => sum + session.durationMinutes);
     int totalHabitsCompleted = habits.fold(0, (sum, habit) => sum + habit.completionDates.length);
-    int totalGoalsProgress = goals.fold(0, (sum, goal) => sum + (goal.progress * 100).toInt());
-
-    // Formula example: score = (focus_time * 0.5 + habit_completion * 0.3 + goal_progress * 0.2)
-    double productivityScore = (totalFocusMinutes * 0.5) + (totalHabitsCompleted * 10 * 0.3) + (totalGoalsProgress * 0.2);
 
     return Scaffold(
       appBar: AppBar(
@@ -57,79 +32,49 @@ class _AnalyticsScreenState extends ConsumerState<AnalyticsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (_isLoading)
-                const LoadingSkeleton(width: double.infinity, height: 120)
-              else
-                Column(
-                  children: [
-                    GlassCard(
-                      padding: const EdgeInsets.all(24),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Row(
+                children: [
+                  Expanded(
+                    child: GlassCard(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('PRODUCTIVITY SCORE', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
-                              const SizedBox(height: 8),
-                              Text(
-                                productivityScore.toStringAsFixed(1),
-                                style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold, color: AppTheme.neonCyan),
-                              ),
-                            ],
+                          const Icon(Icons.timer, color: AppTheme.neonCyan),
+                          const SizedBox(height: 16),
+                          Text(
+                            '$totalFocusMinutes',
+                            style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppTheme.textPrimary),
                           ),
-                          const Icon(Icons.show_chart, color: AppTheme.neonCyan, size: 48),
+                          const Text('Total Focus (min)', style: TextStyle(color: AppTheme.textSecondary)),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 16),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: GlassCard(
-                            padding: const EdgeInsets.all(20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Icon(Icons.timer, color: AppTheme.neonPink),
-                                const SizedBox(height: 16),
-                                Text(
-                                  '$totalFocusMinutes',
-                                  style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppTheme.textPrimary),
-                                ),
-                                const Text('Focus (min)', style: TextStyle(color: AppTheme.textSecondary)),
-                              ],
-                            ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: GlassCard(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Icon(Icons.check_circle_outline, color: AppTheme.primaryPurple),
+                          const SizedBox(height: 16),
+                          Text(
+                            '$totalHabitsCompleted',
+                            style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppTheme.textPrimary),
                           ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: GlassCard(
-                            padding: const EdgeInsets.all(20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Icon(Icons.check_circle_outline, color: AppTheme.primaryPurple),
-                                const SizedBox(height: 16),
-                                Text(
-                                  '$totalHabitsCompleted',
-                                  style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppTheme.textPrimary),
-                                ),
-                                const Text('Habits Done', style: TextStyle(color: AppTheme.textSecondary)),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+                          const Text('Habits Completed', style: TextStyle(color: AppTheme.textSecondary)),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
               const SizedBox(height: 32),
               const Text('FOCUS TRAJECTORY (LAST 7 DAYS)', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
               const SizedBox(height: 16),
-              if (_isLoading)
-                const LoadingSkeleton(width: double.infinity, height: 250)
-              else if (sessions.isEmpty)
+              if (sessions.isEmpty)
                 const GlassCard(
                   padding: EdgeInsets.all(48),
                   child: Center(

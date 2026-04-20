@@ -82,6 +82,7 @@ class _AddEditUnifiedFormScreenState extends State<AddEditUnifiedFormScreen> {
         actions: widget.onDelete != null
             ? [
                 IconButton(
+                  tooltip: 'Delete',
                   icon: const Icon(Icons.delete_outline, color: AppTheme.neonPink),
                   onPressed: widget.onDelete,
                 )
@@ -115,6 +116,7 @@ class _AddEditUnifiedFormScreenState extends State<AddEditUnifiedFormScreen> {
                 controller: _descController,
                 hintText: widget.descHint,
                 maxLines: 3,
+                maxLength: 1000,
               ),
               const SizedBox(height: 24),
 

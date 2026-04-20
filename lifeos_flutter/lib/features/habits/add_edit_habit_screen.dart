@@ -6,7 +6,6 @@ import '../../shared/components/add_edit_unified_form_screen.dart';
 import '../../shared/components/confirmation_dialog.dart';
 import '../../data/models/habit.dart';
 import '../../providers/habits_provider.dart';
-import '../../data/services/notification_service.dart';
 
 class AddEditHabitScreen extends ConsumerStatefulWidget {
   final Habit? existingHabit;
@@ -17,10 +16,10 @@ class AddEditHabitScreen extends ConsumerStatefulWidget {
   ConsumerState<AddEditHabitScreen> createState() => _AddEditHabitScreenState();
 }
 
+
 class _AddEditHabitScreenState extends ConsumerState<AddEditHabitScreen> {
   int _frequencyDays = 7;
   String _frequencyType = 'Daily';
-  String? _reminderTime;
   final TextEditingController _notesController = TextEditingController();
 
   @override
@@ -29,7 +28,6 @@ class _AddEditHabitScreenState extends ConsumerState<AddEditHabitScreen> {
     if (widget.existingHabit != null) {
       _frequencyDays = widget.existingHabit!.frequencyDays;
       _frequencyType = widget.existingHabit!.frequencyType;
-      _reminderTime = widget.existingHabit!.reminderTime;
       _notesController.text = widget.existingHabit!.notes;
     }
   }
@@ -40,14 +38,13 @@ class _AddEditHabitScreenState extends ConsumerState<AddEditHabitScreen> {
     super.dispose();
   }
 
-  void _saveHabit(String name, String description) async {
+  void _saveHabit(String name, String description) {
     final habit = Habit(
       id: widget.existingHabit?.id,
       title: name,
       description: description,
       frequencyDays: _frequencyDays,
       frequencyType: _frequencyType,
-      reminderTime: _reminderTime,
       notes: _notesController.text,
       completionDates: widget.existingHabit?.completionDates,
       streak: widget.existingHabit?.streak ?? 0,
@@ -59,25 +56,7 @@ class _AddEditHabitScreenState extends ConsumerState<AddEditHabitScreen> {
     } else {
       ref.read(habitsProvider.notifier).updateHabit(habit);
     }
-
-    if (_reminderTime != null) {
-       final timeParts = _reminderTime!.split(':');
-       if (timeParts.length == 2) {
-          final h = int.tryParse(timeParts[0]);
-          final m = int.tryParse(timeParts[1]);
-          if (h != null && m != null) {
-              await NotificationService.requestPermissions();
-              await NotificationService.scheduleDailyReminder(
-                  habit.id.hashCode,
-                  'LifeOS: Habit Pending',
-                  'Execute protocol: ${habit.title}',
-                  h, m
-              );
-          }
-       }
-    }
-
-    if (mounted) Navigator.pop(context);
+    Navigator.pop(context);
   }
 
   void _deleteHabit() {
@@ -153,11 +132,13 @@ class _AddEditHabitScreenState extends ConsumerState<AddEditHabitScreen> {
               Row(
                 children: [
                   IconButton(
+                    tooltip: 'Decrease frequency',
                     onPressed: _frequencyDays > 1 ? () => setState(() => _frequencyDays--) : null,
                     icon: const Icon(Icons.remove_circle_outline, color: AppTheme.neonCyan),
                   ),
                   Text('$_frequencyDays', style: const TextStyle(color: AppTheme.textPrimary, fontSize: 24, fontWeight: FontWeight.bold)),
                   IconButton(
+                    tooltip: 'Increase frequency',
                     onPressed: _frequencyDays < 7 ? () => setState(() => _frequencyDays++) : null,
                     icon: const Icon(Icons.add_circle_outline, color: AppTheme.neonCyan),
                   ),
@@ -166,34 +147,13 @@ class _AddEditHabitScreenState extends ConsumerState<AddEditHabitScreen> {
             ],
           ),
           const SizedBox(height: 24),
-          const Text('DAILY REMINDER', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
-          const SizedBox(height: 8),
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: const Icon(Icons.notifications_active, color: AppTheme.primaryPurple),
-            title: Text(_reminderTime ?? 'No Reminder Set', style: const TextStyle(color: AppTheme.textPrimary)),
-            trailing: const Icon(Icons.chevron_right, color: AppTheme.textSecondary),
-            onTap: () async {
-               TimeOfDay? picked = await showTimePicker(
-                 context: context,
-                 initialTime: _reminderTime != null
-                    ? TimeOfDay(hour: int.parse(_reminderTime!.split(':')[0]), minute: int.parse(_reminderTime!.split(':')[1]))
-                    : TimeOfDay.now()
-               );
-               if (picked != null) {
-                 setState(() {
-                    _reminderTime = '${picked.hour.toString().padLeft(2, '0')}:${picked.minute.toString().padLeft(2, '0')}';
-                 });
-               }
-            },
-          ),
-          const SizedBox(height: 24),
           const Text('ADDITIONAL NOTES', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
           const SizedBox(height: 8),
           CustomInputField(
             controller: _notesController,
             hintText: 'E.g., Reminders or observations...',
             maxLines: 3,
+            maxLength: 1000,
           ),
         ],
       ),

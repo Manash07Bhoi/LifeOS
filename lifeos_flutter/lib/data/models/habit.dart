@@ -32,9 +32,6 @@ class Habit extends HiveObject {
   @HiveField(8)
   final String frequencyType; // 'Daily', 'Weekly', 'Custom'
 
-  @HiveField(9)
-  final String? reminderTime; // e.g. "08:00"
-
   Habit({
     String? id,
     required this.title,
@@ -44,14 +41,17 @@ class Habit extends HiveObject {
     this.streak = 0,
     this.notes = '',
     this.frequencyType = 'Daily',
-    this.reminderTime,
     DateTime? createdAt,
   })  : id = id ?? const Uuid().v4(),
         completionDates = completionDates ?? [],
         createdAt = createdAt ?? DateTime.now();
 
   bool isCompletedOn(DateTime date) {
-    return completionDates.any((d) =>
+    // ⚡ Bolt Performance Optimization:
+    // We use .reversed to check dates from the end of the list first.
+    // This improves average-case performance when checking recent dates (such as today's completion).
+    // Worst-case time complexity remains O(n).
+    return completionDates.reversed.any((d) =>
         d.year == date.year && d.month == date.month && d.day == date.day);
   }
 
@@ -63,7 +63,6 @@ class Habit extends HiveObject {
     int? streak,
     String? notes,
     String? frequencyType,
-    String? reminderTime,
   }) {
     return Habit(
       id: id,
@@ -74,7 +73,6 @@ class Habit extends HiveObject {
       streak: streak ?? this.streak,
       notes: notes ?? this.notes,
       frequencyType: frequencyType ?? this.frequencyType,
-      reminderTime: reminderTime ?? this.reminderTime,
       createdAt: createdAt,
     );
   }
