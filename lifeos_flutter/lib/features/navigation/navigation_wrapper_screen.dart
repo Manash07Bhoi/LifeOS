@@ -1,3 +1,4 @@
+import '../../shared/widgets/gradient_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../core/theme/app_theme.dart';
@@ -12,6 +13,7 @@ import '../goals/add_edit_goal_screen.dart';
 import '../habits/add_edit_habit_screen.dart';
 import '../focus/focus_screen.dart';
 import '../profile/profile_screen.dart';
+import '../routines/routine_list_screen.dart';
 import '../../shared/components/confirmation_dialog.dart';
 import 'dart:ui';
 
@@ -100,10 +102,12 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
           SystemNavigator.pop();
         }
       },
-      child: Scaffold(
-        extendBody: true,
-        drawer: _buildDrawer(),
-        appBar: AppBar(
+      child: GradientBackground(
+        child: Scaffold(
+          extendBody: true,
+          backgroundColor: Colors.transparent,
+          drawer: _buildDrawer(),
+          appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: Builder(
@@ -141,7 +145,8 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
           ),
         ),
       ),
-        bottomNavigationBar: _buildModernBottomBar(),
+          bottomNavigationBar: _buildModernBottomBar(),
+        ),
       ),
     );
   }
@@ -253,6 +258,10 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
                 _buildDrawerItem(Icons.timer, 'Focus Mode', () {
                   Navigator.pop(context);
                   Navigator.push(context, MaterialPageRoute(builder: (_) => const FocusScreen()));
+                }),
+                _buildDrawerItem(Icons.memory, 'Task Automation', () {
+                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const RoutineListScreen()));
                 }),
                 _buildDrawerItem(Icons.bar_chart, 'Analytics', () {
                   Navigator.pop(context);

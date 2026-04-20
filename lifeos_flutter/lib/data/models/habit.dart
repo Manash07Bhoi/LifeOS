@@ -32,6 +32,9 @@ class Habit extends HiveObject {
   @HiveField(8)
   final String frequencyType; // 'Daily', 'Weekly', 'Custom'
 
+  @HiveField(9)
+  final String? reminderTime; // e.g. "08:00"
+
   Habit({
     String? id,
     required this.title,
@@ -41,6 +44,7 @@ class Habit extends HiveObject {
     this.streak = 0,
     this.notes = '',
     this.frequencyType = 'Daily',
+    this.reminderTime,
     DateTime? createdAt,
   })  : id = id ?? const Uuid().v4(),
         completionDates = completionDates ?? [],
@@ -59,6 +63,7 @@ class Habit extends HiveObject {
     int? streak,
     String? notes,
     String? frequencyType,
+    String? reminderTime,
   }) {
     return Habit(
       id: id,
@@ -69,6 +74,7 @@ class Habit extends HiveObject {
       streak: streak ?? this.streak,
       notes: notes ?? this.notes,
       frequencyType: frequencyType ?? this.frequencyType,
+      reminderTime: reminderTime ?? this.reminderTime,
       createdAt: createdAt,
     );
   }

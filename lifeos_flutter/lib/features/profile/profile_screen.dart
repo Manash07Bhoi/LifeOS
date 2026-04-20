@@ -7,11 +7,28 @@ import '../../providers/goals_provider.dart';
 import '../../providers/habits_provider.dart';
 import '../../providers/focus_provider.dart';
 
-class ProfileScreen extends ConsumerWidget {
+import '../../shared/widgets/loading_skeleton.dart';
+
+class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends ConsumerState<ProfileScreen> {
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 400), () {
+      if (mounted) setState(() => _isLoading = false);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final goals = ref.watch(goalsProvider);
     final habits = ref.watch(habitsProvider);
     final sessions = ref.watch(focusSessionsProvider);
@@ -73,17 +90,20 @@ class ProfileScreen extends ConsumerWidget {
                 child: Text('LIFETIME METRICS', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
               ),
               const SizedBox(height: 16),
-              GlassCard(
-                child: Column(
-                  children: [
-                    _StatRow(icon: Icons.timer, color: AppTheme.neonCyan, label: 'Total Focus Time', value: '${totalFocusMinutes}m'),
-                    const Divider(color: Colors.white12, height: 32),
-                    _StatRow(icon: Icons.track_changes, color: AppTheme.primaryPurple, label: 'Goals Completed', value: '$goalsCompleted'),
-                    const Divider(color: Colors.white12, height: 32),
-                    _StatRow(icon: Icons.local_fire_department, color: AppTheme.neonPink, label: 'Max Habit Streak', value: '$maxStreak days'),
-                  ],
+              if (_isLoading)
+                 const LoadingSkeleton(width: double.infinity, height: 250)
+              else
+                GlassCard(
+                  child: Column(
+                    children: [
+                      _StatRow(icon: Icons.timer, color: AppTheme.neonCyan, label: 'Total Focus Time', value: '${totalFocusMinutes}m'),
+                      const Divider(color: Colors.white12, height: 32),
+                      _StatRow(icon: Icons.track_changes, color: AppTheme.primaryPurple, label: 'Goals Completed', value: '$goalsCompleted'),
+                      const Divider(color: Colors.white12, height: 32),
+                      _StatRow(icon: Icons.local_fire_department, color: AppTheme.neonPink, label: 'Max Habit Streak', value: '$maxStreak days'),
+                    ],
+                  ),
                 ),
-              ),
             ],
           ),
         ),

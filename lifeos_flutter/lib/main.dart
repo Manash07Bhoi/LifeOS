@@ -11,6 +11,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'features/goals/add_edit_goal_screen.dart';
 import 'features/habits/add_edit_habit_screen.dart';
+import 'data/models/routine.dart';
 
 void main() async {
   runZonedGuarded(() async {
@@ -27,13 +28,15 @@ void main() async {
   Hive.registerAdapter(HabitAdapter());
   Hive.registerAdapter(FocusSessionAdapter());
   Hive.registerAdapter(CommandHistoryAdapter());
+  Hive.registerAdapter(RoutineAdapter());
 
   // Open Boxes
   await Hive.openBox<Goal>('goalsBox');
   await Hive.openBox<Habit>('habitsBox');
   await Hive.openBox<FocusSession>('sessionsBox');
   await Hive.openBox<CommandHistory>('commandHistoryBox');
-    await Hive.openBox('settingsBox');
+  await Hive.openBox<Routine>('routinesBox');
+  await Hive.openBox('settingsBox');
 
     runApp(
       const ProviderScope(

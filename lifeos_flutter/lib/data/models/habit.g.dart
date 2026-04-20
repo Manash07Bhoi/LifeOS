@@ -25,6 +25,7 @@ class HabitAdapter extends TypeAdapter<Habit> {
       streak: fields[5] as int,
       notes: fields[7] as String,
       frequencyType: fields[8] as String,
+      reminderTime: fields[9] as String?,
       createdAt: fields[6] as DateTime?,
     );
   }
@@ -32,7 +33,7 @@ class HabitAdapter extends TypeAdapter<Habit> {
   @override
   void write(BinaryWriter writer, Habit obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -50,7 +51,9 @@ class HabitAdapter extends TypeAdapter<Habit> {
       ..writeByte(7)
       ..write(obj.notes)
       ..writeByte(8)
-      ..write(obj.frequencyType);
+      ..write(obj.frequencyType)
+      ..writeByte(9)
+      ..write(obj.reminderTime);
   }
 
   @override
