@@ -6,7 +6,7 @@ import '../../shared/widgets/neon_text.dart';
 import '../../shared/components/confirmation_dialog.dart';
 import '../../providers/goals_provider.dart';
 import 'add_edit_goal_screen.dart';
-import 'package:intl/intl.dart';
+import '../../core/utils/date_formats.dart';
 
 class GoalDetailScreen extends ConsumerWidget {
   final String goalId;
@@ -145,7 +145,7 @@ class GoalDetailScreen extends ConsumerWidget {
                         const Text('TARGET DEADLINE', style: TextStyle(color: AppTheme.textSecondary, fontSize: 10, letterSpacing: 1)),
                         const SizedBox(height: 4),
                         Text(
-                          DateFormat('MMMM d, yyyy').format(goal.targetDate),
+                          AppDateFormats.standard.format(goal.targetDate),
                           style: const TextStyle(color: AppTheme.textPrimary, fontWeight: FontWeight.bold),
                         ),
                       ],

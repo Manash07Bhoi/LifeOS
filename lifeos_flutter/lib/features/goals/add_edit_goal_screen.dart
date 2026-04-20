@@ -4,7 +4,7 @@ import '../../core/theme/app_theme.dart';
 import '../../shared/components/add_edit_unified_form_screen.dart';
 import '../../data/models/goal.dart';
 import '../../providers/goals_provider.dart';
-import 'package:intl/intl.dart';
+import '../../core/utils/date_formats.dart';
 
 class AddEditGoalScreen extends ConsumerStatefulWidget {
   final Goal? existingGoal;
@@ -133,7 +133,7 @@ class _AddEditGoalScreenState extends ConsumerState<AddEditGoalScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    DateFormat('MMMM d, yyyy').format(_targetDate),
+                    AppDateFormats.standard.format(_targetDate),
                     style: const TextStyle(color: AppTheme.textPrimary, fontSize: 16),
                   ),
                   const Icon(Icons.calendar_today, color: AppTheme.primaryPurple),
