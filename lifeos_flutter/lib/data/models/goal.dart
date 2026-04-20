@@ -26,6 +26,9 @@ class Goal extends HiveObject {
   @HiveField(6)
   final DateTime createdAt;
 
+  @HiveField(7)
+  final String priority; // e.g. "Low", "Medium", "High"
+
   Goal({
     String? id,
     required this.title,
@@ -33,6 +36,7 @@ class Goal extends HiveObject {
     required this.targetDate,
     this.progress = 0.0,
     required this.category,
+    this.priority = 'Medium',
     DateTime? createdAt,
   })  : id = id ?? const Uuid().v4(),
         createdAt = createdAt ?? DateTime.now();
@@ -43,6 +47,7 @@ class Goal extends HiveObject {
     DateTime? targetDate,
     double? progress,
     String? category,
+    String? priority,
   }) {
     return Goal(
       id: id,
@@ -51,6 +56,7 @@ class Goal extends HiveObject {
       targetDate: targetDate ?? this.targetDate,
       progress: progress ?? this.progress,
       category: category ?? this.category,
+      priority: priority ?? this.priority,
       createdAt: createdAt,
     );
   }

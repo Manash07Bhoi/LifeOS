@@ -17,12 +17,14 @@ class AddEditGoalScreen extends ConsumerStatefulWidget {
 
 class _AddEditGoalScreenState extends ConsumerState<AddEditGoalScreen> {
   DateTime _targetDate = DateTime.now().add(const Duration(days: 30));
+  String _priority = 'Medium';
 
   @override
   void initState() {
     super.initState();
     if (widget.existingGoal != null) {
       _targetDate = widget.existingGoal!.targetDate;
+      _priority = widget.existingGoal!.priority;
     }
   }
 
@@ -32,6 +34,7 @@ class _AddEditGoalScreenState extends ConsumerState<AddEditGoalScreen> {
       title: name,
       description: description,
       category: 'General',
+      priority: _priority,
       targetDate: _targetDate,
       progress: widget.existingGoal?.progress ?? 0.0,
       createdAt: widget.existingGoal?.createdAt,
@@ -90,6 +93,31 @@ class _AddEditGoalScreenState extends ConsumerState<AddEditGoalScreen> {
       extraFields: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const Text('PRIORITY LEVEL', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: ['Low', 'Medium', 'High'].map((p) {
+              final isSelected = _priority == p;
+              return Expanded(
+                child: GestureDetector(
+                  onTap: () => setState(() => _priority = p),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    decoration: BoxDecoration(
+                      color: isSelected ? AppTheme.primaryPurple.withValues(alpha: 0.2) : AppTheme.surfaceElevated,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: isSelected ? AppTheme.primaryPurple : Colors.transparent),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(p, style: TextStyle(color: isSelected ? AppTheme.primaryPurple : AppTheme.textSecondary, fontWeight: FontWeight.bold)),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+          const SizedBox(height: 24),
           const Text('TARGET DATE', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
           const SizedBox(height: 8),
           GestureDetector(

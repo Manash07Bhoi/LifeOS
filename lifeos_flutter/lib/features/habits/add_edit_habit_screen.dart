@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../shared/widgets/custom_input_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/theme/app_theme.dart';
 import '../../shared/components/add_edit_unified_form_screen.dart';
@@ -15,15 +16,26 @@ class AddEditHabitScreen extends ConsumerStatefulWidget {
   ConsumerState<AddEditHabitScreen> createState() => _AddEditHabitScreenState();
 }
 
+
 class _AddEditHabitScreenState extends ConsumerState<AddEditHabitScreen> {
   int _frequencyDays = 7;
+  String _frequencyType = 'Daily';
+  final TextEditingController _notesController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     if (widget.existingHabit != null) {
       _frequencyDays = widget.existingHabit!.frequencyDays;
+      _frequencyType = widget.existingHabit!.frequencyType;
+      _notesController.text = widget.existingHabit!.notes;
     }
+  }
+
+  @override
+  void dispose() {
+    _notesController.dispose();
+    super.dispose();
   }
 
   void _saveHabit(String name, String description) {
@@ -32,6 +44,8 @@ class _AddEditHabitScreenState extends ConsumerState<AddEditHabitScreen> {
       title: name,
       description: description,
       frequencyDays: _frequencyDays,
+      frequencyType: _frequencyType,
+      notes: _notesController.text,
       completionDates: widget.existingHabit?.completionDates,
       streak: widget.existingHabit?.streak ?? 0,
       createdAt: widget.existingHabit?.createdAt,
@@ -84,12 +98,37 @@ class _AddEditHabitScreenState extends ConsumerState<AddEditHabitScreen> {
       extraFields: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('WEEKLY FREQUENCY', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+          const Text('FREQUENCY TYPE', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: ['Daily', 'Weekly', 'Custom'].map((t) {
+              final isSelected = _frequencyType == t;
+              return Expanded(
+                child: GestureDetector(
+                  onTap: () => setState(() => _frequencyType = t),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    decoration: BoxDecoration(
+                      color: isSelected ? AppTheme.neonCyan.withValues(alpha: 0.2) : AppTheme.surfaceElevated,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: isSelected ? AppTheme.neonCyan : Colors.transparent),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(t, style: TextStyle(color: isSelected ? AppTheme.neonCyan : AppTheme.textSecondary, fontWeight: FontWeight.bold)),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+          const SizedBox(height: 24),
+          const Text('TARGET DAYS PER WEEK', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Days per week:', style: TextStyle(color: AppTheme.textPrimary, fontSize: 16)),
+              const Text('Days:', style: TextStyle(color: AppTheme.textPrimary, fontSize: 16)),
               Row(
                 children: [
                   IconButton(
@@ -104,7 +143,15 @@ class _AddEditHabitScreenState extends ConsumerState<AddEditHabitScreen> {
                 ],
               )
             ],
-          )
+          ),
+          const SizedBox(height: 24),
+          const Text('ADDITIONAL NOTES', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+          const SizedBox(height: 8),
+          CustomInputField(
+            controller: _notesController,
+            hintText: 'E.g., Reminders or observations...',
+            maxLines: 3,
+          ),
         ],
       ),
     );
