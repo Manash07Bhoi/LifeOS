@@ -151,6 +151,7 @@ class _AddEditHabitScreenState extends ConsumerState<AddEditHabitScreen> {
             controller: _notesController,
             hintText: 'E.g., Reminders or observations...',
             maxLines: 3,
+            maxLength: 1000,
           ),
         ],
       ),
