@@ -365,6 +365,7 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
                     child: TextField(
                       controller: _controller,
                       focusNode: _focusNode,
+                      maxLength: 255,
                       style: const TextStyle(
                         color: AppTheme.textPrimary,
                         fontSize: 24,
@@ -372,6 +373,7 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
                         letterSpacing: 1.2,
                       ),
                       decoration: InputDecoration(
+                        counterText: '',
                         hintText: 'Type a command...',
                         hintStyle: TextStyle(
                           color: AppTheme.textSecondary.withValues(alpha: 0.3),
