@@ -23,6 +23,7 @@ class HabitMatrixScreen extends ConsumerWidget {
         centerTitle: false,
         actions: [
           IconButton(
+            tooltip: 'Add habit',
             icon: const Icon(Icons.add_circle_outline, color: AppTheme.neonCyan),
             onPressed: () {
               Navigator.push(
@@ -117,6 +118,7 @@ class HabitMatrixScreen extends ConsumerWidget {
                         ),
                         const SizedBox(width: 8),
                         IconButton(
+                          tooltip: 'Edit habit',
                           icon: const Icon(Icons.edit, color: AppTheme.textSecondary, size: 20),
                           onPressed: () {
                             Navigator.push(

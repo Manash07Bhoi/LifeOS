@@ -184,6 +184,7 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
               Align(
                 alignment: Alignment.topRight,
                 child: IconButton(
+                  tooltip: 'Close',
                   icon: const Icon(Icons.close, color: AppTheme.textSecondary),
                   onPressed: _closeOverlay,
                 ),

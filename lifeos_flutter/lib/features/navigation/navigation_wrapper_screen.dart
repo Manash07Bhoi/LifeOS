@@ -108,6 +108,7 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
           elevation: 0,
           leading: Builder(
             builder: (ctx) => IconButton(
+              tooltip: 'Open menu',
               icon: const Icon(Icons.menu, color: AppTheme.textPrimary),
               onPressed: () => Scaffold.of(ctx).openDrawer(),
             ),
