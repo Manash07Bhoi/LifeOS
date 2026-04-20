@@ -187,9 +187,9 @@ class AnalyticsScreen extends ConsumerWidget {
   }
 
   List<FlSpot> _generateFocusSpots(List<FocusSession> sessions) {
-    // Generate real data aggregation for the last 7 days
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
+    // Generate real data aggregation for the last 7 days using UTC to prevent DST edge cases
+    final now = DateTime.now().toUtc();
+    final today = DateTime.utc(now.year, now.month, now.day);
 
     // Create a map to hold total minutes per day for the last 7 days
     Map<int, int> dailyMinutes = {};
@@ -198,7 +198,8 @@ class AnalyticsScreen extends ConsumerWidget {
     }
 
     for (var session in sessions) {
-      final sessionDay = DateTime(session.startTime.year, session.startTime.month, session.startTime.day);
+      final sessionUtc = session.startTime.toUtc();
+      final sessionDay = DateTime.utc(sessionUtc.year, sessionUtc.month, sessionUtc.day);
       final difference = today.difference(sessionDay).inDays;
 
       // If the session is within the last 7 days (0 = today, 6 = 6 days ago)
