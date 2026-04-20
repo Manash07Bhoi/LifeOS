@@ -82,6 +82,7 @@ class _AddEditUnifiedFormScreenState extends State<AddEditUnifiedFormScreen> {
         actions: widget.onDelete != null
             ? [
                 IconButton(
+                  tooltip: 'Delete',
                   icon: const Icon(Icons.delete_outline, color: AppTheme.neonPink),
                   onPressed: widget.onDelete,
                 )

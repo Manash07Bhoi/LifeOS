@@ -132,11 +132,13 @@ class _AddEditHabitScreenState extends ConsumerState<AddEditHabitScreen> {
               Row(
                 children: [
                   IconButton(
+                    tooltip: 'Decrease frequency',
                     onPressed: _frequencyDays > 1 ? () => setState(() => _frequencyDays--) : null,
                     icon: const Icon(Icons.remove_circle_outline, color: AppTheme.neonCyan),
                   ),
                   Text('$_frequencyDays', style: const TextStyle(color: AppTheme.textPrimary, fontSize: 24, fontWeight: FontWeight.bold)),
                   IconButton(
+                    tooltip: 'Increase frequency',
                     onPressed: _frequencyDays < 7 ? () => setState(() => _frequencyDays++) : null,
                     icon: const Icon(Icons.add_circle_outline, color: AppTheme.neonCyan),
                   ),

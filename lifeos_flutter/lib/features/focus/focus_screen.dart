@@ -38,6 +38,7 @@ class FocusScreen extends ConsumerWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
+          tooltip: 'Back',
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             if (focusState.status == FocusState.running || focusState.status == FocusState.paused) {

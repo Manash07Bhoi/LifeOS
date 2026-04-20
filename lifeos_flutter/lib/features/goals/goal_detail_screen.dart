@@ -24,6 +24,7 @@ class GoalDetailScreen extends ConsumerWidget {
         elevation: 0,
         actions: [
           IconButton(
+            tooltip: 'Edit goal',
             icon: const Icon(Icons.edit, color: AppTheme.textSecondary),
             onPressed: () {
               Navigator.push(
@@ -33,6 +34,7 @@ class GoalDetailScreen extends ConsumerWidget {
             },
           ),
           IconButton(
+            tooltip: 'Delete goal',
             icon: const Icon(Icons.delete_outline, color: AppTheme.neonPink),
             onPressed: () {
               ConfirmationDialog.show(
