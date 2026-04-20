@@ -47,7 +47,11 @@ class Habit extends HiveObject {
         createdAt = createdAt ?? DateTime.now();
 
   bool isCompletedOn(DateTime date) {
-    return completionDates.any((d) =>
+    // ⚡ Bolt Performance Optimization:
+    // We use .reversed to check dates from the end of the list first.
+    // This improves average-case performance when checking recent dates (such as today's completion).
+    // Worst-case time complexity remains O(n).
+    return completionDates.reversed.any((d) =>
         d.year == date.year && d.month == date.month && d.day == date.day);
   }
 
