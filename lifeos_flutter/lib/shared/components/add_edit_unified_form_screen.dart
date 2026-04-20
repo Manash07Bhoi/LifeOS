@@ -116,6 +116,7 @@ class _AddEditUnifiedFormScreenState extends State<AddEditUnifiedFormScreen> {
                 controller: _descController,
                 hintText: widget.descHint,
                 maxLines: 3,
+                maxLength: 1000,
               ),
               const SizedBox(height: 24),
 
