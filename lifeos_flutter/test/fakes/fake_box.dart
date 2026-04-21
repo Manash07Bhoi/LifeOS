@@ -30,12 +30,6 @@ class FakeBox<T> implements Box<T> {
 
   // Unimplemented members required by Box interface
   @override
-  Future<int> clear() async {
-    _data.clear();
-    return 0;
-  }
-
-  @override
   String get name => throw UnimplementedError();
 
   @override
@@ -73,7 +67,6 @@ class FakeBox<T> implements Box<T> {
 
   @override
   Stream<BoxEvent> watch({dynamic key}) => throw UnimplementedError();
->>>>>>> origin/main
 
   @override
   bool containsKey(dynamic key) => _data.containsKey(key);

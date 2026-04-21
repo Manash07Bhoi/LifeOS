@@ -15,9 +15,7 @@ void main() {
       formatter.format(date);
     }
     final baselineEnd = DateTime.now();
-    final baselineDuration = baselineEnd
-        .difference(baselineStart)
-        .inMicroseconds;
+    final baselineDuration = baselineEnd.difference(baselineStart).inMicroseconds;
 
     // Optimized: using pre-instantiated formatter
     final optimizedStart = DateTime.now();
@@ -25,17 +23,11 @@ void main() {
       AppDateFormats.standard.format(date);
     }
     final optimizedEnd = DateTime.now();
-    final optimizedDuration = optimizedEnd
-        .difference(optimizedStart)
-        .inMicroseconds;
+    final optimizedDuration = optimizedEnd.difference(optimizedStart).inMicroseconds;
 
-    debugPrint(
-      'Baseline (instantiation inside loop) duration: $baselineDuration µs',
-    );
+    debugPrint('Baseline (instantiation inside loop) duration: $baselineDuration µs');
     debugPrint('Optimized (reusing instance) duration: $optimizedDuration µs');
-    debugPrint(
-      'Improvement: ${(baselineDuration - optimizedDuration) / baselineDuration * 100}%',
-    );
+    debugPrint('Improvement: ${(baselineDuration - optimizedDuration) / baselineDuration * 100}%');
 
     expect(optimizedDuration, lessThan(baselineDuration));
   });
