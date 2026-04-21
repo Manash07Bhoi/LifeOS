@@ -10,12 +10,6 @@ import 'focus_complete_screen.dart';
 class FocusScreen extends ConsumerWidget {
   const FocusScreen({super.key});
 
-  String _formatTime(int seconds) {
-    final m = (seconds ~/ 60).toString().padLeft(2, '0');
-    final s = (seconds % 60).toString().padLeft(2, '0');
-    return '$m:$s';
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final focusState = ref.watch(focusProvider);
@@ -68,102 +62,169 @@ class FocusScreen extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                width: 280,
-                height: 280,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppTheme.surfaceElevated,
-                  border: Border.all(
-                    color: focusState.status == FocusState.running
-                        ? AppTheme.primaryPurple
-                        : AppTheme.textSecondary.withValues(alpha: 0.3),
-                    width: 4,
-                  ),
-                  boxShadow: focusState.status == FocusState.running
-                      ? [
-                          BoxShadow(
-                            color: AppTheme.primaryPurple.withValues(alpha: 0.3),
-                            blurRadius: 40,
-                            spreadRadius: 10,
-                          )
-                        ]
-                      : null,
-                ),
-                child: Center(
-                  child: Text(
-                    _formatTime(focusState.remainingSeconds),
-                    style: TextStyle(
-                      fontSize: 64,
-                      fontWeight: FontWeight.bold,
-                      color: focusState.status == FocusState.running ? AppTheme.primaryPurple : AppTheme.textPrimary,
-                      letterSpacing: 2,
-                    ),
-                  ),
-                ),
+              _TimerDisplay(
+                remainingSeconds: focusState.remainingSeconds,
+                isRunning: focusState.status == FocusState.running,
               ),
               const SizedBox(height: 64),
-
-              if (focusState.status == FocusState.idle)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _DurationButton(
-                      minutes: 15,
-                      isActive: focusState.initialMinutes == 15,
-                      onTap: () => ref.read(focusProvider.notifier).setDuration(15),
-                    ),
-                    const SizedBox(width: 16),
-                    _DurationButton(
-                      minutes: 25,
-                      isActive: focusState.initialMinutes == 25,
-                      onTap: () => ref.read(focusProvider.notifier).setDuration(25),
-                    ),
-                    const SizedBox(width: 16),
-                    _DurationButton(
-                      minutes: 50,
-                      isActive: focusState.initialMinutes == 50,
-                      onTap: () => ref.read(focusProvider.notifier).setDuration(50),
-                    ),
-                  ],
+              if (focusState.status == FocusState.idle) ...[
+                _FocusConfig(
+                  initialMinutes: focusState.initialMinutes,
+                  onDurationSelected: (minutes) =>
+                      ref.read(focusProvider.notifier).setDuration(minutes),
                 ),
-
-              const SizedBox(height: 48),
-
-              if (focusState.status == FocusState.idle)
-                SizedBox(
-                  width: 200,
-                  child: GlowButton(
-                    text: 'INITIATE',
-                    color: AppTheme.primaryPurple,
-                    onPressed: () => ref.read(focusProvider.notifier).startTimer(),
-                  ),
-                ),
-
-              if (focusState.status == FocusState.running)
-                SizedBox(
-                  width: 200,
-                  child: GlowButton(
-                    text: 'PAUSE',
-                    color: AppTheme.neonPink,
-                    onPressed: () => ref.read(focusProvider.notifier).pauseTimer(),
-                  ),
-                ),
-
-              if (focusState.status == FocusState.paused)
-                SizedBox(
-                  width: 200,
-                  child: GlowButton(
-                    text: 'RESUME',
-                    color: AppTheme.neonCyan,
-                    onPressed: () => ref.read(focusProvider.notifier).startTimer(),
-                  ),
-                ),
+                const SizedBox(height: 48),
+              ],
+              _FocusControls(
+                status: focusState.status,
+                onStart: () => ref.read(focusProvider.notifier).startTimer(),
+                onPause: () => ref.read(focusProvider.notifier).pauseTimer(),
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class _TimerDisplay extends StatelessWidget {
+  final int remainingSeconds;
+  final bool isRunning;
+
+  const _TimerDisplay({
+    required this.remainingSeconds,
+    required this.isRunning,
+  });
+
+  String _formatTime(int seconds) {
+    final m = (seconds ~/ 60).toString().padLeft(2, '0');
+    final s = (seconds % 60).toString().padLeft(2, '0');
+    return '$m:$s';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 280,
+      height: 280,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: AppTheme.surfaceElevated,
+        border: Border.all(
+          color: isRunning
+              ? AppTheme.primaryPurple
+              : AppTheme.textSecondary.withValues(alpha: 0.3),
+          width: 4,
+        ),
+        boxShadow: isRunning
+            ? [
+                BoxShadow(
+                  color: AppTheme.primaryPurple.withValues(alpha: 0.3),
+                  blurRadius: 40,
+                  spreadRadius: 10,
+                )
+              ]
+            : null,
+      ),
+      child: Center(
+        child: Text(
+          _formatTime(remainingSeconds),
+          style: TextStyle(
+            fontSize: 64,
+            fontWeight: FontWeight.bold,
+            color: isRunning ? AppTheme.primaryPurple : AppTheme.textPrimary,
+            letterSpacing: 2,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _FocusConfig extends StatelessWidget {
+  final int initialMinutes;
+  final ValueChanged<int> onDurationSelected;
+
+  const _FocusConfig({
+    required this.initialMinutes,
+    required this.onDurationSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _DurationButton(
+          minutes: 15,
+          isActive: initialMinutes == 15,
+          onTap: () => onDurationSelected(15),
+        ),
+        const SizedBox(width: 16),
+        _DurationButton(
+          minutes: 25,
+          isActive: initialMinutes == 25,
+          onTap: () => onDurationSelected(25),
+        ),
+        const SizedBox(width: 16),
+        _DurationButton(
+          minutes: 50,
+          isActive: initialMinutes == 50,
+          onTap: () => onDurationSelected(50),
+        ),
+      ],
+    );
+  }
+}
+
+class _FocusControls extends StatelessWidget {
+  final FocusState status;
+  final VoidCallback onStart;
+  final VoidCallback onPause;
+
+  const _FocusControls({
+    required this.status,
+    required this.onStart,
+    required this.onPause,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (status == FocusState.idle) {
+      return SizedBox(
+        width: 200,
+        child: GlowButton(
+          text: 'INITIATE',
+          color: AppTheme.primaryPurple,
+          onPressed: onStart,
+        ),
+      );
+    }
+
+    if (status == FocusState.running) {
+      return SizedBox(
+        width: 200,
+        child: GlowButton(
+          text: 'PAUSE',
+          color: AppTheme.neonPink,
+          onPressed: onPause,
+        ),
+      );
+    }
+
+    if (status == FocusState.paused) {
+      return SizedBox(
+        width: 200,
+        child: GlowButton(
+          text: 'RESUME',
+          color: AppTheme.neonCyan,
+          onPressed: onStart,
+        ),
+      );
+    }
+
+    return const SizedBox.shrink();
   }
 }
 
