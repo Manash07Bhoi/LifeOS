@@ -25,18 +25,16 @@ class HabitsNotifier extends StateNotifier<List<Habit>> {
   void toggleCompletion(String id, DateTime date) {
     final habit = _box.get(id);
     if (habit != null) {
-      final completions = List<DateTime>.from(habit.completionDates);
-      final isCompleted = completions.any((d) =>
-          d.year == date.year && d.month == date.month && d.day == date.day);
+      final updatedHabit = habit.copyWith(
+        completionDates: List<DateTime>.from(habit.completionDates),
+      );
 
-      if (isCompleted) {
-        completions.removeWhere((d) =>
-            d.year == date.year && d.month == date.month && d.day == date.day);
+      if (updatedHabit.isCompletedOn(date)) {
+        updatedHabit.removeCompletion(date);
       } else {
-        completions.add(date);
+        updatedHabit.addCompletion(date);
       }
 
-      final updatedHabit = habit.copyWith(completionDates: completions);
       updateHabit(updatedHabit);
     }
   }

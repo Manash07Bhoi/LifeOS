@@ -46,13 +46,26 @@ class Habit extends HiveObject {
         completionDates = completionDates ?? [],
         createdAt = createdAt ?? DateTime.now();
 
+  late final Set<String> _completionDatesCache =
+      completionDates.map((d) => _normalizeDate(d)).toSet();
+
+  String _normalizeDate(DateTime d) {
+    return "${d.year}-${d.month}-${d.day}";
+  }
+
   bool isCompletedOn(DateTime date) {
-    // ⚡ Bolt Performance Optimization:
-    // We use .reversed to check dates from the end of the list first.
-    // This improves average-case performance when checking recent dates (such as today's completion).
-    // Worst-case time complexity remains O(n).
-    return completionDates.reversed.any((d) =>
-        d.year == date.year && d.month == date.month && d.day == date.day);
+    return _completionDatesCache.contains(_normalizeDate(date));
+  }
+
+  void addCompletion(DateTime date) {
+    completionDates.add(date);
+    _completionDatesCache.add(_normalizeDate(date));
+  }
+
+  void removeCompletion(DateTime date) {
+    final normalized = _normalizeDate(date);
+    completionDates.removeWhere((d) => _normalizeDate(d) == normalized);
+    _completionDatesCache.remove(normalized);
   }
 
   Habit copyWith({

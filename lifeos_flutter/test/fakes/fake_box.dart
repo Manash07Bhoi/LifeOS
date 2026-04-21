@@ -22,8 +22,10 @@ class FakeBox<T> implements Box<T> {
   }
 
   @override
-  Future<void> clear() async {
+  Future<int> clear() async {
+    final count = _data.length;
     _data.clear();
+    return count;
   }
 
   @override
