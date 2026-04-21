@@ -130,14 +130,17 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
             )
           ],
         ),
-        child: GestureDetector(
-          onLongPress: _openQuickActions,
-          child: FloatingActionButton(
-            onPressed: _openCommandCenter,
-            backgroundColor: AppTheme.surfaceElevated,
-            child: const Icon(
-              Icons.terminal,
-              color: AppTheme.neonCyan,
+        child: Tooltip(
+          message: 'Command Center (Long press for Quick Actions)',
+          child: GestureDetector(
+            onLongPress: _openQuickActions,
+            child: FloatingActionButton(
+              onPressed: _openCommandCenter,
+              backgroundColor: AppTheme.surfaceElevated,
+              child: const Icon(
+                Icons.terminal,
+                color: AppTheme.neonCyan,
+              ),
             ),
           ),
         ),
@@ -171,11 +174,11 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildNavItem(Icons.dashboard_outlined, Icons.dashboard, 0),
-                _buildNavItem(Icons.track_changes_outlined, Icons.track_changes, 1),
+                _buildNavItem(Icons.dashboard_outlined, Icons.dashboard, 0, 'Dashboard'),
+                _buildNavItem(Icons.track_changes_outlined, Icons.track_changes, 1, 'Goals'),
                 const SizedBox(width: 48), // Space for FAB
-                _buildNavItem(Icons.bar_chart_outlined, Icons.bar_chart, 3),
-                _buildNavItem(Icons.person_outline, Icons.person, 4),
+                _buildNavItem(Icons.bar_chart_outlined, Icons.bar_chart, 3, 'Analytics'),
+                _buildNavItem(Icons.person_outline, Icons.person, 4, 'Profile'),
               ],
             ),
           ),
@@ -184,32 +187,35 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
     );
   }
 
-  Widget _buildNavItem(IconData icon, IconData activeIcon, int index) {
+  Widget _buildNavItem(IconData icon, IconData activeIcon, int index, String tooltipText) {
     final isActive = _currentIndex == index;
-    return GestureDetector(
-      onTap: () => setState(() => _currentIndex = index),
-      behavior: HitTestBehavior.opaque,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeOutExpo,
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: isActive ? AppTheme.primaryPurple.withValues(alpha: 0.2) : Colors.transparent,
-          shape: BoxShape.circle,
-          boxShadow: isActive
-              ? [
-                  BoxShadow(
-                    color: AppTheme.primaryPurple.withValues(alpha: 0.3),
-                    blurRadius: 15,
-                    spreadRadius: 2,
-                  )
-                ]
-              : [],
-        ),
-        child: Icon(
-          isActive ? activeIcon : icon,
-          color: isActive ? AppTheme.primaryPurple : AppTheme.textSecondary,
-          size: 28,
+    return Tooltip(
+      message: tooltipText,
+      child: GestureDetector(
+        onTap: () => setState(() => _currentIndex = index),
+        behavior: HitTestBehavior.opaque,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOutExpo,
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: isActive ? AppTheme.primaryPurple.withValues(alpha: 0.2) : Colors.transparent,
+            shape: BoxShape.circle,
+            boxShadow: isActive
+                ? [
+                    BoxShadow(
+                      color: AppTheme.primaryPurple.withValues(alpha: 0.3),
+                      blurRadius: 15,
+                      spreadRadius: 2,
+                    )
+                  ]
+                : [],
+          ),
+          child: Icon(
+            isActive ? activeIcon : icon,
+            color: isActive ? AppTheme.primaryPurple : AppTheme.textSecondary,
+            size: 28,
+          ),
         ),
       ),
     );
