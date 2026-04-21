@@ -118,10 +118,20 @@ class SettingsScreen extends ConsumerWidget {
       confirmText: 'PURGE',
     ).then((confirmed) async {
       if (confirmed == true) {
-        // Step 1: Clear all Hive boxes
-        await Hive.box<Goal>('goalsBox').clear();
-        await Hive.box<Habit>('habitsBox').clear();
-        await Hive.box<FocusSession>('sessionsBox').clear();
+        // Step 1: Clear all Hive boxes securely using deleteFromDisk and reopen
+        // We use deleteFromDisk for sensitive data (Goals, Habits, Sessions)
+        // We handle each box individually to prevent a single failure from bricking the state.
+
+        try { await Hive.box<Goal>('goalsBox').deleteFromDisk(); } catch (_) {}
+        try { await Hive.openBox<Goal>('goalsBox'); } catch (_) {}
+
+        try { await Hive.box<Habit>('habitsBox').deleteFromDisk(); } catch (_) {}
+        try { await Hive.openBox<Habit>('habitsBox'); } catch (_) {}
+
+        try { await Hive.box<FocusSession>('sessionsBox').deleteFromDisk(); } catch (_) {}
+        try { await Hive.openBox<FocusSession>('sessionsBox'); } catch (_) {}
+
+        // Command history and settings are not sensitive, regular clear is sufficient.
         await Hive.box<CommandHistory>('commandHistoryBox').clear();
         await Hive.box('settingsBox').clear();
 
