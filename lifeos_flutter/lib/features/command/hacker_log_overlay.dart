@@ -12,23 +12,41 @@ class HackerLogOverlay extends StatefulWidget {
   State<HackerLogOverlay> createState() => _HackerLogOverlayState();
 }
 
-class _HackerLogOverlayState extends State<HackerLogOverlay> {
+class _HackerLogOverlayState extends State<HackerLogOverlay> with TickerProviderStateMixin {
   final List<String> _displayedLogs = [];
-  String _currentLog = '';
   int _logIndex = 0;
-  int _charIndex = 0;
-  Timer? _timer;
+  late AnimationController _typingController;
+  late Animation<int> _charCount;
+  Timer? _pauseTimer;
 
   @override
   void initState() {
     super.initState();
+    _typingController = AnimationController(vsync: this);
+    _typingController.addStatusListener(_handleAnimationStatus);
     _startTyping();
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
+    _pauseTimer?.cancel();
+    _typingController.dispose();
     super.dispose();
+  }
+
+  void _handleAnimationStatus(AnimationStatus status) {
+    if (status == AnimationStatus.completed) {
+      setState(() {
+        _displayedLogs.add(widget.logs[_logIndex]);
+        _logIndex++;
+        // Reset immediately to avoid flashing the full next text
+        // string during the 400ms pause delay.
+        _typingController.value = 0.0;
+      });
+      _pauseTimer = Timer(const Duration(milliseconds: 400), () {
+        if (mounted) _startTyping();
+      });
+    }
   }
 
   void _startTyping() {
@@ -38,28 +56,12 @@ class _HackerLogOverlayState extends State<HackerLogOverlay> {
     }
 
     final targetStr = widget.logs[_logIndex];
-
-    _timer = Timer.periodic(const Duration(milliseconds: 30), (timer) {
-      if (_charIndex < targetStr.length) {
-        setState(() {
-          _currentLog += targetStr[_charIndex];
-          _charIndex++;
-        });
-      } else {
-        timer.cancel();
-        setState(() {
-          _displayedLogs.add(_currentLog);
-          _currentLog = '';
-          _logIndex++;
-          _charIndex = 0;
-        });
-
-        // Pause before starting the next log line
-        Future.delayed(const Duration(milliseconds: 400), () {
-          if (mounted) _startTyping();
-        });
-      }
-    });
+    // Reset explicitly to 0.0 before creating a new tween to avoid RangeError
+    // during AnimatedBuilder's build phase with a shorter string.
+    _typingController.value = 0.0;
+    _typingController.duration = Duration(milliseconds: targetStr.length * 30);
+    _charCount = StepTween(begin: 0, end: targetStr.length).animate(_typingController);
+    _typingController.forward();
   }
 
   @override
@@ -83,16 +85,23 @@ class _HackerLogOverlayState extends State<HackerLogOverlay> {
                 ),
               ),
             ),
-          if (_currentLog.isNotEmpty || _logIndex < widget.logs.length)
+          if (_logIndex < widget.logs.length)
             Row(
               children: [
-                Text(
-                  '> $_currentLog',
-                  style: const TextStyle(
-                    fontFamily: 'monospace',
-                    color: AppTheme.textPrimary,
-                    fontSize: 14,
-                  ),
+                AnimatedBuilder(
+                  animation: _typingController,
+                  builder: (context, child) {
+                    final currentLog = widget.logs[_logIndex];
+                    final displayedText = currentLog.substring(0, _charCount.value.clamp(0, currentLog.length));
+                    return Text(
+                      '> $displayedText',
+                      style: const TextStyle(
+                        fontFamily: 'monospace',
+                        color: AppTheme.textPrimary,
+                        fontSize: 14,
+                      ),
+                    );
+                  },
                 ),
                 _BlinkingCursor(),
               ],
