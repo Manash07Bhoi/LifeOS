@@ -11,3 +11,6 @@ Optimization Note:
 Updated isCompletedOn to iterate from the end using reversed.any(...).
 This improves average-case performance when checking recent dates (such as today's completion).
 Worst-case time complexity remains O(n).
+## 2023-10-27 - Hacker Log Overlay Text Animation Performance
+**Learning:** Using a periodic Timer to call `setState` character-by-character on a large widget tree causes massive UI rebuild overhead. Wrapping the specific text widget in an `AnimatedBuilder` driven by an `AnimationController` and `StepTween` perfectly isolates rebuilds and drastically reduces CPU frame time.
+**Action:** Replaced Timer with `AnimationController` and isolated the text widget rebuild via `AnimatedBuilder`. Explicitly resetting `_typingController.value = 0.0` before state transitions ensures safety from `RangeError` on dynamically sized strings.
