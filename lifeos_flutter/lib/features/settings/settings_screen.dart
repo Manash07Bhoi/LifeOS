@@ -34,75 +34,13 @@ class SettingsScreen extends ConsumerWidget {
         child: ListView(
           padding: const EdgeInsets.all(24.0),
           children: [
-            const Text('APPEARANCE', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
-            const SizedBox(height: 16),
-            GlassCard(
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: const Icon(Icons.palette_outlined, color: AppTheme.primaryPurple),
-                    title: const Text('Theme Preview', style: TextStyle(color: AppTheme.textPrimary)),
-                    subtitle: const Text('Accent Color Selector', style: TextStyle(color: AppTheme.textSecondary)),
-                    trailing: const Icon(Icons.chevron_right, color: AppTheme.textSecondary),
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) => const ThemePreviewScreen()));
-                    },
-                  ),
-                  const Divider(color: Colors.white12, height: 1),
-                  SwitchListTile(
-                    activeTrackColor: AppTheme.neonCyan.withValues(alpha: 0.3),
-                    activeThumbColor: AppTheme.neonCyan,
-                    secondary: const Icon(Icons.animation, color: AppTheme.neonCyan),
-                    title: const Text('Animation Engine', style: TextStyle(color: AppTheme.textPrimary)),
-                    subtitle: const Text('High / Low Performance Toggle', style: TextStyle(color: AppTheme.textSecondary)),
-                    value: true,
-                    onChanged: (val) {
-                      SuccessFeedbackToast.show(context, 'Core animations locked to high-performance profile.', isError: false);
-                    },
-                  ),
-                ],
-              ),
+            const _AppearanceSection(),
+            const SizedBox(height: 32),
+            _DataManagementSection(
+              onPurgeData: () => _showDataResetConfirm(context, ref),
             ),
             const SizedBox(height: 32),
-            const Text('DATA MANAGEMENT', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
-            const SizedBox(height: 16),
-            GlassCard(
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: const Icon(Icons.sd_storage_outlined, color: AppTheme.neonCyan),
-                    title: const Text('Export Local Data', style: TextStyle(color: AppTheme.textPrimary)),
-                    subtitle: const Text('Save Hive boxes to JSON', style: TextStyle(color: AppTheme.textSecondary)),
-                    trailing: const Icon(Icons.download, color: AppTheme.textSecondary),
-                    onTap: () {
-                      SuccessFeedbackToast.show(context, 'Data Export capability not available in core build.', isError: true);
-                    },
-                  ),
-                  const Divider(color: Colors.white12, height: 1),
-                  ListTile(
-                    leading: const Icon(Icons.warning_amber_rounded, color: AppTheme.neonPink),
-                    title: const Text('Purge System Data', style: TextStyle(color: AppTheme.textPrimary)),
-                    subtitle: const Text('Irreversible action', style: TextStyle(color: AppTheme.neonPink)),
-                    onTap: () {
-                      _showDataResetConfirm(context, ref);
-                    },
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 32),
-            const Text('SYSTEM INFO', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
-            const SizedBox(height: 16),
-            GlassCard(
-              child: ListTile(
-                leading: const Icon(Icons.info_outline, color: AppTheme.textSecondary),
-                title: const Text('About LifeOS', style: TextStyle(color: AppTheme.textPrimary)),
-                trailing: const Icon(Icons.chevron_right, color: AppTheme.textSecondary),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => const AboutScreen()));
-                },
-              ),
-            ),
+            const _SystemInfoSection(),
           ],
         ),
       ),
@@ -119,21 +57,14 @@ class SettingsScreen extends ConsumerWidget {
     ).then((confirmed) async {
       if (confirmed == true) {
         try {
-          // Step 1: Delete all Hive boxes from disk
-          await Hive.box<Goal>('goalsBox').deleteFromDisk();
-          await Hive.box<Habit>('habitsBox').deleteFromDisk();
-          await Hive.box<FocusSession>('sessionsBox').deleteFromDisk();
-          await Hive.box<CommandHistory>('commandHistoryBox').deleteFromDisk();
-          await Hive.box('settingsBox').deleteFromDisk();
+          // Step 1: Clear all Hive boxes (preserves encryption ciphers)
+          await Hive.box<Goal>('goalsBox').clear();
+          await Hive.box<Habit>('habitsBox').clear();
+          await Hive.box<FocusSession>('sessionsBox').clear();
+          await Hive.box<CommandHistory>('commandHistoryBox').clear();
+          await Hive.box('settingsBox').clear();
 
-          // Step 2: Reopen boxes
-          await Hive.openBox<Goal>('goalsBox');
-          await Hive.openBox<Habit>('habitsBox');
-          await Hive.openBox<FocusSession>('sessionsBox');
-          await Hive.openBox<CommandHistory>('commandHistoryBox');
-          await Hive.openBox('settingsBox');
-
-          // Step 3: Invalidate Riverpod Providers
+          // Step 2: Invalidate Riverpod Providers
           ref.invalidate(goalsProvider);
           ref.invalidate(habitsProvider);
           ref.invalidate(focusProvider);
@@ -158,5 +89,111 @@ class SettingsScreen extends ConsumerWidget {
         }
       }
     });
+  }
+}
+
+class _AppearanceSection extends StatelessWidget {
+  const _AppearanceSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('APPEARANCE', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+        const SizedBox(height: 16),
+        GlassCard(
+          child: Column(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.palette_outlined, color: AppTheme.primaryPurple),
+                title: const Text('Theme Preview', style: TextStyle(color: AppTheme.textPrimary)),
+                subtitle: const Text('Accent Color Selector', style: TextStyle(color: AppTheme.textSecondary)),
+                trailing: const Icon(Icons.chevron_right, color: AppTheme.textSecondary),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => const ThemePreviewScreen()));
+                },
+              ),
+              const Divider(color: Colors.white12, height: 1),
+              SwitchListTile(
+                activeTrackColor: AppTheme.neonCyan.withValues(alpha: 0.3),
+                activeThumbColor: AppTheme.neonCyan,
+                secondary: const Icon(Icons.animation, color: AppTheme.neonCyan),
+                title: const Text('Animation Engine', style: TextStyle(color: AppTheme.textPrimary)),
+                subtitle: const Text('High / Low Performance Toggle', style: TextStyle(color: AppTheme.textSecondary)),
+                value: true,
+                onChanged: (val) {
+                  SuccessFeedbackToast.show(context, 'Core animations locked to high-performance profile.', isError: false);
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _DataManagementSection extends StatelessWidget {
+  final VoidCallback onPurgeData;
+
+  const _DataManagementSection({required this.onPurgeData});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('DATA MANAGEMENT', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+        const SizedBox(height: 16),
+        GlassCard(
+          child: Column(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.sd_storage_outlined, color: AppTheme.neonCyan),
+                title: const Text('Export Local Data', style: TextStyle(color: AppTheme.textPrimary)),
+                subtitle: const Text('Save Hive boxes to JSON', style: TextStyle(color: AppTheme.textSecondary)),
+                trailing: const Icon(Icons.download, color: AppTheme.textSecondary),
+                onTap: () {
+                  SuccessFeedbackToast.show(context, 'Data Export capability not available in core build.', isError: true);
+                },
+              ),
+              const Divider(color: Colors.white12, height: 1),
+              ListTile(
+                leading: const Icon(Icons.warning_amber_rounded, color: AppTheme.neonPink),
+                title: const Text('Purge System Data', style: TextStyle(color: AppTheme.textPrimary)),
+                subtitle: const Text('Irreversible action', style: TextStyle(color: AppTheme.neonPink)),
+                onTap: onPurgeData,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _SystemInfoSection extends StatelessWidget {
+  const _SystemInfoSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text('SYSTEM INFO', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+        const SizedBox(height: 16),
+        GlassCard(
+          child: ListTile(
+            leading: const Icon(Icons.info_outline, color: AppTheme.textSecondary),
+            title: const Text('About LifeOS', style: TextStyle(color: AppTheme.textPrimary)),
+            trailing: const Icon(Icons.chevron_right, color: AppTheme.textSecondary),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (_) => const AboutScreen()));
+            },
+          ),
+        ),
+      ],
+    );
   }
 }
