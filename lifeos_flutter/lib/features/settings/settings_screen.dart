@@ -118,32 +118,44 @@ class SettingsScreen extends ConsumerWidget {
       confirmText: 'PURGE',
     ).then((confirmed) async {
       if (confirmed == true) {
-        // Step 1: Clear all Hive boxes
-        await Hive.box<Goal>('goalsBox').clear();
-        await Hive.box<Habit>('habitsBox').clear();
-        await Hive.box<FocusSession>('sessionsBox').clear();
-        await Hive.box<CommandHistory>('commandHistoryBox').clear();
-        await Hive.box('settingsBox').clear();
+        try {
+          // Step 1: Delete all Hive boxes from disk
+          await Hive.box<Goal>('goalsBox').deleteFromDisk();
+          await Hive.box<Habit>('habitsBox').deleteFromDisk();
+          await Hive.box<FocusSession>('sessionsBox').deleteFromDisk();
+          await Hive.box<CommandHistory>('commandHistoryBox').deleteFromDisk();
+          await Hive.box('settingsBox').deleteFromDisk();
 
-        // Step 2: Invalidate Riverpod Providers
-        ref.invalidate(goalsProvider);
-        ref.invalidate(habitsProvider);
-        ref.invalidate(focusProvider);
-        ref.invalidate(focusSessionsProvider);
-        ref.invalidate(commandProvider);
-        // Note: settingsProvider and analyticsProvider do not technically exist as separate state notifiers in this codebase structure.
-        // focusSessionsProvider drives the analytics view entirely, so invalidating it serves the same purpose.
+          // Step 2: Reopen boxes
+          await Hive.openBox<Goal>('goalsBox');
+          await Hive.openBox<Habit>('habitsBox');
+          await Hive.openBox<FocusSession>('sessionsBox');
+          await Hive.openBox<CommandHistory>('commandHistoryBox');
+          await Hive.openBox('settingsBox');
 
-        if (!context.mounted) return;
+          // Step 3: Invalidate Riverpod Providers
+          ref.invalidate(goalsProvider);
+          ref.invalidate(habitsProvider);
+          ref.invalidate(focusProvider);
+          ref.invalidate(focusSessionsProvider); // Serves as analyticsProvider
+          ref.invalidate(commandProvider);
+          // Note: settingsProvider and analyticsProvider do not technically exist as separate state notifiers in this codebase structure.
+          // focusSessionsProvider drives the analytics view entirely, so invalidating it serves the same purpose.
 
-        SuccessFeedbackToast.show(context, 'System memory purged successfully.');
+          if (!context.mounted) return;
 
-        // Step 3: Navigate user to clean state (Dashboard via NavigationWrapperScreen)
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (_) => const NavigationWrapperScreen()),
-          (route) => false,
-        );
+          SuccessFeedbackToast.show(context, 'System reset complete');
+
+          // Step 4: Navigate user to clean state (Dashboard via NavigationWrapperScreen)
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (_) => const NavigationWrapperScreen()),
+            (route) => false,
+          );
+        } catch (e) {
+          if (!context.mounted) return;
+          SuccessFeedbackToast.show(context, 'Failed to purge data securely.', isError: true);
+        }
       }
     });
   }
