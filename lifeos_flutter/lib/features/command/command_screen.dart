@@ -27,7 +27,6 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
   String _errorText = '';
   bool _isProcessing = false;
   List<String> _currentLogs = [];
-
   int _historyIndex = -1;
 
   final List<String> _suggestions = [
@@ -53,17 +52,10 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
     super.dispose();
   }
 
-  void _processCommand(String rawCmd) async {
-    if (rawCmd.trim().isEmpty || _isProcessing) return;
+  void _processCommand(String cmd) async {
+    if (cmd.trim().isEmpty || _isProcessing) return;
 
-    final commands = rawCmd.split('&&').map((c) => c.trim()).where((c) => c.isNotEmpty).toList();
-
-    if (commands.length > 1) {
-       _processChainedCommands(commands, rawCmd);
-       return;
-    }
-
-    final lower = rawCmd.trim().toLowerCase();
+    final lower = cmd.trim().toLowerCase();
     bool success = false;
 
     setState(() {
@@ -73,12 +65,9 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
 
     void finishProcess(bool isSuccess, [List<String>? logs, VoidCallback? onComplete]) {
       success = isSuccess;
-      ref.read(commandProvider.notifier).addCommand(rawCmd, wasSuccessful: success);
+      ref.read(commandProvider.notifier).addCommand(cmd, wasSuccessful: success);
 
-      if (success) {
-        _controller.clear();
-        _historyIndex = -1;
-      }
+      if (success) _controller.clear();
 
       if (logs != null && logs.isNotEmpty) {
         setState(() {
@@ -171,88 +160,7 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
     } else {
       finishProcess(false);
       setState(() {
-        _errorText = 'bash: $rawCmd: command not found\nTry "help" or "-h" for a list of commands.';
-      });
-    }
-  }
-
-  void _processChainedCommands(List<String> commands, String fullCmd) async {
-     setState(() {
-      _isProcessing = true;
-      _errorText = '';
-      _currentLogs = ['Executing chained commands...'];
-    });
-
-    ref.read(commandProvider.notifier).addCommand(fullCmd, wasSuccessful: true);
-    _controller.clear();
-    _historyIndex = -1;
-
-    bool hasError = false;
-    List<String> deferredNavigation = [];
-
-    for (var cmd in commands) {
-      setState(() {
-         _currentLogs.add(' > executing: $cmd');
-      });
-      await Future.delayed(const Duration(milliseconds: 500));
-
-      final lower = cmd.toLowerCase();
-
-      // Actually execute the internal logic per command
-      if (lower == 'clear') {
-         await Hive.box<CommandHistory>('commandHistoryBox').clear();
-         setState(() => _currentLogs.add('   [OK] Buffer cleared.'));
-      } else if (lower == 'help' || lower == '-h') {
-         deferredNavigation.add('help');
-         setState(() => _currentLogs.add('   [OK] Manual queued.'));
-      } else if (lower == 'ls') {
-         final goals = ref.read(goalsProvider).length;
-         final habits = ref.read(habitsProvider).length;
-         setState(() {
-            _currentLogs.addAll(['   [OK]', '   ├─ goals [$goals]', '   ├─ habits [$habits]', '   └─ analytics']);
-         });
-      } else if (lower == 'status') {
-         setState(() {
-            _currentLogs.addAll(['   [OK]', '   Status: ONLINE', '   Storage: STABLE']);
-         });
-      } else if (lower == 'history') {
-         setState(() => _currentLogs.add('   [OK] History active.'));
-      } else if (lower.startsWith('cd ')) {
-         final module = lower.split('cd ').last.trim();
-         if (module == 'goals' || module == 'habits' || module == 'analytics') {
-           deferredNavigation.add(module);
-           setState(() => _currentLogs.add('   [OK] $module queued.'));
-         } else {
-           hasError = true;
-           setState(() => _currentLogs.addAll(['   [ERR] cd: $module: No such directory', 'Chained execution aborted.']));
-           break;
-         }
-      } else if (lower.contains('goal') && (lower.contains('add') || lower.contains('create'))) {
-         deferredNavigation.add('add_goal');
-         setState(() => _currentLogs.add('   [OK] goal protocol queued.'));
-      } else if (lower.contains('habit') && (lower.contains('add') || lower.contains('create'))) {
-         deferredNavigation.add('add_habit');
-         setState(() => _currentLogs.add('   [OK] habit protocol queued.'));
-      } else if (lower.contains('focus') && lower.contains('start')) {
-         deferredNavigation.add('focus');
-         setState(() => _currentLogs.add('   [OK] focus queued.'));
-      } else {
-         hasError = true;
-         setState(() {
-            _currentLogs.add('   [ERR] bash: $cmd: command not found');
-            _currentLogs.add('Chained execution aborted.');
-         });
-         break;
-      }
-    }
-
-    if (!hasError) {
-      setState(() {
-        _currentLogs.add('Chained execution complete.');
-        // We embed the deferred navigation target into the final log so the HackerOverlay's onComplete callback can read it and route safely.
-        if (deferredNavigation.isNotEmpty) {
-           _currentLogs.add('__NAV__${deferredNavigation.last}');
-        }
+        _errorText = 'bash: $cmd: command not found\nTry "help" or "-h" for a list of commands.';
       });
     }
   }
@@ -301,6 +209,7 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
               Align(
                 alignment: Alignment.topRight,
                 child: IconButton(
+                  tooltip: 'Close',
                   icon: const Icon(Icons.close, color: AppTheme.textSecondary),
                   onPressed: _closeOverlay,
                 ),
@@ -319,41 +228,17 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
               if (_isProcessing && _currentLogs.isNotEmpty)
                 Expanded(
                   child: HackerLogOverlay(
-                    logs: _currentLogs.where((l) => !l.startsWith('__NAV__')).toList(),
+                    logs: _currentLogs,
                     onComplete: () {
-                      String? navTarget;
-                      if (_currentLogs.isNotEmpty && _currentLogs.last.startsWith('__NAV__')) {
-                        navTarget = _currentLogs.last.split('__NAV__').last;
-                      }
-
                       setState(() {
                         _isProcessing = false;
                         _currentLogs = [];
                       });
 
-                      // Process deferred navigations sequentially outside the processing loop
-                      if (navTarget != null && context.mounted) {
-                          _closeOverlay();
-                          if (navTarget == 'help') {
-                             Navigator.push(context, MaterialPageRoute(builder: (_) => const CommandDictionaryScreen()));
-                          } else if (navTarget == 'goals') {
-                             Navigator.push(context, MaterialPageRoute(builder: (_) => const GoalsScreen()));
-                          } else if (navTarget == 'habits') {
-                             Navigator.push(context, MaterialPageRoute(builder: (_) => const HabitMatrixScreen()));
-                          } else if (navTarget == 'analytics') {
-                             Navigator.push(context, MaterialPageRoute(builder: (_) => const AnalyticsScreen()));
-                          } else if (navTarget == 'add_goal') {
-                             Navigator.pushNamed(context, '/add_goal');
-                          } else if (navTarget == 'add_habit') {
-                             Navigator.pushNamed(context, '/add_habit');
-                          } else if (navTarget == 'focus') {
-                             Navigator.push(context, MaterialPageRoute(builder: (_) => const FocusScreen()));
-                          }
-                      } else if (history.isNotEmpty) {
-                          final cmd = history.first.commandText.trim().toLowerCase();
-                          if (cmd == 'help' || cmd == '-h') {
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const CommandDictionaryScreen()));
-                          }
+                      // Finalize actions
+                      final cmd = history.first.commandText.trim().toLowerCase();
+                      if (cmd == 'help' || cmd == '-h') {
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const CommandDictionaryScreen()));
                       }
                     },
                   ),
@@ -396,12 +281,14 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
                   Column(
                     children: [
                       IconButton(
+                        tooltip: 'Previous Command',
                         icon: const Icon(Icons.keyboard_arrow_up, color: AppTheme.textSecondary),
                         onPressed: () => _navigateHistory(-1),
                         constraints: const BoxConstraints(minHeight: 32, minWidth: 32),
                         padding: EdgeInsets.zero,
                       ),
                       IconButton(
+                        tooltip: 'Next Command',
                         icon: const Icon(Icons.keyboard_arrow_down, color: AppTheme.textSecondary),
                         onPressed: () => _navigateHistory(1),
                         constraints: const BoxConstraints(minHeight: 32, minWidth: 32),
@@ -485,31 +372,31 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
                     itemCount: history.length,
                     itemBuilder: (context, index) {
                       final cmd = history[index];
-                    return GestureDetector(
-                      onTap: () {
-                         _controller.text = cmd.commandText;
-                         _controller.selection = TextSelection.fromPosition(TextPosition(offset: _controller.text.length));
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 12.0),
-                        child: Row(
-                          children: [
-                            Icon(
-                              cmd.wasSuccessful ? Icons.check_circle_outline : Icons.cancel_outlined,
-                              color: cmd.wasSuccessful ? AppTheme.primaryPurple : AppTheme.textSecondary,
-                              size: 16,
-                            ),
-                            const SizedBox(width: 8),
-                            Text(
-                              cmd.commandText,
-                              style: TextStyle(
-                                fontFamily: 'monospace',
-                                color: cmd.wasSuccessful ? AppTheme.textPrimary : AppTheme.textSecondary,
-                                decoration: cmd.wasSuccessful ? null : TextDecoration.lineThrough,
+                      return GestureDetector(
+                        onTap: () {
+                          _controller.text = cmd.commandText;
+                          _controller.selection = TextSelection.fromPosition(TextPosition(offset: _controller.text.length));
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 12.0),
+                          child: Row(
+                            children: [
+                              Icon(
+                                cmd.wasSuccessful ? Icons.check_circle_outline : Icons.cancel_outlined,
+                                color: cmd.wasSuccessful ? AppTheme.primaryPurple : AppTheme.textSecondary,
+                                size: 16,
                               ),
+                              const SizedBox(width: 8),
+                              Text(
+                                cmd.commandText,
+                                style: TextStyle(
+                                  fontFamily: 'monospace',
+                                  color: cmd.wasSuccessful ? AppTheme.textPrimary : AppTheme.textSecondary,
+                                  decoration: cmd.wasSuccessful ? null : TextDecoration.lineThrough,
+                                ),
                               ),
-                          ],
-                        ),
+                            ],
+                          ),
                         ),
                       );
                     },

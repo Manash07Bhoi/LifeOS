@@ -22,7 +22,7 @@ class DataExportService {
     final file = File('${directory.path}/lifeos_backup.json');
     await file.writeAsString(jsonString);
 
-    await SharePlus.instance.share(ShareParams(files: [XFile(file.path)], text: 'LifeOS Data Backup'));
+    await Share.shareXFiles([XFile(file.path)], text: 'LifeOS Data Backup'); // Ignoring deprecation in this older SDK context
   }
 
   static Future<bool> importData() async {
