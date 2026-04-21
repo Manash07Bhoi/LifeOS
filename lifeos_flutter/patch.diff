@@ -1,0 +1,52 @@
+--- test/fakes/fake_box.dart
++++ test/fakes/fake_box.dart
+@@ -30,34 +30,34 @@
+
+   // Unimplemented members required by Box interface
+   @override
+-<<<<<<< HEAD
+   Future<int> clear() async {
+     _data.clear();
+     return 0;
+   }
+-=======
++
++  @override
+   String get name => throw UnimplementedError();
+
+   @override
+   bool get isOpen => true;
+
+   @override
+   String? get path => throw UnimplementedError();
+
+   @override
+   bool get lazy => throw UnimplementedError();
+
+   @override
+   Iterable<dynamic> get keys => _data.keys;
+
+   @override
+   int get length => _data.length;
+
+   @override
+   bool get isEmpty => _data.isEmpty;
+
+   @override
+   bool get isNotEmpty => _data.isNotEmpty;
+
+   @override
+   Iterable<T> valuesBetween({dynamic startKey, dynamic endKey}) => throw UnimplementedError();
+
+   @override
+   T? getAt(int index) => throw UnimplementedError();
+
+   @override
+   Map<dynamic, T> toMap() => Map.of(_data);
+
+   @override
+   dynamic keyAt(int index) => throw UnimplementedError();
+
+   @override
+   Stream<BoxEvent> watch({dynamic key}) => throw UnimplementedError();
+->>>>>>> origin/main
