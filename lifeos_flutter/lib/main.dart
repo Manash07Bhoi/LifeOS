@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'core/theme/app_theme.dart';
+import 'core/security/encryption_service.dart';
 import 'data/models/goal.dart';
 import 'data/models/habit.dart';
 import 'data/models/focus_session.dart';
@@ -23,17 +24,20 @@ void main() async {
     await Hive.initFlutter();
 
     // Register Adapters
-  Hive.registerAdapter(GoalAdapter());
-  Hive.registerAdapter(HabitAdapter());
-  Hive.registerAdapter(FocusSessionAdapter());
-  Hive.registerAdapter(CommandHistoryAdapter());
+    Hive.registerAdapter(GoalAdapter());
+    Hive.registerAdapter(HabitAdapter());
+    Hive.registerAdapter(FocusSessionAdapter());
+    Hive.registerAdapter(CommandHistoryAdapter());
 
-  // Open Boxes
-  await Hive.openBox<Goal>('goalsBox');
-  await Hive.openBox<Habit>('habitsBox');
-  await Hive.openBox<FocusSession>('sessionsBox');
-  await Hive.openBox<CommandHistory>('commandHistoryBox');
-    await Hive.openBox('settingsBox');
+    // Initialize Encryption
+    final cipher = await EncryptionService.getCipher();
+
+    // Open Encrypted Boxes
+    await EncryptionService.openEncryptedBox<Goal>('goalsBox', cipher);
+    await EncryptionService.openEncryptedBox<Habit>('habitsBox', cipher);
+    await EncryptionService.openEncryptedBox<FocusSession>('sessionsBox', cipher);
+    await EncryptionService.openEncryptedBox<CommandHistory>('commandHistoryBox', cipher);
+    await EncryptionService.openEncryptedBox('settingsBox', cipher);
 
     runApp(
       const ProviderScope(
