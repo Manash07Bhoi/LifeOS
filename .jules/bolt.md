@@ -16,3 +16,7 @@ Worst-case time complexity remains O(n).
 
 **Learning:** Using a `Timer` that calls `setState()` for every typed character in a long stream of text (like in a terminal logs overlay) triggers expensive, full widget tree rebuilds repeatedly. This becomes a significant bottleneck as the tree or the log output grows.
 **Action:** Always use an `AnimationController` combined with an `AnimatedBuilder` (and a `StepTween` to dictate string length) to isolate rebuilds solely to the changing text widget. Remember to reset the controller (`_typingController.value = 0.0`) when iterating over sequential strings to prevent `RangeError` during the rebuild.
+## 2024-04-20 - Extract ListView items to const widgets
+
+**Learning:** When using `ListView.builder`, placing complex, deeply nested widget trees directly inside the `itemBuilder` function prevents the Flutter framework from using `const` optimizations, leading to unnecessary rebuilds when scrolling, especially if `Theme.of(context)` or other InheritedWidgets trigger an update.
+**Action:** Always extract the repeated item UI into a separate private class (e.g., `_CommandListItem`) that extends `StatelessWidget`. By using a `const` constructor for this extracted widget, Flutter can safely skip rebuilding list items that scroll out of view and back in, significantly improving scrolling performance and reducing Jank.

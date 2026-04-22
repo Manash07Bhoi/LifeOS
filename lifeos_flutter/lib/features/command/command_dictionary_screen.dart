@@ -73,59 +73,80 @@ class CommandDictionaryScreen extends StatelessWidget {
           itemCount: _commands.length,
           itemBuilder: (context, index) {
             final item = _commands[index];
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: GlassCard(
-                child: Theme(
-                  data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-                  child: ExpansionTile(
-                    iconColor: AppTheme.neonCyan,
-                    collapsedIconColor: AppTheme.textSecondary,
-                    title: Text(
-                      item['cmd']!,
-                      style: const TextStyle(
-                        fontFamily: 'monospace',
-                        color: AppTheme.neonCyan,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              item['desc']!,
-                              style: const TextStyle(color: AppTheme.textPrimary),
-                            ),
-                            const SizedBox(height: 12),
-                            Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                color: AppTheme.background.withValues(alpha: 0.5),
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: AppTheme.textSecondary.withValues(alpha: 0.2)),
-                              ),
-                              child: Text(
-                                'Ex: ${item['example']}',
-                                style: const TextStyle(
-                                  fontFamily: 'monospace',
-                                  color: AppTheme.textSecondary,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
+            return _CommandListItem(
+              cmd: item['cmd']!,
+              desc: item['desc']!,
+              example: item['example']!,
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+class _CommandListItem extends StatelessWidget {
+  final String cmd;
+  final String desc;
+  final String example;
+
+  const _CommandListItem({
+    required this.cmd,
+    required this.desc,
+    required this.example,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16.0),
+      child: GlassCard(
+        child: Theme(
+          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+          child: ExpansionTile(
+            iconColor: AppTheme.neonCyan,
+            collapsedIconColor: AppTheme.textSecondary,
+            title: Text(
+              cmd,
+              style: const TextStyle(
+                fontFamily: 'monospace',
+                color: AppTheme.neonCyan,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      desc,
+                      style: const TextStyle(color: AppTheme.textPrimary),
+                    ),
+                    const SizedBox(height: 12),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: AppTheme.background.withValues(alpha: 0.5),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: AppTheme.textSecondary.withValues(alpha: 0.2)),
+                      ),
+                      child: Text(
+                        'Ex: $example',
+                        style: const TextStyle(
+                          fontFamily: 'monospace',
+                          color: AppTheme.textSecondary,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
