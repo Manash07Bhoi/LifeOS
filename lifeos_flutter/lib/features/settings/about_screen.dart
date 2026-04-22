@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_theme.dart';
 import '../../shared/widgets/glass_card.dart';
 import '../../shared/widgets/neon_text.dart';
-import 'package:url_launcher/url_launcher.dart';
+import '../../core/utils/safe_url_launcher.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -60,10 +60,7 @@ class AboutScreen extends StatelessWidget {
                   foregroundColor: AppTheme.textPrimary,
                 ),
                 onPressed: () async {
-                  final Uri url = Uri.parse('https://github.com/roshan');
-                  if (await canLaunchUrl(url)) {
-                    await launchUrl(url);
-                  }
+                  await safeLaunchUrl(context, 'https://github.com/roshan');
                 },
                 icon: const Icon(Icons.code),
                 label: const Text('VIEW SOURCE'),
