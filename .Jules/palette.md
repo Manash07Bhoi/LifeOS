@@ -5,3 +5,7 @@
 ## 2024-04-21 - Expanded Accessibility Support for Custom Interactive Elements
 **Learning:** While `IconButton` has a built-in `tooltip` property, custom icon-only buttons built using `GestureDetector` or `AnimatedContainer` (e.g., custom bottom navigation bars or primary action FABs) completely lack context for screen readers and miss native hover states on web/desktop.
 **Action:** Always wrap custom interactive widgets (`GestureDetector`, `InkWell`) that lack text labels with the `Tooltip` widget. This natively applies the `aria-label` equivalent, providing immediate accessibility and UX improvements.
+
+## 2026-04-22 - Dynamic Tooltips on State-Toggling UI Controls
+**Learning:** In state-toggling UI elements like habit completion checkboxes built with `GestureDetector`, a static tooltip isn't enough. The accessibility label needs to reflect the action the user *will* take (e.g., 'Mark as complete' vs 'Mark as incomplete'), not just what the element is.
+**Action:** When wrapping a state-dependent interactive widget with a `Tooltip`, dynamically compute the `message` property based on the current state to provide accurate, context-aware feedback to screen readers and mouse hover users.

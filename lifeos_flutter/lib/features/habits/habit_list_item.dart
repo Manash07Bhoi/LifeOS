@@ -10,11 +10,7 @@ class HabitListItem extends ConsumerWidget {
   final Habit habit;
   final DateTime today;
 
-  const HabitListItem({
-    super.key,
-    required this.habit,
-    required this.today,
-  });
+  const HabitListItem({super.key, required this.habit, required this.today});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,33 +22,48 @@ class HabitListItem extends ConsumerWidget {
         padding: const EdgeInsets.all(20),
         child: Row(
           children: [
-            GestureDetector(
-              onTap: () {
-                ref.read(habitsProvider.notifier).toggleCompletion(habit.id, today);
-              },
-              child: Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: isCompletedToday ? AppTheme.neonCyan : AppTheme.textSecondary,
-                    width: 2,
+            Tooltip(
+              message: isCompletedToday
+                  ? 'Mark as incomplete'
+                  : 'Mark as complete',
+              child: GestureDetector(
+                onTap: () {
+                  ref
+                      .read(habitsProvider.notifier)
+                      .toggleCompletion(habit.id, today);
+                },
+                child: Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: isCompletedToday
+                          ? AppTheme.neonCyan
+                          : AppTheme.textSecondary,
+                      width: 2,
+                    ),
+                    color: isCompletedToday
+                        ? AppTheme.neonCyan.withValues(alpha: 0.2)
+                        : Colors.transparent,
+                    boxShadow: isCompletedToday
+                        ? [
+                            BoxShadow(
+                              color: AppTheme.neonCyan.withValues(alpha: 0.3),
+                              blurRadius: 8,
+                              spreadRadius: 2,
+                            ),
+                          ]
+                        : null,
                   ),
-                  color: isCompletedToday ? AppTheme.neonCyan.withValues(alpha: 0.2) : Colors.transparent,
-                  boxShadow: isCompletedToday
-                      ? [
-                          BoxShadow(
-                            color: AppTheme.neonCyan.withValues(alpha: 0.3),
-                            blurRadius: 8,
-                            spreadRadius: 2,
-                          )
-                        ]
+                  child: isCompletedToday
+                      ? const Icon(
+                          Icons.check,
+                          color: AppTheme.neonCyan,
+                          size: 18,
+                        )
                       : null,
                 ),
-                child: isCompletedToday
-                    ? const Icon(Icons.check, color: AppTheme.neonCyan, size: 18)
-                    : null,
               ),
             ),
             const SizedBox(width: 16),
@@ -66,37 +77,55 @@ class HabitListItem extends ConsumerWidget {
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: AppTheme.textPrimary,
-                      decoration: isCompletedToday ? TextDecoration.lineThrough : null,
+                      decoration: isCompletedToday
+                          ? TextDecoration.lineThrough
+                          : null,
                     ),
                   ),
                   if (habit.description.isNotEmpty) ...[
                     const SizedBox(height: 4),
                     Text(
                       habit.description,
-                      style: const TextStyle(color: AppTheme.textSecondary, fontSize: 14),
+                      style: const TextStyle(
+                        color: AppTheme.textSecondary,
+                        fontSize: 14,
+                      ),
                     ),
-                  ]
+                  ],
                 ],
               ),
             ),
             Row(
               children: [
-                const Icon(Icons.local_fire_department, color: AppTheme.neonPink, size: 16),
+                const Icon(
+                  Icons.local_fire_department,
+                  color: AppTheme.neonPink,
+                  size: 16,
+                ),
                 const SizedBox(width: 4),
                 Text(
                   '${habit.streak}',
-                  style: const TextStyle(color: AppTheme.neonPink, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    color: AppTheme.neonPink,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),
             const SizedBox(width: 8),
             IconButton(
               tooltip: 'Edit habit',
-              icon: const Icon(Icons.edit, color: AppTheme.textSecondary, size: 20),
+              icon: const Icon(
+                Icons.edit,
+                color: AppTheme.textSecondary,
+                size: 20,
+              ),
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => AddEditHabitScreen(existingHabit: habit)),
+                  MaterialPageRoute(
+                    builder: (_) => AddEditHabitScreen(existingHabit: habit),
+                  ),
                 );
               },
             ),
