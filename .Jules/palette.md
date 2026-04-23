@@ -9,3 +9,6 @@
 ## 2026-04-22 - Dynamic Tooltips on State-Toggling UI Controls
 **Learning:** In state-toggling UI elements like habit completion checkboxes built with `GestureDetector`, a static tooltip isn't enough. The accessibility label needs to reflect the action the user *will* take (e.g., 'Mark as complete' vs 'Mark as incomplete'), not just what the element is.
 **Action:** When wrapping a state-dependent interactive widget with a `Tooltip`, dynamically compute the `message` property based on the current state to provide accurate, context-aware feedback to screen readers and mouse hover users.
+## 2024-04-23 - Accessibility Support for Quick Actions Panel
+**Learning:** `GestureDetector` widgets nested deep within custom components like the `_ActionCard` in `QuickActionsPanel` often lack context for screen readers and do not natively support desktop hover labels, creating an accessibility gap for interactive elements.
+**Action:** Always wrap custom interactive UI elements with a `Tooltip`, dynamically passing the available contextual label (e.g., `widget.title`) to provide native `aria-label` equivalent behavior and visible hover states.
