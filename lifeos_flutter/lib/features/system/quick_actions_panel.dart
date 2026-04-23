@@ -16,7 +16,8 @@ class QuickActionsPanel extends StatelessWidget {
     required this.onViewAnalytics,
   });
 
-  static void show(BuildContext context, {
+  static void show(
+    BuildContext context, {
     required VoidCallback onAddGoal,
     required VoidCallback onAddHabit,
     required VoidCallback onStartFocus,
@@ -126,7 +127,8 @@ class _ActionCard extends StatefulWidget {
   State<_ActionCard> createState() => _ActionCardState();
 }
 
-class _ActionCardState extends State<_ActionCard> with SingleTickerProviderStateMixin {
+class _ActionCardState extends State<_ActionCard>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
   bool _isPressed = false;
@@ -138,9 +140,10 @@ class _ActionCardState extends State<_ActionCard> with SingleTickerProviderState
       vsync: this,
       duration: const Duration(milliseconds: 100),
     );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _scaleAnimation = Tween<double>(
+      begin: 1.0,
+      end: 0.95,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -151,58 +154,61 @@ class _ActionCardState extends State<_ActionCard> with SingleTickerProviderState
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: (_) {
-        setState(() => _isPressed = true);
-        _controller.forward();
-      },
-      onTapUp: (_) {
-        setState(() => _isPressed = false);
-        _controller.reverse();
-        widget.onTap();
-      },
-      onTapCancel: () {
-        setState(() => _isPressed = false);
-        _controller.reverse();
-      },
-      child: AnimatedBuilder(
-        animation: _scaleAnimation,
-        builder: (context, child) {
-          return Transform.scale(
-            scale: _scaleAnimation.value,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24),
-                boxShadow: _isPressed
-                    ? [
-                        BoxShadow(
-                          color: widget.color.withValues(alpha: 0.3),
-                          blurRadius: 20,
-                          spreadRadius: 2,
-                        )
-                      ]
-                    : [],
-              ),
-              child: GlassCard(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(widget.icon, color: widget.color, size: 32),
-                    const SizedBox(height: 12),
-                    Text(
-                      widget.title,
-                      style: const TextStyle(
-                        color: AppTheme.textPrimary,
-                        fontWeight: FontWeight.bold,
+    return Tooltip(
+      message: widget.title,
+      child: GestureDetector(
+        onTapDown: (_) {
+          setState(() => _isPressed = true);
+          _controller.forward();
+        },
+        onTapUp: (_) {
+          setState(() => _isPressed = false);
+          _controller.reverse();
+          widget.onTap();
+        },
+        onTapCancel: () {
+          setState(() => _isPressed = false);
+          _controller.reverse();
+        },
+        child: AnimatedBuilder(
+          animation: _scaleAnimation,
+          builder: (context, child) {
+            return Transform.scale(
+              scale: _scaleAnimation.value,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(24),
+                  boxShadow: _isPressed
+                      ? [
+                          BoxShadow(
+                            color: widget.color.withValues(alpha: 0.3),
+                            blurRadius: 20,
+                            spreadRadius: 2,
+                          ),
+                        ]
+                      : [],
+                ),
+                child: GlassCard(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(widget.icon, color: widget.color, size: 32),
+                      const SizedBox(height: 12),
+                      Text(
+                        widget.title,
+                        style: const TextStyle(
+                          color: AppTheme.textPrimary,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
