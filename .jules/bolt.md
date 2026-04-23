@@ -20,3 +20,7 @@ Worst-case time complexity remains O(n).
 
 **Learning:** When using `ListView.builder`, placing complex, deeply nested widget trees directly inside the `itemBuilder` function prevents the Flutter framework from using `const` optimizations, leading to unnecessary rebuilds when scrolling, especially if `Theme.of(context)` or other InheritedWidgets trigger an update.
 **Action:** Always extract the repeated item UI into a separate private class (e.g., `_CommandListItem`) that extends `StatelessWidget`. By using a `const` constructor for this extracted widget, Flutter can safely skip rebuilding list items that scroll out of view and back in, significantly improving scrolling performance and reducing Jank.
+## 2024-04-20 - Extract high-frequency Riverpod updates into separate ConsumerWidgets
+
+**Learning:** In a screen with a timer, calling `ref.watch(provider)` at the top level causes the entire screen to rebuild every time the timer ticks (every second). This can lead to performance issues and unnecessary repaints.
+**Action:** Extract the frequently updating UI component (like the timer display) into a separate `ConsumerWidget`. Use `ref.watch(provider.select(...))` to specifically target the changing state, isolating the rebuilds only to the component that actually needs to change.

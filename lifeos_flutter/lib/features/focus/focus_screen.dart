@@ -12,7 +12,8 @@ class FocusScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final focusState = ref.watch(focusProvider);
+    final status = ref.watch(focusProvider.select((s) => s.status));
+    final initialMinutes = ref.watch(focusProvider.select((s) => s.initialMinutes));
 
     ref.listen(focusProvider, (previous, next) {
       if (previous?.status != FocusState.completed && next.status == FocusState.completed) {
@@ -35,7 +36,7 @@ class FocusScreen extends ConsumerWidget {
           tooltip: 'Back',
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            if (focusState.status == FocusState.running || focusState.status == FocusState.paused) {
+            if (status == FocusState.running || status == FocusState.paused) {
               ConfirmationDialog.show(
                 context,
                 title: 'ABORT PROTOCOL?',
@@ -62,21 +63,18 @@ class FocusScreen extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _TimerDisplay(
-                remainingSeconds: focusState.remainingSeconds,
-                isRunning: focusState.status == FocusState.running,
-              ),
+              const _TimerDisplay(),
               const SizedBox(height: 64),
-              if (focusState.status == FocusState.idle) ...[
+              if (status == FocusState.idle) ...[
                 _FocusConfig(
-                  initialMinutes: focusState.initialMinutes,
+                  initialMinutes: initialMinutes,
                   onDurationSelected: (minutes) =>
                       ref.read(focusProvider.notifier).setDuration(minutes),
                 ),
                 const SizedBox(height: 48),
               ],
               _FocusControls(
-                status: focusState.status,
+                status: status,
                 onStart: () => ref.read(focusProvider.notifier).startTimer(),
                 onPause: () => ref.read(focusProvider.notifier).pauseTimer(),
               ),
@@ -88,14 +86,8 @@ class FocusScreen extends ConsumerWidget {
   }
 }
 
-class _TimerDisplay extends StatelessWidget {
-  final int remainingSeconds;
-  final bool isRunning;
-
-  const _TimerDisplay({
-    required this.remainingSeconds,
-    required this.isRunning,
-  });
+class _TimerDisplay extends ConsumerWidget {
+  const _TimerDisplay();
 
   String _formatTime(int seconds) {
     final m = (seconds ~/ 60).toString().padLeft(2, '0');
@@ -104,7 +96,10 @@ class _TimerDisplay extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final remainingSeconds = ref.watch(focusProvider.select((s) => s.remainingSeconds));
+    final isRunning = ref.watch(focusProvider.select((s) => s.status == FocusState.running));
+
     return Container(
       width: 280,
       height: 280,
