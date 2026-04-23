@@ -4,7 +4,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 class EncryptionService {
   static const String _keyName = 'hive_encryption_key';
-  static const _secureStorage = FlutterSecureStorage();
+  static const _secureStorage = FlutterSecureStorage(
+    aOptions: AndroidOptions(encryptedSharedPreferences: true),
+  );
 
   static Future<List<int>> getOrCreateEncryptionKey() async {
     final String? storedKey = await _secureStorage.read(key: _keyName);
@@ -22,7 +24,10 @@ class EncryptionService {
     return HiveAesCipher(key);
   }
 
-  static Future<Box<T>> openEncryptedBox<T>(String name, HiveAesCipher cipher) async {
+  static Future<Box<T>> openEncryptedBox<T>(
+    String name,
+    HiveAesCipher cipher,
+  ) async {
     // Attempt 1: Try to open WITHOUT encryption to see if migration is needed
     bool needsMigration = false;
     Map<dynamic, T> existingData = {};

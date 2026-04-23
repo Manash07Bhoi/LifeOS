@@ -7,3 +7,8 @@
 **Vulnerability:** Inline usage of `launchUrl()` directly parses string links without schema validation, allowing potential arbitrary URI scheme execution (e.g., launching unintended local app schemes or system intent triggers if an attacker controls the URL data).
 **Learning:** Relying solely on `canLaunchUrl()` is insufficient as it only checks if an app exists to handle the protocol, not if the protocol is safe or intended for the context.
 **Prevention:** Create a centralized `safeLaunchUrl()` wrapper that strictly validates allowed schemas (`https`, `http`, `mailto`) and handles platform-specific exceptions via safe UI `SnackBar` feedback.
+
+## 2024-05-25 - EncryptedSharedPreferences Implementation
+**Vulnerability:** Default `FlutterSecureStorage` relies on the Android Keystore, which might fallback to weaker storage mechanisms depending on the API level and system configuration, exposing cryptographic keys to potential physical extraction risks.
+**Learning:** Adding the `AndroidOptions(encryptedSharedPreferences: true)` argument during `FlutterSecureStorage` instantiation forces Android to strictly use EncryptedSharedPreferences (part of Android Jetpack Security), providing a more robust and predictable hardware-backed encryption layer for the master AES keys.
+**Prevention:** Always instantiate `FlutterSecureStorage` with `aOptions: const AndroidOptions(encryptedSharedPreferences: true)` in offline Android applications to secure sensitive keys.
