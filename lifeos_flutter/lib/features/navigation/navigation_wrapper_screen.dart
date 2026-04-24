@@ -19,7 +19,8 @@ class NavigationWrapperScreen extends StatefulWidget {
   const NavigationWrapperScreen({super.key});
 
   @override
-  State<NavigationWrapperScreen> createState() => _NavigationWrapperScreenState();
+  State<NavigationWrapperScreen> createState() =>
+      _NavigationWrapperScreenState();
 }
 
 class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
@@ -37,13 +38,22 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
     QuickActionsPanel.show(
       context,
       onAddGoal: () {
-        Navigator.push(context, MaterialPageRoute(builder: (_) => const AddEditGoalScreen()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const AddEditGoalScreen()),
+        );
       },
       onAddHabit: () {
-        Navigator.push(context, MaterialPageRoute(builder: (_) => const AddEditHabitScreen()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const AddEditHabitScreen()),
+        );
       },
       onStartFocus: () {
-        Navigator.push(context, MaterialPageRoute(builder: (_) => const FocusScreen()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const FocusScreen()),
+        );
       },
       onViewAnalytics: () {
         setState(() => _currentIndex = 3);
@@ -63,13 +73,10 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
       },
       transitionBuilder: (context, animation, secondaryAnimation, child) {
         return SlideTransition(
-          position: Tween<Offset>(
-            begin: const Offset(0, 1),
-            end: Offset.zero,
-          ).animate(CurvedAnimation(
-            parent: animation,
-            curve: Curves.easeOutExpo,
-          )),
+          position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero)
+              .animate(
+                CurvedAnimation(parent: animation, curve: Curves.easeOutExpo),
+              ),
           child: child,
         );
       },
@@ -114,37 +121,31 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
             ),
           ),
         ),
-        body: IndexedStack(
-          index: _currentIndex,
-          children: _screens,
-        ),
+        body: IndexedStack(index: _currentIndex, children: _screens),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: AppTheme.neonCyan.withValues(alpha: 0.3),
-              blurRadius: 20,
-              spreadRadius: 2,
-            )
-          ],
-        ),
-        child: Tooltip(
-          message: 'Command Center (Long press for Quick Actions)',
-          child: GestureDetector(
-            onLongPress: _openQuickActions,
-            child: FloatingActionButton(
-              onPressed: _openCommandCenter,
-              backgroundColor: AppTheme.surfaceElevated,
-              child: const Icon(
-                Icons.terminal,
-                color: AppTheme.neonCyan,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: AppTheme.neonCyan.withValues(alpha: 0.3),
+                blurRadius: 20,
+                spreadRadius: 2,
+              ),
+            ],
+          ),
+          child: Tooltip(
+            message: 'Command Center (Long press for Quick Actions)',
+            child: GestureDetector(
+              onLongPress: _openQuickActions,
+              child: FloatingActionButton(
+                onPressed: _openCommandCenter,
+                backgroundColor: AppTheme.surfaceElevated,
+                child: const Icon(Icons.terminal, color: AppTheme.neonCyan),
               ),
             ),
           ),
         ),
-      ),
         bottomNavigationBar: _buildModernBottomBar(),
       ),
     );
@@ -162,7 +163,7 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
             color: Colors.black.withValues(alpha: 0.3),
             blurRadius: 20,
             offset: const Offset(0, 10),
-          )
+          ),
         ],
       ),
       child: ClipRRect(
@@ -170,14 +171,32 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 8.0,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildNavItem(Icons.dashboard_outlined, Icons.dashboard, 0, 'Dashboard'),
-                _buildNavItem(Icons.track_changes_outlined, Icons.track_changes, 1, 'Goals'),
+                _buildNavItem(
+                  Icons.dashboard_outlined,
+                  Icons.dashboard,
+                  0,
+                  'Dashboard',
+                ),
+                _buildNavItem(
+                  Icons.track_changes_outlined,
+                  Icons.track_changes,
+                  1,
+                  'Goals',
+                ),
                 const SizedBox(width: 48), // Space for FAB
-                _buildNavItem(Icons.bar_chart_outlined, Icons.bar_chart, 3, 'Analytics'),
+                _buildNavItem(
+                  Icons.bar_chart_outlined,
+                  Icons.bar_chart,
+                  3,
+                  'Analytics',
+                ),
                 _buildNavItem(Icons.person_outline, Icons.person, 4, 'Profile'),
               ],
             ),
@@ -187,7 +206,12 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
     );
   }
 
-  Widget _buildNavItem(IconData icon, IconData activeIcon, int index, String tooltipText) {
+  Widget _buildNavItem(
+    IconData icon,
+    IconData activeIcon,
+    int index,
+    String tooltipText,
+  ) {
     final isActive = _currentIndex == index;
     return Tooltip(
       message: tooltipText,
@@ -199,7 +223,9 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
           curve: Curves.easeOutExpo,
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: isActive ? AppTheme.primaryPurple.withValues(alpha: 0.2) : Colors.transparent,
+            color: isActive
+                ? AppTheme.primaryPurple.withValues(alpha: 0.2)
+                : Colors.transparent,
             shape: BoxShape.circle,
             boxShadow: isActive
                 ? [
@@ -207,7 +233,7 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
                       color: AppTheme.primaryPurple.withValues(alpha: 0.3),
                       blurRadius: 15,
                       spreadRadius: 2,
-                    )
+                    ),
                   ]
                 : [],
           ),
@@ -255,11 +281,19 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
                 }),
                 _buildDrawerItem(Icons.loop, 'Habits', () {
                   Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => const HabitMatrixScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const HabitMatrixScreen(),
+                    ),
+                  );
                 }),
                 _buildDrawerItem(Icons.timer, 'Focus Mode', () {
                   Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => const FocusScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const FocusScreen()),
+                  );
                 }),
                 _buildDrawerItem(Icons.bar_chart, 'Analytics', () {
                   Navigator.pop(context);
@@ -277,7 +311,10 @@ class _NavigationWrapperScreenState extends State<NavigationWrapperScreen> {
                 const Divider(color: Colors.white12),
                 _buildDrawerItem(Icons.settings, 'Settings', () {
                   Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => const SettingsScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const SettingsScreen()),
+                  );
                 }),
                 const SizedBox(height: 24),
               ],

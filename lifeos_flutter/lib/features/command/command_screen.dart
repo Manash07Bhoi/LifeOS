@@ -33,7 +33,7 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
     'add goal',
     'create new habit',
     'start focus',
-    'ls'
+    'ls',
   ];
 
   @override
@@ -62,15 +62,21 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
       _errorText = '';
     });
 
-    void finishProcess(bool isSuccess, [List<String>? logs, VoidCallback? onComplete]) {
+    void finishProcess(
+      bool isSuccess, [
+      List<String>? logs,
+      VoidCallback? onComplete,
+    ]) {
       success = isSuccess;
-      ref.read(commandProvider.notifier).addCommand(cmd, wasSuccessful: success);
+      ref
+          .read(commandProvider.notifier)
+          .addCommand(cmd, wasSuccessful: success);
 
       if (success) _controller.clear();
 
       if (logs != null && logs.isNotEmpty) {
         setState(() {
-           _currentLogs = logs;
+          _currentLogs = logs;
         });
       } else {
         setState(() => _isProcessing = false);
@@ -82,7 +88,7 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
     if (lower == 'help' || lower == '-h') {
       finishProcess(true, [
         'Fetching manual...',
-        'Accessing command dictionary...'
+        'Accessing command dictionary...',
       ]);
     } else if (lower == 'ls') {
       final goals = ref.read(goalsProvider).length;
@@ -99,67 +105,89 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
       if (module == 'goals') {
         finishProcess(true, ['Navigating to module: goals...'], () {
           _closeOverlay();
-          Navigator.push(context, MaterialPageRoute(builder: (_) => const GoalsScreen()));
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const GoalsScreen()),
+          );
         });
       } else if (module == 'habits') {
         finishProcess(true, ['Navigating to module: habits...'], () {
           _closeOverlay();
-          Navigator.push(context, MaterialPageRoute(builder: (_) => const HabitMatrixScreen()));
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const HabitMatrixScreen()),
+          );
         });
       } else if (module == 'analytics') {
         finishProcess(true, ['Navigating to module: analytics...'], () {
           _closeOverlay();
-          Navigator.push(context, MaterialPageRoute(builder: (_) => const AnalyticsScreen()));
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const AnalyticsScreen()),
+          );
         });
       } else {
         finishProcess(false, ['cd: $module: No such file or directory']);
       }
-    } else if (lower.contains('goal') && (lower.contains('add') || lower.contains('create'))) {
-      finishProcess(true, [
-        'Initializing goal creation protocol...',
-        'Allocating memory space...'
-      ], () {
-        _closeOverlay();
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (context.mounted) Navigator.pushNamed(context, '/add_goal');
-        });
-      });
-    } else if (lower.contains('habit') && (lower.contains('add') || lower.contains('create'))) {
-      finishProcess(true, [
-        'Initializing habit creation protocol...',
-        'Allocating memory space...'
-      ], () {
-        _closeOverlay();
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (context.mounted) Navigator.pushNamed(context, '/add_habit');
-        });
-      });
+    } else if (lower.contains('goal') &&
+        (lower.contains('add') || lower.contains('create'))) {
+      finishProcess(
+        true,
+        [
+          'Initializing goal creation protocol...',
+          'Allocating memory space...',
+        ],
+        () {
+          _closeOverlay();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (context.mounted) Navigator.pushNamed(context, '/add_goal');
+          });
+        },
+      );
+    } else if (lower.contains('habit') &&
+        (lower.contains('add') || lower.contains('create'))) {
+      finishProcess(
+        true,
+        [
+          'Initializing habit creation protocol...',
+          'Allocating memory space...',
+        ],
+        () {
+          _closeOverlay();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (context.mounted) Navigator.pushNamed(context, '/add_habit');
+          });
+        },
+      );
     } else if (lower.contains('focus') && lower.contains('start')) {
-      finishProcess(true, [
-        'Engaging Deep Focus mode...',
-        'Disabling external interruptions...'
-      ], () {
-        _closeOverlay();
-        Navigator.push(context, MaterialPageRoute(builder: (_) => const FocusScreen()));
-      });
+      finishProcess(
+        true,
+        ['Engaging Deep Focus mode...', 'Disabling external interruptions...'],
+        () {
+          _closeOverlay();
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const FocusScreen()),
+          );
+        },
+      );
     } else if (lower == 'clear') {
       await Hive.box<CommandHistory>('commandHistoryBox').clear();
       finishProcess(true, ['Clearing terminal buffer...', 'Buffer cleared.']);
     } else if (lower == 'history') {
-      finishProcess(true, [
-        'Accessing command history...'
-      ]);
+      finishProcess(true, ['Accessing command history...']);
     } else if (lower == 'status') {
       finishProcess(true, [
         'Running system diagnostics...',
         'Status: ONLINE',
         'Storage: STABLE',
-        'All modules operational.'
+        'All modules operational.',
       ]);
     } else {
       finishProcess(false);
       setState(() {
-        _errorText = 'bash: $cmd: command not found\nTry "help" or "-h" for a list of commands.';
+        _errorText =
+            'bash: $cmd: command not found\nTry "help" or "-h" for a list of commands.';
       });
     }
   }
@@ -211,44 +239,51 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
                       });
 
                       // Finalize actions
-                      final cmd = history.first.commandText.trim().toLowerCase();
+                      final cmd = history.first.commandText
+                          .trim()
+                          .toLowerCase();
                       if (cmd == 'help' || cmd == '-h') {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const CommandDictionaryScreen()));
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const CommandDictionaryScreen(),
+                          ),
+                        );
                       }
                     },
                   ),
                 )
               else
-              TextField(
-                controller: _controller,
-                focusNode: _focusNode,
-                maxLength: 255,
-                style: const TextStyle(
-                  color: AppTheme.textPrimary,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.2,
-                ),
-                decoration: InputDecoration(
-                  counterText: '',
-                  hintText: 'Type a command...',
-                  hintStyle: TextStyle(
-                    color: AppTheme.textSecondary.withValues(alpha: 0.3),
+                TextField(
+                  controller: _controller,
+                  focusNode: _focusNode,
+                  maxLength: 255,
+                  style: const TextStyle(
+                    color: AppTheme.textPrimary,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.2,
                   ),
-                  border: InputBorder.none,
-                  prefixIcon: Icon(
-                    Icons.chevron_right,
-                    color: isError ? AppTheme.neonPink : AppTheme.neonCyan,
-                    size: 32,
+                  decoration: InputDecoration(
+                    counterText: '',
+                    hintText: 'Type a command...',
+                    hintStyle: TextStyle(
+                      color: AppTheme.textSecondary.withValues(alpha: 0.3),
+                    ),
+                    border: InputBorder.none,
+                    prefixIcon: Icon(
+                      Icons.chevron_right,
+                      color: isError ? AppTheme.neonPink : AppTheme.neonCyan,
+                      size: 32,
+                    ),
                   ),
+                  onSubmitted: _processCommand,
+                  onChanged: (val) {
+                    if (isError) {
+                      setState(() => _errorText = '');
+                    }
+                  },
                 ),
-                onSubmitted: _processCommand,
-                onChanged: (val) {
-                  if (isError) {
-                    setState(() => _errorText = '');
-                  }
-                },
-              ),
 
               if (isError && !_isProcessing) ...[
                 const SizedBox(height: 16),
@@ -258,13 +293,18 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: AppTheme.neonPink.withValues(alpha: 0.1),
-                      border: Border.all(color: AppTheme.neonPink.withValues(alpha: 0.5)),
+                      border: Border.all(
+                        color: AppTheme.neonPink.withValues(alpha: 0.5),
+                      ),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Icon(Icons.error_outline, color: AppTheme.neonPink),
+                        const Icon(
+                          Icons.error_outline,
+                          color: AppTheme.neonPink,
+                        ),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
@@ -272,7 +312,7 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
                             style: const TextStyle(
                               fontFamily: 'monospace',
                               color: AppTheme.neonPink,
-                              fontWeight: FontWeight.bold
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -296,15 +336,21 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
               Wrap(
                 spacing: 8,
                 runSpacing: 8,
-                children: _suggestions.map((s) => ActionChip(
-                  label: Text(s),
-                  backgroundColor: AppTheme.surfaceElevated,
-                  labelStyle: const TextStyle(color: AppTheme.textPrimary),
-                  onPressed: () {
-                    _controller.text = s;
-                    _processCommand(s);
-                  },
-                )).toList(),
+                children: _suggestions
+                    .map(
+                      (s) => ActionChip(
+                        label: Text(s),
+                        backgroundColor: AppTheme.surfaceElevated,
+                        labelStyle: const TextStyle(
+                          color: AppTheme.textPrimary,
+                        ),
+                        onPressed: () {
+                          _controller.text = s;
+                          _processCommand(s);
+                        },
+                      ),
+                    )
+                    .toList(),
               ),
 
               if (!_isProcessing) ...[
@@ -328,8 +374,12 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
                         child: Row(
                           children: [
                             Icon(
-                              cmd.wasSuccessful ? Icons.check_circle_outline : Icons.cancel_outlined,
-                              color: cmd.wasSuccessful ? AppTheme.primaryPurple : AppTheme.textSecondary,
+                              cmd.wasSuccessful
+                                  ? Icons.check_circle_outline
+                                  : Icons.cancel_outlined,
+                              color: cmd.wasSuccessful
+                                  ? AppTheme.primaryPurple
+                                  : AppTheme.textSecondary,
                               size: 16,
                             ),
                             const SizedBox(width: 8),
@@ -337,8 +387,12 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
                               cmd.commandText,
                               style: TextStyle(
                                 fontFamily: 'monospace',
-                                color: cmd.wasSuccessful ? AppTheme.textPrimary : AppTheme.textSecondary,
-                                decoration: cmd.wasSuccessful ? null : TextDecoration.lineThrough,
+                                color: cmd.wasSuccessful
+                                    ? AppTheme.textPrimary
+                                    : AppTheme.textSecondary,
+                                decoration: cmd.wasSuccessful
+                                    ? null
+                                    : TextDecoration.lineThrough,
                               ),
                             ),
                           ],

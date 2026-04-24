@@ -23,14 +23,17 @@ class FocusCompleteScreen extends ConsumerWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: AppTheme.neonCyan.withValues(alpha: 0.1),
-                    border: Border.all(color: AppTheme.neonCyan.withValues(alpha: 0.5), width: 2),
+                    border: Border.all(
+                      color: AppTheme.neonCyan.withValues(alpha: 0.5),
+                      width: 2,
+                    ),
                     boxShadow: [
                       BoxShadow(
                         color: AppTheme.neonCyan.withValues(alpha: 0.3),
                         blurRadius: 40,
                         spreadRadius: 10,
-                      )
-                    ]
+                      ),
+                    ],
                   ),
                   child: const Icon(
                     Icons.check_circle,

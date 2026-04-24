@@ -54,7 +54,8 @@ class FakeBox<T> implements Box<T> {
   bool get isNotEmpty => _data.isNotEmpty;
 
   @override
-  Iterable<T> valuesBetween({dynamic startKey, dynamic endKey}) => throw UnimplementedError();
+  Iterable<T> valuesBetween({dynamic startKey, dynamic endKey}) =>
+      throw UnimplementedError();
 
   @override
   T? getAt(int index) => throw UnimplementedError();

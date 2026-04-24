@@ -42,17 +42,18 @@ class Habit extends HiveObject {
     this.notes = '',
     this.frequencyType = 'Daily',
     DateTime? createdAt,
-  })  : id = id ?? const Uuid().v4(),
-        completionDates = completionDates ?? [],
-        createdAt = createdAt ?? DateTime.now();
+  }) : id = id ?? const Uuid().v4(),
+       completionDates = completionDates ?? [],
+       createdAt = createdAt ?? DateTime.now();
 
   bool isCompletedOn(DateTime date) {
     // ⚡ Bolt Performance Optimization:
     // We use .reversed to check dates from the end of the list first.
     // This improves average-case performance when checking recent dates (such as today's completion).
     // Worst-case time complexity remains O(n).
-    return completionDates.reversed.any((d) =>
-        d.year == date.year && d.month == date.month && d.day == date.day);
+    return completionDates.reversed.any(
+      (d) => d.year == date.year && d.month == date.month && d.day == date.day,
+    );
   }
 
   Habit copyWith({

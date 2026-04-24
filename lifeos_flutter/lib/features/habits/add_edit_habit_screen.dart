@@ -16,7 +16,6 @@ class AddEditHabitScreen extends ConsumerStatefulWidget {
   ConsumerState<AddEditHabitScreen> createState() => _AddEditHabitScreenState();
 }
 
-
 class _AddEditHabitScreenState extends ConsumerState<AddEditHabitScreen> {
   int _frequencyDays = 7;
   String _frequencyType = 'Daily';
@@ -98,7 +97,14 @@ class _AddEditHabitScreenState extends ConsumerState<AddEditHabitScreen> {
       extraFields: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('FREQUENCY TYPE', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+          const Text(
+            'FREQUENCY TYPE',
+            style: TextStyle(
+              color: AppTheme.textSecondary,
+              fontSize: 12,
+              letterSpacing: 1.5,
+            ),
+          ),
           const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -111,43 +117,91 @@ class _AddEditHabitScreenState extends ConsumerState<AddEditHabitScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 4),
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     decoration: BoxDecoration(
-                      color: isSelected ? AppTheme.neonCyan.withValues(alpha: 0.2) : AppTheme.surfaceElevated,
+                      color: isSelected
+                          ? AppTheme.neonCyan.withValues(alpha: 0.2)
+                          : AppTheme.surfaceElevated,
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: isSelected ? AppTheme.neonCyan : Colors.transparent),
+                      border: Border.all(
+                        color: isSelected
+                            ? AppTheme.neonCyan
+                            : Colors.transparent,
+                      ),
                     ),
                     alignment: Alignment.center,
-                    child: Text(t, style: TextStyle(color: isSelected ? AppTheme.neonCyan : AppTheme.textSecondary, fontWeight: FontWeight.bold)),
+                    child: Text(
+                      t,
+                      style: TextStyle(
+                        color: isSelected
+                            ? AppTheme.neonCyan
+                            : AppTheme.textSecondary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               );
             }).toList(),
           ),
           const SizedBox(height: 24),
-          const Text('TARGET DAYS PER WEEK', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+          const Text(
+            'TARGET DAYS PER WEEK',
+            style: TextStyle(
+              color: AppTheme.textSecondary,
+              fontSize: 12,
+              letterSpacing: 1.5,
+            ),
+          ),
           const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Days:', style: TextStyle(color: AppTheme.textPrimary, fontSize: 16)),
+              const Text(
+                'Days:',
+                style: TextStyle(color: AppTheme.textPrimary, fontSize: 16),
+              ),
               Row(
                 children: [
                   IconButton(
                     tooltip: 'Decrease frequency',
-                    onPressed: _frequencyDays > 1 ? () => setState(() => _frequencyDays--) : null,
-                    icon: const Icon(Icons.remove_circle_outline, color: AppTheme.neonCyan),
+                    onPressed: _frequencyDays > 1
+                        ? () => setState(() => _frequencyDays--)
+                        : null,
+                    icon: const Icon(
+                      Icons.remove_circle_outline,
+                      color: AppTheme.neonCyan,
+                    ),
                   ),
-                  Text('$_frequencyDays', style: const TextStyle(color: AppTheme.textPrimary, fontSize: 24, fontWeight: FontWeight.bold)),
+                  Text(
+                    '$_frequencyDays',
+                    style: const TextStyle(
+                      color: AppTheme.textPrimary,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   IconButton(
                     tooltip: 'Increase frequency',
-                    onPressed: _frequencyDays < 7 ? () => setState(() => _frequencyDays++) : null,
-                    icon: const Icon(Icons.add_circle_outline, color: AppTheme.neonCyan),
+                    onPressed: _frequencyDays < 7
+                        ? () => setState(() => _frequencyDays++)
+                        : null,
+                    icon: const Icon(
+                      Icons.add_circle_outline,
+                      color: AppTheme.neonCyan,
+                    ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
           const SizedBox(height: 24),
-          const Text('ADDITIONAL NOTES', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+          const Text(
+            'ADDITIONAL NOTES',
+            style: TextStyle(
+              color: AppTheme.textSecondary,
+              fontSize: 12,
+              letterSpacing: 1.5,
+            ),
+          ),
           const SizedBox(height: 8),
           CustomInputField(
             controller: _notesController,

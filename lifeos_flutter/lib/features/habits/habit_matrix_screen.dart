@@ -19,12 +19,19 @@ class HabitMatrixScreen extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const NeonText('HABIT MATRIX', color: AppTheme.textPrimary, glow: false),
+        title: const NeonText(
+          'HABIT MATRIX',
+          color: AppTheme.textPrimary,
+          glow: false,
+        ),
         centerTitle: false,
         actions: [
           IconButton(
             tooltip: 'Add habit',
-            icon: const Icon(Icons.add_circle_outline, color: AppTheme.neonCyan),
+            icon: const Icon(
+              Icons.add_circle_outline,
+              color: AppTheme.neonCyan,
+            ),
             onPressed: () {
               Navigator.push(
                 context,
@@ -37,7 +44,8 @@ class HabitMatrixScreen extends ConsumerWidget {
       body: habits.isEmpty
           ? const EmptyStateScreen(
               title: 'Matrix Offline',
-              subtitle: 'No recurring habits found. Initialize a habit to track daily routines.',
+              subtitle:
+                  'No recurring habits found. Initialize a habit to track daily routines.',
               icon: Icons.loop,
             )
           : ListView.builder(

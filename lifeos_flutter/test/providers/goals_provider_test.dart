@@ -46,7 +46,10 @@ void main() {
       goalsNotifier.updateGoal(updatedGoal);
 
       expect(fakeBox.get(goal.id)?.title, 'Updated Goal');
-      expect(goalsNotifier.state.firstWhere((g) => g.id == goal.id).title, 'Updated Goal');
+      expect(
+        goalsNotifier.state.firstWhere((g) => g.id == goal.id).title,
+        'Updated Goal',
+      );
     });
 
     test('deleteGoal removes goal from box and state', () {

@@ -22,7 +22,10 @@ class EncryptionService {
     return HiveAesCipher(key);
   }
 
-  static Future<Box<T>> openEncryptedBox<T>(String name, HiveAesCipher cipher) async {
+  static Future<Box<T>> openEncryptedBox<T>(
+    String name,
+    HiveAesCipher cipher,
+  ) async {
     // Attempt 1: Try to open WITHOUT encryption to see if migration is needed
     bool needsMigration = false;
     Map<dynamic, T> existingData = {};

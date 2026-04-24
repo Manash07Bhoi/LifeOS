@@ -23,30 +23,29 @@ class AppTheme {
         tertiary: neonPink,
         onSurface: textPrimary,
       ),
-      textTheme: GoogleFonts.manropeTextTheme(
-        ThemeData.dark().textTheme,
-      ).copyWith(
-        displayLarge: GoogleFonts.plusJakartaSans(
-          fontSize: 32,
-          fontWeight: FontWeight.bold,
-          color: textPrimary,
-        ),
-        displayMedium: GoogleFonts.plusJakartaSans(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: textPrimary,
-        ),
-        displaySmall: GoogleFonts.plusJakartaSans(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-          color: textPrimary,
-        ),
-        labelLarge: GoogleFonts.spaceGrotesk(
-          fontSize: 14,
-          fontWeight: FontWeight.w500,
-          color: textSecondary,
-        ),
-      ),
+      textTheme: GoogleFonts.manropeTextTheme(ThemeData.dark().textTheme)
+          .copyWith(
+            displayLarge: GoogleFonts.plusJakartaSans(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              color: textPrimary,
+            ),
+            displayMedium: GoogleFonts.plusJakartaSans(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: textPrimary,
+            ),
+            displaySmall: GoogleFonts.plusJakartaSans(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: textPrimary,
+            ),
+            labelLarge: GoogleFonts.spaceGrotesk(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: textSecondary,
+            ),
+          ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: primaryPurple,

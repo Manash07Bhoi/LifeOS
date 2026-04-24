@@ -13,7 +13,11 @@ class AboutScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const NeonText('ABOUT LIFEOS', color: AppTheme.textPrimary, glow: false),
+        title: const NeonText(
+          'ABOUT LIFEOS',
+          color: AppTheme.textPrimary,
+          glow: false,
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -34,25 +38,50 @@ class AboutScreen extends StatelessWidget {
                       color: AppTheme.neonCyan.withValues(alpha: 0.2),
                       blurRadius: 30,
                       spreadRadius: 5,
-                    )
+                    ),
                   ],
                 ),
-                child: const Icon(Icons.architecture, size: 60, color: AppTheme.neonCyan),
+                child: const Icon(
+                  Icons.architecture,
+                  size: 60,
+                  color: AppTheme.neonCyan,
+                ),
               ),
               const SizedBox(height: 24),
-              const NeonText('LIFE OS', color: AppTheme.textPrimary, fontSize: 32),
+              const NeonText(
+                'LIFE OS',
+                color: AppTheme.textPrimary,
+                fontSize: 32,
+              ),
               const SizedBox(height: 8),
-              const Text('VERSION 1.0.0 (OFFLINE CORE)', style: TextStyle(color: AppTheme.textSecondary, letterSpacing: 2)),
+              const Text(
+                'VERSION 1.0.0 (OFFLINE CORE)',
+                style: TextStyle(
+                  color: AppTheme.textSecondary,
+                  letterSpacing: 2,
+                ),
+              ),
               const SizedBox(height: 48),
               const GlassCard(
                 child: Text(
                   'LifeOS is a highly specialized, local-first operating environment designed to maintain optimal focus and construct a rigid protocol for daily operations. It requires zero external network connections to function, preserving strict data sovereignty.',
-                  style: TextStyle(color: AppTheme.textPrimary, height: 1.6, fontSize: 16),
+                  style: TextStyle(
+                    color: AppTheme.textPrimary,
+                    height: 1.6,
+                    fontSize: 16,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ),
               const SizedBox(height: 32),
-              const Text('DESIGNED BY ROSHAN', style: TextStyle(color: AppTheme.primaryPurple, fontWeight: FontWeight.bold, letterSpacing: 2)),
+              const Text(
+                'DESIGNED BY ROSHAN',
+                style: TextStyle(
+                  color: AppTheme.primaryPurple,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2,
+                ),
+              ),
               const SizedBox(height: 32),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
@@ -64,7 +93,7 @@ class AboutScreen extends StatelessWidget {
                 },
                 icon: const Icon(Icons.code),
                 label: const Text('VIEW SOURCE'),
-              )
+              ),
             ],
           ),
         ),

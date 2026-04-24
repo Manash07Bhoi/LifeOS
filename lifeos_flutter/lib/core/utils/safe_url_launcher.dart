@@ -8,7 +8,10 @@ Future<void> safeLaunchUrl(BuildContext context, String urlString) async {
     // Strict scheme validation
     final List<String> allowedSchemes = ['https', 'http', 'mailto'];
     if (!allowedSchemes.contains(url.scheme)) {
-      _showErrorSnackBar(context, 'Security Policy Violation: Launching this protocol is not permitted.');
+      _showErrorSnackBar(
+        context,
+        'Security Policy Violation: Launching this protocol is not permitted.',
+      );
       return;
     }
 
@@ -20,7 +23,10 @@ Future<void> safeLaunchUrl(BuildContext context, String urlString) async {
       }
     } else {
       if (!context.mounted) return;
-      _showErrorSnackBar(context, 'Could not find a suitable application to open this link.');
+      _showErrorSnackBar(
+        context,
+        'Could not find a suitable application to open this link.',
+      );
     }
   } catch (e) {
     if (!context.mounted) return;

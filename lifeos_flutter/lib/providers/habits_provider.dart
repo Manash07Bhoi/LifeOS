@@ -26,12 +26,16 @@ class HabitsNotifier extends StateNotifier<List<Habit>> {
     final habit = _box.get(id);
     if (habit != null) {
       final completions = List<DateTime>.from(habit.completionDates);
-      final isCompleted = completions.any((d) =>
-          d.year == date.year && d.month == date.month && d.day == date.day);
+      final isCompleted = completions.any(
+        (d) =>
+            d.year == date.year && d.month == date.month && d.day == date.day,
+      );
 
       if (isCompleted) {
-        completions.removeWhere((d) =>
-            d.year == date.year && d.month == date.month && d.day == date.day);
+        completions.removeWhere(
+          (d) =>
+              d.year == date.year && d.month == date.month && d.day == date.day,
+        );
       } else {
         completions.add(date);
       }
@@ -42,7 +46,9 @@ class HabitsNotifier extends StateNotifier<List<Habit>> {
   }
 }
 
-final habitsProvider = StateNotifierProvider<HabitsNotifier, List<Habit>>((ref) {
+final habitsProvider = StateNotifierProvider<HabitsNotifier, List<Habit>>((
+  ref,
+) {
   final box = Hive.box<Habit>('habitsBox');
   return HabitsNotifier(box);
 });

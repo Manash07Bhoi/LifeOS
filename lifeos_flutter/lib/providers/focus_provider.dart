@@ -34,7 +34,8 @@ class FocusTimerState {
   }
 }
 
-class FocusProvider extends StateNotifier<FocusTimerState> with WidgetsBindingObserver {
+class FocusProvider extends StateNotifier<FocusTimerState>
+    with WidgetsBindingObserver {
   Timer? _timer;
   DateTime? _sessionStartTime;
   DateTime? _targetEndTime;
@@ -54,11 +55,13 @@ class FocusProvider extends StateNotifier<FocusTimerState> with WidgetsBindingOb
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed && this.state.status == FocusState.running) {
+    if (state == AppLifecycleState.resumed &&
+        this.state.status == FocusState.running) {
       _resyncTimer();
-    } else if (state == AppLifecycleState.paused && this.state.status == FocusState.running) {
-       // Timer continues in background via _targetEndTime, but we pause the UI tick
-       _timer?.cancel();
+    } else if (state == AppLifecycleState.paused &&
+        this.state.status == FocusState.running) {
+      // Timer continues in background via _targetEndTime, but we pause the UI tick
+      _timer?.cancel();
     }
   }
 
@@ -100,9 +103,13 @@ class FocusProvider extends StateNotifier<FocusTimerState> with WidgetsBindingOb
     if (state.status == FocusState.idle || state.status == FocusState.paused) {
       if (state.status == FocusState.idle) {
         _sessionStartTime = DateTime.now();
-        _targetEndTime = _sessionStartTime!.add(Duration(minutes: state.initialMinutes));
+        _targetEndTime = _sessionStartTime!.add(
+          Duration(minutes: state.initialMinutes),
+        );
       } else if (state.status == FocusState.paused) {
-        _targetEndTime = DateTime.now().add(Duration(seconds: _pausedRemainingSeconds));
+        _targetEndTime = DateTime.now().add(
+          Duration(seconds: _pausedRemainingSeconds),
+        );
       }
 
       state = state.copyWith(status: FocusState.running);
@@ -128,9 +135,9 @@ class FocusProvider extends StateNotifier<FocusTimerState> with WidgetsBindingOb
   }
 
   void cancelSession() {
-      _timer?.cancel();
-      _targetEndTime = null;
-      state = FocusTimerState();
+    _timer?.cancel();
+    _targetEndTime = null;
+    state = FocusTimerState();
   }
 
   void resetTimer() {
@@ -152,7 +159,9 @@ class FocusProvider extends StateNotifier<FocusTimerState> with WidgetsBindingOb
   }
 }
 
-final focusProvider = StateNotifierProvider<FocusProvider, FocusTimerState>((ref) {
+final focusProvider = StateNotifierProvider<FocusProvider, FocusTimerState>((
+  ref,
+) {
   final box = Hive.box<FocusSession>('sessionsBox');
   return FocusProvider(box);
 });

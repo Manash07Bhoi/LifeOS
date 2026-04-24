@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_theme.dart';
 
 class SuccessFeedbackToast {
-  static void show(BuildContext context, String message, {bool isError = false}) {
+  static void show(
+    BuildContext context,
+    String message, {
+    bool isError = false,
+  }) {
     final color = isError ? AppTheme.neonPink : AppTheme.neonCyan;
     final icon = isError ? Icons.error_outline : Icons.check_circle_outline;
 

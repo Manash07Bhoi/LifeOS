@@ -16,15 +16,24 @@ class ProfileScreen extends ConsumerWidget {
     final habits = ref.watch(habitsProvider);
     final sessions = ref.watch(focusSessionsProvider);
 
-    int totalFocusMinutes = sessions.fold(0, (sum, session) => sum + session.durationMinutes);
+    int totalFocusMinutes = sessions.fold(
+      0,
+      (sum, session) => sum + session.durationMinutes,
+    );
     int goalsCompleted = goals.where((g) => g.progress >= 1.0).length;
-    int maxStreak = habits.isEmpty ? 0 : habits.map((h) => h.streak).reduce((a, b) => a > b ? a : b);
+    int maxStreak = habits.isEmpty
+        ? 0
+        : habits.map((h) => h.streak).reduce((a, b) => a > b ? a : b);
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const NeonText('USER PROFILE', color: AppTheme.textPrimary, glow: false),
+        title: const NeonText(
+          'USER PROFILE',
+          color: AppTheme.textPrimary,
+          glow: false,
+        ),
         centerTitle: false,
       ),
       body: SafeArea(
@@ -47,7 +56,7 @@ class ProfileScreen extends ConsumerWidget {
                           color: AppTheme.primaryPurple.withValues(alpha: 0.3),
                           blurRadius: 40,
                           spreadRadius: 10,
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -57,30 +66,70 @@ class ProfileScreen extends ConsumerWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: AppTheme.surfaceElevated,
-                      border: Border.all(color: AppTheme.primaryPurple, width: 3),
+                      border: Border.all(
+                        color: AppTheme.primaryPurple,
+                        width: 3,
+                      ),
                     ),
-                    child: const Icon(Icons.person_outline, size: 64, color: AppTheme.primaryPurple),
+                    child: const Icon(
+                      Icons.person_outline,
+                      size: 64,
+                      color: AppTheme.primaryPurple,
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: 24),
-              const NeonText('OPERATOR', color: AppTheme.textPrimary, fontSize: 28),
+              const NeonText(
+                'OPERATOR',
+                color: AppTheme.textPrimary,
+                fontSize: 28,
+              ),
               const SizedBox(height: 8),
-              const Text('STATUS: ONLINE', style: TextStyle(color: AppTheme.neonCyan, letterSpacing: 2, fontWeight: FontWeight.bold)),
+              const Text(
+                'STATUS: ONLINE',
+                style: TextStyle(
+                  color: AppTheme.neonCyan,
+                  letterSpacing: 2,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               const SizedBox(height: 48),
               const Align(
                 alignment: Alignment.centerLeft,
-                child: Text('LIFETIME METRICS', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+                child: Text(
+                  'LIFETIME METRICS',
+                  style: TextStyle(
+                    color: AppTheme.textSecondary,
+                    fontSize: 12,
+                    letterSpacing: 1.5,
+                  ),
+                ),
               ),
               const SizedBox(height: 16),
               GlassCard(
                 child: Column(
                   children: [
-                    _StatRow(icon: Icons.timer, color: AppTheme.neonCyan, label: 'Total Focus Time', value: '${totalFocusMinutes}m'),
+                    _StatRow(
+                      icon: Icons.timer,
+                      color: AppTheme.neonCyan,
+                      label: 'Total Focus Time',
+                      value: '${totalFocusMinutes}m',
+                    ),
                     const Divider(color: Colors.white12, height: 32),
-                    _StatRow(icon: Icons.track_changes, color: AppTheme.primaryPurple, label: 'Goals Completed', value: '$goalsCompleted'),
+                    _StatRow(
+                      icon: Icons.track_changes,
+                      color: AppTheme.primaryPurple,
+                      label: 'Goals Completed',
+                      value: '$goalsCompleted',
+                    ),
                     const Divider(color: Colors.white12, height: 32),
-                    _StatRow(icon: Icons.local_fire_department, color: AppTheme.neonPink, label: 'Max Habit Streak', value: '$maxStreak days'),
+                    _StatRow(
+                      icon: Icons.local_fire_department,
+                      color: AppTheme.neonPink,
+                      label: 'Max Habit Streak',
+                      value: '$maxStreak days',
+                    ),
                   ],
                 ),
               ),
@@ -119,9 +168,19 @@ class _StatRow extends StatelessWidget {
         ),
         const SizedBox(width: 16),
         Expanded(
-          child: Text(label, style: const TextStyle(color: AppTheme.textSecondary, fontSize: 16)),
+          child: Text(
+            label,
+            style: const TextStyle(color: AppTheme.textSecondary, fontSize: 16),
+          ),
         ),
-        Text(value, style: const TextStyle(color: AppTheme.textPrimary, fontSize: 20, fontWeight: FontWeight.bold)),
+        Text(
+          value,
+          style: const TextStyle(
+            color: AppTheme.textPrimary,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ],
     );
   }

@@ -38,7 +38,8 @@ class AddEditUnifiedFormScreen extends StatefulWidget {
   });
 
   @override
-  State<AddEditUnifiedFormScreen> createState() => _AddEditUnifiedFormScreenState();
+  State<AddEditUnifiedFormScreen> createState() =>
+      _AddEditUnifiedFormScreenState();
 }
 
 class _AddEditUnifiedFormScreenState extends State<AddEditUnifiedFormScreen> {
@@ -74,18 +75,17 @@ class _AddEditUnifiedFormScreenState extends State<AddEditUnifiedFormScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: NeonText(
-          widget.title,
-          color: AppTheme.textPrimary,
-          glow: false,
-        ),
+        title: NeonText(widget.title, color: AppTheme.textPrimary, glow: false),
         actions: widget.onDelete != null
             ? [
                 IconButton(
                   tooltip: 'Delete',
-                  icon: const Icon(Icons.delete_outline, color: AppTheme.neonPink),
+                  icon: const Icon(
+                    Icons.delete_outline,
+                    color: AppTheme.neonPink,
+                  ),
                   onPressed: widget.onDelete,
-                )
+                ),
               ]
             : null,
       ),
@@ -95,7 +95,14 @@ class _AddEditUnifiedFormScreenState extends State<AddEditUnifiedFormScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.nameLabel, style: const TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+              Text(
+                widget.nameLabel,
+                style: const TextStyle(
+                  color: AppTheme.textSecondary,
+                  fontSize: 12,
+                  letterSpacing: 1.5,
+                ),
+              ),
               const SizedBox(height: 8),
               CustomInputField(
                 controller: _nameController,
@@ -107,10 +114,20 @@ class _AddEditUnifiedFormScreenState extends State<AddEditUnifiedFormScreen> {
               if (_hasError)
                 const Padding(
                   padding: EdgeInsets.only(top: 8.0),
-                  child: Text('This field is required', style: TextStyle(color: AppTheme.neonPink, fontSize: 12)),
+                  child: Text(
+                    'This field is required',
+                    style: TextStyle(color: AppTheme.neonPink, fontSize: 12),
+                  ),
                 ),
               const SizedBox(height: 24),
-              Text(widget.descLabel, style: const TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+              Text(
+                widget.descLabel,
+                style: const TextStyle(
+                  color: AppTheme.textSecondary,
+                  fontSize: 12,
+                  letterSpacing: 1.5,
+                ),
+              ),
               const SizedBox(height: 8),
               CustomInputField(
                 controller: _descController,
