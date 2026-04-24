@@ -49,7 +49,11 @@ class ConfirmationDialog extends StatelessWidget {
       backgroundColor: AppTheme.surfaceElevated,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
-        side: BorderSide(color: isDestructive ? AppTheme.neonPink.withValues(alpha: 0.5) : AppTheme.neonCyan.withValues(alpha: 0.5)),
+        side: BorderSide(
+          color: isDestructive
+              ? AppTheme.neonPink.withValues(alpha: 0.5)
+              : AppTheme.neonCyan.withValues(alpha: 0.5),
+        ),
       ),
       title: NeonText(
         title,
@@ -65,7 +69,10 @@ class ConfirmationDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: onCancel ?? () => Navigator.pop(context),
-          child: Text(cancelText, style: const TextStyle(color: AppTheme.textSecondary)),
+          child: Text(
+            cancelText,
+            style: const TextStyle(color: AppTheme.textSecondary),
+          ),
         ),
         GlowButton(
           text: confirmText,

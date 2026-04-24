@@ -13,10 +13,13 @@ class FocusScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final status = ref.watch(focusProvider.select((s) => s.status));
-    final initialMinutes = ref.watch(focusProvider.select((s) => s.initialMinutes));
+    final initialMinutes = ref.watch(
+      focusProvider.select((s) => s.initialMinutes),
+    );
 
     ref.listen(focusProvider, (previous, next) {
-      if (previous?.status != FocusState.completed && next.status == FocusState.completed) {
+      if (previous?.status != FocusState.completed &&
+          next.status == FocusState.completed) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (context.mounted) {
             Navigator.pushReplacement(
@@ -40,7 +43,8 @@ class FocusScreen extends ConsumerWidget {
               ConfirmationDialog.show(
                 context,
                 title: 'ABORT PROTOCOL?',
-                message: 'Exiting now will discard this session. Time tracked will not be saved.',
+                message:
+                    'Exiting now will discard this session. Time tracked will not be saved.',
                 isDestructive: true,
                 confirmText: 'ABORT',
               ).then((confirmed) {
@@ -56,7 +60,11 @@ class FocusScreen extends ConsumerWidget {
             }
           },
         ),
-        title: const NeonText('DEEP FOCUS', color: AppTheme.textPrimary, glow: false),
+        title: const NeonText(
+          'DEEP FOCUS',
+          color: AppTheme.textPrimary,
+          glow: false,
+        ),
       ),
       body: SafeArea(
         child: Center(
@@ -97,8 +105,12 @@ class _TimerDisplay extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final remainingSeconds = ref.watch(focusProvider.select((s) => s.remainingSeconds));
-    final isRunning = ref.watch(focusProvider.select((s) => s.status == FocusState.running));
+    final remainingSeconds = ref.watch(
+      focusProvider.select((s) => s.remainingSeconds),
+    );
+    final isRunning = ref.watch(
+      focusProvider.select((s) => s.status == FocusState.running),
+    );
 
     return Container(
       width: 280,
@@ -118,7 +130,7 @@ class _TimerDisplay extends ConsumerWidget {
                   color: AppTheme.primaryPurple.withValues(alpha: 0.3),
                   blurRadius: 40,
                   spreadRadius: 10,
-                )
+                ),
               ]
             : null,
       ),
@@ -241,9 +253,13 @@ class _DurationButton extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         decoration: BoxDecoration(
-          color: isActive ? AppTheme.primaryPurple.withValues(alpha: 0.2) : Colors.transparent,
+          color: isActive
+              ? AppTheme.primaryPurple.withValues(alpha: 0.2)
+              : Colors.transparent,
           border: Border.all(
-            color: isActive ? AppTheme.primaryPurple : AppTheme.textSecondary.withValues(alpha: 0.3),
+            color: isActive
+                ? AppTheme.primaryPurple
+                : AppTheme.textSecondary.withValues(alpha: 0.3),
           ),
           borderRadius: BorderRadius.circular(16),
         ),

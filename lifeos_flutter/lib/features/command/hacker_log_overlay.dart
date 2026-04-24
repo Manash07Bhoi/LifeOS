@@ -6,13 +6,18 @@ class HackerLogOverlay extends StatefulWidget {
   final List<String> logs;
   final VoidCallback onComplete;
 
-  const HackerLogOverlay({super.key, required this.logs, required this.onComplete});
+  const HackerLogOverlay({
+    super.key,
+    required this.logs,
+    required this.onComplete,
+  });
 
   @override
   State<HackerLogOverlay> createState() => _HackerLogOverlayState();
 }
 
-class _HackerLogOverlayState extends State<HackerLogOverlay> with TickerProviderStateMixin {
+class _HackerLogOverlayState extends State<HackerLogOverlay>
+    with TickerProviderStateMixin {
   final List<String> _displayedLogs = [];
   int _logIndex = 0;
   late AnimationController _typingController;
@@ -60,7 +65,10 @@ class _HackerLogOverlayState extends State<HackerLogOverlay> with TickerProvider
     // during AnimatedBuilder's build phase with a shorter string.
     _typingController.value = 0.0;
     _typingController.duration = Duration(milliseconds: targetStr.length * 30);
-    _charCount = StepTween(begin: 0, end: targetStr.length).animate(_typingController);
+    _charCount = StepTween(
+      begin: 0,
+      end: targetStr.length,
+    ).animate(_typingController);
     _typingController.forward();
   }
 
@@ -92,7 +100,10 @@ class _HackerLogOverlayState extends State<HackerLogOverlay> with TickerProvider
                   animation: _typingController,
                   builder: (context, child) {
                     final currentLog = widget.logs[_logIndex];
-                    final displayedText = currentLog.substring(0, _charCount.value.clamp(0, currentLog.length));
+                    final displayedText = currentLog.substring(
+                      0,
+                      _charCount.value.clamp(0, currentLog.length),
+                    );
                     return Text(
                       '> $displayedText',
                       style: const TextStyle(
@@ -117,7 +128,8 @@ class _BlinkingCursor extends StatefulWidget {
   State<_BlinkingCursor> createState() => _BlinkingCursorState();
 }
 
-class _BlinkingCursorState extends State<_BlinkingCursor> with SingleTickerProviderStateMixin {
+class _BlinkingCursorState extends State<_BlinkingCursor>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override

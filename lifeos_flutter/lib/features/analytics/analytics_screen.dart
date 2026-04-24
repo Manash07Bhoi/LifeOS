@@ -16,14 +16,24 @@ class AnalyticsScreen extends ConsumerWidget {
     final sessions = ref.watch(focusSessionsProvider);
     final habits = ref.watch(habitsProvider);
 
-    int totalFocusMinutes = sessions.fold(0, (sum, session) => sum + session.durationMinutes);
-    int totalHabitsCompleted = habits.fold(0, (sum, habit) => sum + habit.completionDates.length);
+    int totalFocusMinutes = sessions.fold(
+      0,
+      (sum, session) => sum + session.durationMinutes,
+    );
+    int totalHabitsCompleted = habits.fold(
+      0,
+      (sum, habit) => sum + habit.completionDates.length,
+    );
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const NeonText('SYSTEM ANALYTICS', color: AppTheme.textPrimary, glow: false),
+        title: const NeonText(
+          'SYSTEM ANALYTICS',
+          color: AppTheme.textPrimary,
+          glow: false,
+        ),
         centerTitle: false,
       ),
       body: SafeArea(
@@ -44,9 +54,16 @@ class AnalyticsScreen extends ConsumerWidget {
                           const SizedBox(height: 16),
                           Text(
                             '$totalFocusMinutes',
-                            style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppTheme.textPrimary),
+                            style: const TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                              color: AppTheme.textPrimary,
+                            ),
                           ),
-                          const Text('Total Focus (min)', style: TextStyle(color: AppTheme.textSecondary)),
+                          const Text(
+                            'Total Focus (min)',
+                            style: TextStyle(color: AppTheme.textSecondary),
+                          ),
                         ],
                       ),
                     ),
@@ -58,13 +75,23 @@ class AnalyticsScreen extends ConsumerWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(Icons.check_circle_outline, color: AppTheme.primaryPurple),
+                          const Icon(
+                            Icons.check_circle_outline,
+                            color: AppTheme.primaryPurple,
+                          ),
                           const SizedBox(height: 16),
                           Text(
                             '$totalHabitsCompleted',
-                            style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: AppTheme.textPrimary),
+                            style: const TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                              color: AppTheme.textPrimary,
+                            ),
                           ),
-                          const Text('Habits Completed', style: TextStyle(color: AppTheme.textSecondary)),
+                          const Text(
+                            'Habits Completed',
+                            style: TextStyle(color: AppTheme.textSecondary),
+                          ),
                         ],
                       ),
                     ),
@@ -72,7 +99,14 @@ class AnalyticsScreen extends ConsumerWidget {
                 ],
               ),
               const SizedBox(height: 32),
-              const Text('FOCUS TRAJECTORY (LAST 7 DAYS)', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+              const Text(
+                'FOCUS TRAJECTORY (LAST 7 DAYS)',
+                style: TextStyle(
+                  color: AppTheme.textSecondary,
+                  fontSize: 12,
+                  letterSpacing: 1.5,
+                ),
+              ),
               const SizedBox(height: 16),
               if (sessions.isEmpty)
                 const GlassCard(
@@ -81,7 +115,11 @@ class AnalyticsScreen extends ConsumerWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.bar_chart, color: AppTheme.textSecondary, size: 48),
+                        Icon(
+                          Icons.bar_chart,
+                          color: AppTheme.textSecondary,
+                          size: 48,
+                        ),
                         SizedBox(height: 16),
                         Text(
                           'No Data Yet',
@@ -112,15 +150,21 @@ class AnalyticsScreen extends ConsumerWidget {
                           drawVerticalLine: false,
                           getDrawingHorizontalLine: (value) {
                             return FlLine(
-                              color: AppTheme.textSecondary.withValues(alpha: 0.1),
+                              color: AppTheme.textSecondary.withValues(
+                                alpha: 0.1,
+                              ),
                               strokeWidth: 1,
                             );
                           },
                         ),
                         titlesData: FlTitlesData(
                           show: true,
-                          rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                          topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                          rightTitles: const AxisTitles(
+                            sideTitles: SideTitles(showTitles: false),
+                          ),
+                          topTitles: const AxisTitles(
+                            sideTitles: SideTitles(showTitles: false),
+                          ),
                           bottomTitles: AxisTitles(
                             sideTitles: SideTitles(
                               showTitles: true,
@@ -129,7 +173,13 @@ class AnalyticsScreen extends ConsumerWidget {
                               getTitlesWidget: (value, meta) {
                                 return Padding(
                                   padding: const EdgeInsets.only(top: 8.0),
-                                  child: Text('D${value.toInt()}', style: const TextStyle(color: AppTheme.textSecondary, fontSize: 10)),
+                                  child: Text(
+                                    'D${value.toInt()}',
+                                    style: const TextStyle(
+                                      color: AppTheme.textSecondary,
+                                      fontSize: 10,
+                                    ),
+                                  ),
                                 );
                               },
                             ),
@@ -139,7 +189,13 @@ class AnalyticsScreen extends ConsumerWidget {
                               showTitles: true,
                               interval: 30,
                               getTitlesWidget: (value, meta) {
-                                return Text('${value.toInt()}', style: const TextStyle(color: AppTheme.textSecondary, fontSize: 10));
+                                return Text(
+                                  '${value.toInt()}',
+                                  style: const TextStyle(
+                                    color: AppTheme.textSecondary,
+                                    fontSize: 10,
+                                  ),
+                                );
                               },
                               reservedSize: 28,
                             ),
@@ -174,11 +230,16 @@ class AnalyticsScreen extends ConsumerWidget {
                     side: const BorderSide(color: AppTheme.primaryPurple),
                   ),
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => const DetailedStatsScreen()));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const DetailedStatsScreen(),
+                      ),
+                    );
                   },
                   child: const Text('VIEW DETAILED TELEMETRY'),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -199,18 +260,27 @@ class AnalyticsScreen extends ConsumerWidget {
 
     for (var session in sessions) {
       final sessionUtc = session.startTime.toUtc();
-      final sessionDay = DateTime.utc(sessionUtc.year, sessionUtc.month, sessionUtc.day);
+      final sessionDay = DateTime.utc(
+        sessionUtc.year,
+        sessionUtc.month,
+        sessionUtc.day,
+      );
       final difference = today.difference(sessionDay).inDays;
 
       // If the session is within the last 7 days (0 = today, 6 = 6 days ago)
       if (difference >= 0 && difference < 7) {
         // Map 0 -> today (index 6), 1 -> yesterday (index 5), ..., 6 -> 6 days ago (index 0)
         final index = 6 - difference;
-        dailyMinutes[index] = (dailyMinutes[index] ?? 0) + session.durationMinutes;
+        dailyMinutes[index] =
+            (dailyMinutes[index] ?? 0) + session.durationMinutes;
       }
     }
 
-    return List.generate(7, (index) => FlSpot(index.toDouble(), dailyMinutes[index]?.toDouble() ?? 0.0));
+    return List.generate(
+      7,
+      (index) =>
+          FlSpot(index.toDouble(), dailyMinutes[index]?.toDouble() ?? 0.0),
+    );
   }
 }
 
@@ -223,7 +293,11 @@ class DetailedStatsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const NeonText('DETAILED TELEMETRY', color: AppTheme.textPrimary, glow: false),
+        title: const NeonText(
+          'DETAILED TELEMETRY',
+          color: AppTheme.textPrimary,
+          glow: false,
+        ),
       ),
       body: Center(
         child: Padding(
@@ -231,7 +305,11 @@ class DetailedStatsScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.analytics, size: 64, color: AppTheme.primaryPurple),
+              const Icon(
+                Icons.analytics,
+                size: 64,
+                color: AppTheme.primaryPurple,
+              ),
               const SizedBox(height: 24),
               Text(
                 'Data Aggregation in Progress',
@@ -243,7 +321,7 @@ class DetailedStatsScreen extends StatelessWidget {
                 'Advanced statistical modeling will be available in future core updates.',
                 style: TextStyle(color: AppTheme.textSecondary),
                 textAlign: TextAlign.center,
-              )
+              ),
             ],
           ),
         ),

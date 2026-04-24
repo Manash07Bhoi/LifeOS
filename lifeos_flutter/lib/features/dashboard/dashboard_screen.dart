@@ -25,7 +25,10 @@ class DashboardScreen extends ConsumerWidget {
               child: CustomScrollView(
                 slivers: [
                   SliverPadding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24.0,
+                      vertical: 32.0,
+                    ),
                     sliver: SliverToBoxAdapter(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,10 +70,7 @@ class _DashboardHeader extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
         const SizedBox(height: 8),
-        Text(
-          'Dashboard',
-          style: Theme.of(context).textTheme.displayLarge,
-        ),
+        Text('Dashboard', style: Theme.of(context).textTheme.displayLarge),
       ],
     );
   }
@@ -80,10 +80,7 @@ class _DashboardSummary extends StatelessWidget {
   final int goalCount;
   final int habitCount;
 
-  const _DashboardSummary({
-    required this.goalCount,
-    required this.habitCount,
-  });
+  const _DashboardSummary({required this.goalCount, required this.habitCount});
 
   @override
   Widget build(BuildContext context) {
@@ -159,16 +156,18 @@ class _ActiveProtocols extends StatelessWidget {
           fontSize: 14,
         ),
         const SizedBox(height: 16),
-        ...goals.take(2).map((g) => Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: _GoalCard(goal: g),
-            )),
+        ...goals
+            .take(2)
+            .map(
+              (g) => Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: _GoalCard(goal: g),
+              ),
+            ),
         if (goals.isEmpty)
           const GlassCard(
-            child: Center(
-              child: Text('No active goals detected.'),
-            ),
-          )
+            child: Center(child: Text('No active goals detected.')),
+          ),
       ],
     );
   }
@@ -205,9 +204,7 @@ class _GoalCard extends StatelessWidget {
           ),
           Text(
             '${(goal.progress * 100).toInt()}%',
-            style: const TextStyle(
-              color: AppTheme.textSecondary,
-            ),
+            style: const TextStyle(color: AppTheme.textSecondary),
           ),
         ],
       ),

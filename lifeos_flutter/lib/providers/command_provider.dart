@@ -22,7 +22,8 @@ class CommandNotifier extends StateNotifier<List<CommandHistory>> {
   }
 }
 
-final commandProvider = StateNotifierProvider<CommandNotifier, List<CommandHistory>>((ref) {
-  final box = Hive.box<CommandHistory>('commandHistoryBox');
-  return CommandNotifier(box);
-});
+final commandProvider =
+    StateNotifierProvider<CommandNotifier, List<CommandHistory>>((ref) {
+      final box = Hive.box<CommandHistory>('commandHistoryBox');
+      return CommandNotifier(box);
+    });

@@ -38,8 +38,8 @@ class Goal extends HiveObject {
     required this.category,
     this.priority = 'Medium',
     DateTime? createdAt,
-  })  : id = id ?? const Uuid().v4(),
-        createdAt = createdAt ?? DateTime.now();
+  }) : id = id ?? const Uuid().v4(),
+       createdAt = createdAt ?? DateTime.now();
 
   Goal copyWith({
     String? title,

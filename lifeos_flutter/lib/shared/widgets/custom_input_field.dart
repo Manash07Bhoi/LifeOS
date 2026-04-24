@@ -33,9 +33,7 @@ class CustomInputField extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppTheme.surfaceElevated,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Colors.white.withValues(alpha: 0.05),
-        ),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
       ),
       child: TextField(
         controller: controller,
@@ -49,7 +47,9 @@ class CustomInputField extends StatelessWidget {
         decoration: InputDecoration(
           counterText: '',
           hintText: hintText,
-          hintStyle: TextStyle(color: AppTheme.textSecondary.withValues(alpha: 0.5)),
+          hintStyle: TextStyle(
+            color: AppTheme.textSecondary.withValues(alpha: 0.5),
+          ),
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
           border: InputBorder.none,

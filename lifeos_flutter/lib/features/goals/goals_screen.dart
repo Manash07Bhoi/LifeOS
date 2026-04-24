@@ -19,12 +19,19 @@ class GoalsScreen extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const NeonText('GOAL ARCHITECTURE', color: AppTheme.textPrimary, glow: false),
+        title: const NeonText(
+          'GOAL ARCHITECTURE',
+          color: AppTheme.textPrimary,
+          glow: false,
+        ),
         centerTitle: false,
         actions: [
           IconButton(
             tooltip: 'Add goal',
-            icon: const Icon(Icons.add_circle_outline, color: AppTheme.neonCyan),
+            icon: const Icon(
+              Icons.add_circle_outline,
+              color: AppTheme.neonCyan,
+            ),
             onPressed: () {
               Navigator.push(
                 context,
@@ -37,7 +44,8 @@ class GoalsScreen extends ConsumerWidget {
       body: goals.isEmpty
           ? const EmptyStateScreen(
               title: 'No Protocols Found',
-              subtitle: 'Initialize a new goal protocol to begin tracking progress.',
+              subtitle:
+                  'Initialize a new goal protocol to begin tracking progress.',
               icon: Icons.track_changes,
             )
           : ListView.builder(
@@ -77,7 +85,7 @@ class GoalsScreen extends ConsumerWidget {
                                 color: AppTheme.neonCyan,
                                 fontWeight: FontWeight.bold,
                               ),
-                            )
+                            ),
                           ],
                         ),
                         const SizedBox(height: 12),

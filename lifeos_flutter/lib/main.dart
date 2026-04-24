@@ -14,39 +14,44 @@ import 'features/goals/add_edit_goal_screen.dart';
 import 'features/habits/add_edit_habit_screen.dart';
 
 void main() async {
-  runZonedGuarded(() async {
-    WidgetsFlutterBinding.ensureInitialized();
+  runZonedGuarded(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
 
-    await SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
+      await SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+      ]);
 
-    await Hive.initFlutter();
+      await Hive.initFlutter();
 
-    // Register Adapters
-    Hive.registerAdapter(GoalAdapter());
-    Hive.registerAdapter(HabitAdapter());
-    Hive.registerAdapter(FocusSessionAdapter());
-    Hive.registerAdapter(CommandHistoryAdapter());
+      // Register Adapters
+      Hive.registerAdapter(GoalAdapter());
+      Hive.registerAdapter(HabitAdapter());
+      Hive.registerAdapter(FocusSessionAdapter());
+      Hive.registerAdapter(CommandHistoryAdapter());
 
-    // Initialize Encryption
-    final cipher = await EncryptionService.getCipher();
+      // Initialize Encryption
+      final cipher = await EncryptionService.getCipher();
 
-    // Open Encrypted Boxes
-    await EncryptionService.openEncryptedBox<Goal>('goalsBox', cipher);
-    await EncryptionService.openEncryptedBox<Habit>('habitsBox', cipher);
-    await EncryptionService.openEncryptedBox<FocusSession>('sessionsBox', cipher);
-    await EncryptionService.openEncryptedBox<CommandHistory>('commandHistoryBox', cipher);
-    await EncryptionService.openEncryptedBox('settingsBox', cipher);
+      // Open Encrypted Boxes
+      await EncryptionService.openEncryptedBox<Goal>('goalsBox', cipher);
+      await EncryptionService.openEncryptedBox<Habit>('habitsBox', cipher);
+      await EncryptionService.openEncryptedBox<FocusSession>(
+        'sessionsBox',
+        cipher,
+      );
+      await EncryptionService.openEncryptedBox<CommandHistory>(
+        'commandHistoryBox',
+        cipher,
+      );
+      await EncryptionService.openEncryptedBox('settingsBox', cipher);
 
-    runApp(
-      const ProviderScope(
-        child: LifeOSApp(),
-      ),
-    );
-  }, (error, stack) {
-    // Log securely in production. Omit debugPrint logic to comply with security hardening.
-  });
+      runApp(const ProviderScope(child: LifeOSApp()));
+    },
+    (error, stack) {
+      // Log securely in production. Omit debugPrint logic to comply with security hardening.
+    },
+  );
 }
 
 class LifeOSApp extends ConsumerWidget {

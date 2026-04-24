@@ -12,3 +12,7 @@
 ## 2024-04-23 - Accessibility Support for Quick Actions Panel
 **Learning:** `GestureDetector` widgets nested deep within custom components like the `_ActionCard` in `QuickActionsPanel` often lack context for screen readers and do not natively support desktop hover labels, creating an accessibility gap for interactive elements.
 **Action:** Always wrap custom interactive UI elements with a `Tooltip`, dynamically passing the available contextual label (e.g., `widget.title`) to provide native `aria-label` equivalent behavior and visible hover states.
+
+## 2024-05-18 - Semantic Labels for Custom Gesture Detectors
+**Learning:** Custom interactive widgets (like `GlowButton`) built using raw `GestureDetector` instances are not automatically recognized by screen readers as interactive buttons, causing accessibility tools to only read their inner text without context.
+**Action:** Always wrap custom gesture-based UI buttons in a `Semantics` widget with `button: true` and an appropriate `label` (e.g., `Semantics(button: true, label: widget.text, child: ...)`), ensuring they are properly announced to assistive technologies.

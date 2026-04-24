@@ -5,10 +5,7 @@ import '../../shared/widgets/neon_text.dart';
 class LoadingScreen extends StatelessWidget {
   final String message;
 
-  const LoadingScreen({
-    super.key,
-    this.message = 'SYSTEM PROCESSING...',
-  });
+  const LoadingScreen({super.key, this.message = 'SYSTEM PROCESSING...'});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +15,7 @@ class LoadingScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const CircularProgressIndicator(
-              color: AppTheme.neonCyan,
-            ),
+            const CircularProgressIndicator(color: AppTheme.neonCyan),
             const SizedBox(height: 24),
             NeonText(
               message,

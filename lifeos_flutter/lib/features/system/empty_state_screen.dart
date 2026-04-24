@@ -29,17 +29,17 @@ class EmptyStateScreen extends StatelessWidget {
             const SizedBox(height: 24),
             Text(
               title,
-              style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                color: AppTheme.textPrimary,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.displaySmall?.copyWith(color: AppTheme.textPrimary),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
             Text(
               subtitle,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: AppTheme.textSecondary,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyLarge?.copyWith(color: AppTheme.textSecondary),
               textAlign: TextAlign.center,
             ),
           ],

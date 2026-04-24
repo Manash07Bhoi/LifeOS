@@ -16,7 +16,10 @@ class GoalDetailScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final goals = ref.watch(goalsProvider);
-    final goal = goals.firstWhere((g) => g.id == goalId, orElse: () => goals.first);
+    final goal = goals.firstWhere(
+      (g) => g.id == goalId,
+      orElse: () => goals.first,
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -29,7 +32,9 @@ class GoalDetailScreen extends ConsumerWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => AddEditGoalScreen(existingGoal: goal)),
+                MaterialPageRoute(
+                  builder: (_) => AddEditGoalScreen(existingGoal: goal),
+                ),
               );
             },
           ),
@@ -40,7 +45,8 @@ class GoalDetailScreen extends ConsumerWidget {
               ConfirmationDialog.show(
                 context,
                 title: 'TERMINATE PROTOCOL?',
-                message: 'This action will permanently delete this goal from local storage.',
+                message:
+                    'This action will permanently delete this goal from local storage.',
                 isDestructive: true,
                 confirmText: 'TERMINATE',
               ).then((confirmed) {
@@ -69,10 +75,7 @@ class GoalDetailScreen extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              Text(
-                goal.title,
-                style: Theme.of(context).textTheme.displayLarge,
-              ),
+              Text(goal.title, style: Theme.of(context).textTheme.displayLarge),
               const SizedBox(height: 32),
               GlassCard(
                 child: Column(
@@ -81,13 +84,24 @@ class GoalDetailScreen extends ConsumerWidget {
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('COMPLETION STATUS', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+                        Text(
+                          'COMPLETION STATUS',
+                          style: TextStyle(
+                            color: AppTheme.textSecondary,
+                            fontSize: 12,
+                            letterSpacing: 1.5,
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 16),
                     Row(
                       children: [
-                        NeonText('${(goal.progress * 100).toInt()}%', color: AppTheme.neonCyan, fontSize: 48),
+                        NeonText(
+                          '${(goal.progress * 100).toInt()}%',
+                          color: AppTheme.neonCyan,
+                          fontSize: 48,
+                        ),
                       ],
                     ),
                     const SizedBox(height: 16),
@@ -103,56 +117,106 @@ class GoalDetailScreen extends ConsumerWidget {
                       children: [
                         Expanded(
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(backgroundColor: AppTheme.surfaceElevated, foregroundColor: AppTheme.textPrimary),
-                            onPressed: goal.progress > 0 ? () {
-                              ref.read(goalsProvider.notifier).updateGoal(goal.copyWith(progress: (goal.progress - 0.1).clamp(0.0, 1.0)));
-                            } : null,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppTheme.surfaceElevated,
+                              foregroundColor: AppTheme.textPrimary,
+                            ),
+                            onPressed: goal.progress > 0
+                                ? () {
+                                    ref
+                                        .read(goalsProvider.notifier)
+                                        .updateGoal(
+                                          goal.copyWith(
+                                            progress: (goal.progress - 0.1)
+                                                .clamp(0.0, 1.0),
+                                          ),
+                                        );
+                                  }
+                                : null,
                             child: const Text('-10%'),
                           ),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(backgroundColor: AppTheme.surfaceElevated, foregroundColor: AppTheme.textPrimary),
-                            onPressed: goal.progress < 1.0 ? () {
-                              ref.read(goalsProvider.notifier).updateGoal(goal.copyWith(progress: (goal.progress + 0.1).clamp(0.0, 1.0)));
-                            } : null,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppTheme.surfaceElevated,
+                              foregroundColor: AppTheme.textPrimary,
+                            ),
+                            onPressed: goal.progress < 1.0
+                                ? () {
+                                    ref
+                                        .read(goalsProvider.notifier)
+                                        .updateGoal(
+                                          goal.copyWith(
+                                            progress: (goal.progress + 0.1)
+                                                .clamp(0.0, 1.0),
+                                          ),
+                                        );
+                                  }
+                                : null,
                             child: const Text('+10%'),
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
               const SizedBox(height: 32),
-              const Text('PARAMETERS', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+              const Text(
+                'PARAMETERS',
+                style: TextStyle(
+                  color: AppTheme.textSecondary,
+                  fontSize: 12,
+                  letterSpacing: 1.5,
+                ),
+              ),
               const SizedBox(height: 12),
               Text(
-                goal.description.isEmpty ? 'No parameters defined.' : goal.description,
-                style: const TextStyle(color: AppTheme.textPrimary, fontSize: 16, height: 1.5),
+                goal.description.isEmpty
+                    ? 'No parameters defined.'
+                    : goal.description,
+                style: const TextStyle(
+                  color: AppTheme.textPrimary,
+                  fontSize: 16,
+                  height: 1.5,
+                ),
               ),
               const SizedBox(height: 32),
               GlassCard(
                 padding: const EdgeInsets.all(16),
                 child: Row(
                   children: [
-                    const Icon(Icons.calendar_today, color: AppTheme.primaryPurple),
+                    const Icon(
+                      Icons.calendar_today,
+                      color: AppTheme.primaryPurple,
+                    ),
                     const SizedBox(width: 16),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('TARGET DEADLINE', style: TextStyle(color: AppTheme.textSecondary, fontSize: 10, letterSpacing: 1)),
+                        const Text(
+                          'TARGET DEADLINE',
+                          style: TextStyle(
+                            color: AppTheme.textSecondary,
+                            fontSize: 10,
+                            letterSpacing: 1,
+                          ),
+                        ),
                         const SizedBox(height: 4),
                         Text(
                           AppDateFormats.standard.format(goal.targetDate),
-                          style: const TextStyle(color: AppTheme.textPrimary, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                            color: AppTheme.textPrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

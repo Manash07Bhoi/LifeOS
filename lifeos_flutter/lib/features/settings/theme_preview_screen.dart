@@ -12,7 +12,11 @@ class ThemePreviewScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const NeonText('THEME PREVIEW', color: AppTheme.textPrimary, glow: false),
+        title: const NeonText(
+          'THEME PREVIEW',
+          color: AppTheme.textPrimary,
+          glow: false,
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -20,7 +24,14 @@ class ThemePreviewScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('SYSTEM PALETTE', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+              const Text(
+                'SYSTEM PALETTE',
+                style: TextStyle(
+                  color: AppTheme.textSecondary,
+                  fontSize: 12,
+                  letterSpacing: 1.5,
+                ),
+              ),
               const SizedBox(height: 16),
               GlassCard(
                 child: Column(
@@ -34,7 +45,14 @@ class ThemePreviewScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              const Text('GLASSMORPHISM', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+              const Text(
+                'GLASSMORPHISM',
+                style: TextStyle(
+                  color: AppTheme.textSecondary,
+                  fontSize: 12,
+                  letterSpacing: 1.5,
+                ),
+              ),
               const SizedBox(height: 16),
               Stack(
                 alignment: Alignment.center,
@@ -52,7 +70,10 @@ class ThemePreviewScreen extends StatelessWidget {
                   const GlassCard(
                     child: Text(
                       'Frosted Glass Layer',
-                      style: TextStyle(color: AppTheme.textPrimary, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        color: AppTheme.textPrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
@@ -68,7 +89,10 @@ class ThemePreviewScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(name, style: const TextStyle(color: AppTheme.textPrimary, fontSize: 16)),
+        Text(
+          name,
+          style: const TextStyle(color: AppTheme.textPrimary, fontSize: 16),
+        ),
         Container(
           width: 40,
           height: 40,
@@ -80,7 +104,7 @@ class ThemePreviewScreen extends StatelessWidget {
                 color: color.withValues(alpha: 0.5),
                 blurRadius: 10,
                 spreadRadius: 2,
-              )
+              ),
             ],
           ),
         ),

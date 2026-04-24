@@ -93,7 +93,14 @@ class _AddEditGoalScreenState extends ConsumerState<AddEditGoalScreen> {
       extraFields: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('PRIORITY LEVEL', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+          const Text(
+            'PRIORITY LEVEL',
+            style: TextStyle(
+              color: AppTheme.textSecondary,
+              fontSize: 12,
+              letterSpacing: 1.5,
+            ),
+          ),
           const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -106,19 +113,40 @@ class _AddEditGoalScreenState extends ConsumerState<AddEditGoalScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 4),
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     decoration: BoxDecoration(
-                      color: isSelected ? AppTheme.primaryPurple.withValues(alpha: 0.2) : AppTheme.surfaceElevated,
+                      color: isSelected
+                          ? AppTheme.primaryPurple.withValues(alpha: 0.2)
+                          : AppTheme.surfaceElevated,
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: isSelected ? AppTheme.primaryPurple : Colors.transparent),
+                      border: Border.all(
+                        color: isSelected
+                            ? AppTheme.primaryPurple
+                            : Colors.transparent,
+                      ),
                     ),
                     alignment: Alignment.center,
-                    child: Text(p, style: TextStyle(color: isSelected ? AppTheme.primaryPurple : AppTheme.textSecondary, fontWeight: FontWeight.bold)),
+                    child: Text(
+                      p,
+                      style: TextStyle(
+                        color: isSelected
+                            ? AppTheme.primaryPurple
+                            : AppTheme.textSecondary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               );
             }).toList(),
           ),
           const SizedBox(height: 24),
-          const Text('TARGET DATE', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+          const Text(
+            'TARGET DATE',
+            style: TextStyle(
+              color: AppTheme.textSecondary,
+              fontSize: 12,
+              letterSpacing: 1.5,
+            ),
+          ),
           const SizedBox(height: 8),
           GestureDetector(
             onTap: () => _selectDate(context),
@@ -134,9 +162,15 @@ class _AddEditGoalScreenState extends ConsumerState<AddEditGoalScreen> {
                 children: [
                   Text(
                     AppDateFormats.standard.format(_targetDate),
-                    style: const TextStyle(color: AppTheme.textPrimary, fontSize: 16),
+                    style: const TextStyle(
+                      color: AppTheme.textPrimary,
+                      fontSize: 16,
+                    ),
                   ),
-                  const Icon(Icons.calendar_today, color: AppTheme.primaryPurple),
+                  const Icon(
+                    Icons.calendar_today,
+                    color: AppTheme.primaryPurple,
+                  ),
                 ],
               ),
             ),

@@ -27,7 +27,11 @@ class SettingsScreen extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const NeonText('SYSTEM CONFIGURATION', color: AppTheme.textPrimary, glow: false),
+        title: const NeonText(
+          'SYSTEM CONFIGURATION',
+          color: AppTheme.textPrimary,
+          glow: false,
+        ),
         centerTitle: false,
       ),
       body: SafeArea(
@@ -51,7 +55,8 @@ class SettingsScreen extends ConsumerWidget {
     ConfirmationDialog.show(
       context,
       title: 'PURGE ALL DATA?',
-      message: 'This will delete all goals, habits, sessions, and command history. This cannot be undone.',
+      message:
+          'This will delete all goals, habits, sessions, and command history. This cannot be undone.',
       isDestructive: true,
       confirmText: 'PURGE',
     ).then((confirmed) async {
@@ -85,7 +90,11 @@ class SettingsScreen extends ConsumerWidget {
           );
         } catch (e) {
           if (!context.mounted) return;
-          SuccessFeedbackToast.show(context, 'Failed to purge data securely.', isError: true);
+          SuccessFeedbackToast.show(
+            context,
+            'Failed to purge data securely.',
+            isError: true,
+          );
         }
       }
     });
@@ -100,30 +109,67 @@ class _AppearanceSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('APPEARANCE', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+        const Text(
+          'APPEARANCE',
+          style: TextStyle(
+            color: AppTheme.textSecondary,
+            fontSize: 12,
+            letterSpacing: 1.5,
+          ),
+        ),
         const SizedBox(height: 16),
         GlassCard(
           child: Column(
             children: [
               ListTile(
-                leading: const Icon(Icons.palette_outlined, color: AppTheme.primaryPurple),
-                title: const Text('Theme Preview', style: TextStyle(color: AppTheme.textPrimary)),
-                subtitle: const Text('Accent Color Selector', style: TextStyle(color: AppTheme.textSecondary)),
-                trailing: const Icon(Icons.chevron_right, color: AppTheme.textSecondary),
+                leading: const Icon(
+                  Icons.palette_outlined,
+                  color: AppTheme.primaryPurple,
+                ),
+                title: const Text(
+                  'Theme Preview',
+                  style: TextStyle(color: AppTheme.textPrimary),
+                ),
+                subtitle: const Text(
+                  'Accent Color Selector',
+                  style: TextStyle(color: AppTheme.textSecondary),
+                ),
+                trailing: const Icon(
+                  Icons.chevron_right,
+                  color: AppTheme.textSecondary,
+                ),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => const ThemePreviewScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const ThemePreviewScreen(),
+                    ),
+                  );
                 },
               ),
               const Divider(color: Colors.white12, height: 1),
               SwitchListTile(
                 activeTrackColor: AppTheme.neonCyan.withValues(alpha: 0.3),
                 activeThumbColor: AppTheme.neonCyan,
-                secondary: const Icon(Icons.animation, color: AppTheme.neonCyan),
-                title: const Text('Animation Engine', style: TextStyle(color: AppTheme.textPrimary)),
-                subtitle: const Text('High / Low Performance Toggle', style: TextStyle(color: AppTheme.textSecondary)),
+                secondary: const Icon(
+                  Icons.animation,
+                  color: AppTheme.neonCyan,
+                ),
+                title: const Text(
+                  'Animation Engine',
+                  style: TextStyle(color: AppTheme.textPrimary),
+                ),
+                subtitle: const Text(
+                  'High / Low Performance Toggle',
+                  style: TextStyle(color: AppTheme.textSecondary),
+                ),
                 value: true,
                 onChanged: (val) {
-                  SuccessFeedbackToast.show(context, 'Core animations locked to high-performance profile.', isError: false);
+                  SuccessFeedbackToast.show(
+                    context,
+                    'Core animations locked to high-performance profile.',
+                    isError: false,
+                  );
                 },
               ),
             ],
@@ -144,25 +190,57 @@ class _DataManagementSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('DATA MANAGEMENT', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+        const Text(
+          'DATA MANAGEMENT',
+          style: TextStyle(
+            color: AppTheme.textSecondary,
+            fontSize: 12,
+            letterSpacing: 1.5,
+          ),
+        ),
         const SizedBox(height: 16),
         GlassCard(
           child: Column(
             children: [
               ListTile(
-                leading: const Icon(Icons.sd_storage_outlined, color: AppTheme.neonCyan),
-                title: const Text('Export Local Data', style: TextStyle(color: AppTheme.textPrimary)),
-                subtitle: const Text('Save Hive boxes to JSON', style: TextStyle(color: AppTheme.textSecondary)),
-                trailing: const Icon(Icons.download, color: AppTheme.textSecondary),
+                leading: const Icon(
+                  Icons.sd_storage_outlined,
+                  color: AppTheme.neonCyan,
+                ),
+                title: const Text(
+                  'Export Local Data',
+                  style: TextStyle(color: AppTheme.textPrimary),
+                ),
+                subtitle: const Text(
+                  'Save Hive boxes to JSON',
+                  style: TextStyle(color: AppTheme.textSecondary),
+                ),
+                trailing: const Icon(
+                  Icons.download,
+                  color: AppTheme.textSecondary,
+                ),
                 onTap: () {
-                  SuccessFeedbackToast.show(context, 'Data Export capability not available in core build.', isError: true);
+                  SuccessFeedbackToast.show(
+                    context,
+                    'Data Export capability not available in core build.',
+                    isError: true,
+                  );
                 },
               ),
               const Divider(color: Colors.white12, height: 1),
               ListTile(
-                leading: const Icon(Icons.warning_amber_rounded, color: AppTheme.neonPink),
-                title: const Text('Purge System Data', style: TextStyle(color: AppTheme.textPrimary)),
-                subtitle: const Text('Irreversible action', style: TextStyle(color: AppTheme.neonPink)),
+                leading: const Icon(
+                  Icons.warning_amber_rounded,
+                  color: AppTheme.neonPink,
+                ),
+                title: const Text(
+                  'Purge System Data',
+                  style: TextStyle(color: AppTheme.textPrimary),
+                ),
+                subtitle: const Text(
+                  'Irreversible action',
+                  style: TextStyle(color: AppTheme.neonPink),
+                ),
                 onTap: onPurgeData,
               ),
             ],
@@ -181,15 +259,34 @@ class _SystemInfoSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('SYSTEM INFO', style: TextStyle(color: AppTheme.textSecondary, fontSize: 12, letterSpacing: 1.5)),
+        const Text(
+          'SYSTEM INFO',
+          style: TextStyle(
+            color: AppTheme.textSecondary,
+            fontSize: 12,
+            letterSpacing: 1.5,
+          ),
+        ),
         const SizedBox(height: 16),
         GlassCard(
           child: ListTile(
-            leading: const Icon(Icons.info_outline, color: AppTheme.textSecondary),
-            title: const Text('About LifeOS', style: TextStyle(color: AppTheme.textPrimary)),
-            trailing: const Icon(Icons.chevron_right, color: AppTheme.textSecondary),
+            leading: const Icon(
+              Icons.info_outline,
+              color: AppTheme.textSecondary,
+            ),
+            title: const Text(
+              'About LifeOS',
+              style: TextStyle(color: AppTheme.textPrimary),
+            ),
+            trailing: const Icon(
+              Icons.chevron_right,
+              color: AppTheme.textSecondary,
+            ),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_) => const AboutScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const AboutScreen()),
+              );
             },
           ),
         ),
