@@ -6,13 +6,30 @@ class EncryptionService {
   static const String _keyName = 'hive_encryption_key';
   static const _secureStorage = FlutterSecureStorage();
 
+  static const _encryptedStorage = FlutterSecureStorage(
+    aOptions: AndroidOptions(encryptedSharedPreferences: true),
+  );
+
   static Future<List<int>> getOrCreateEncryptionKey() async {
-    final String? storedKey = await _secureStorage.read(key: _keyName);
+    String? storedKey = await _encryptedStorage.read(key: _keyName);
+
+    if (storedKey == null) {
+      storedKey = await _secureStorage.read(key: _keyName);
+
+      if (storedKey != null) {
+        await _encryptedStorage.write(key: _keyName, value: storedKey);
+        await _secureStorage.delete(key: _keyName);
+      }
+    }
+
     if (storedKey != null) {
       return base64Url.decode(storedKey);
     } else {
       final key = Hive.generateSecureKey();
-      await _secureStorage.write(key: _keyName, value: base64Url.encode(key));
+      await _encryptedStorage.write(
+        key: _keyName,
+        value: base64Url.encode(key),
+      );
       return key;
     }
   }
@@ -22,7 +39,10 @@ class EncryptionService {
     return HiveAesCipher(key);
   }
 
-  static Future<Box<T>> openEncryptedBox<T>(String name, HiveAesCipher cipher) async {
+  static Future<Box<T>> openEncryptedBox<T>(
+    String name,
+    HiveAesCipher cipher,
+  ) async {
     // Attempt 1: Try to open WITHOUT encryption to see if migration is needed
     bool needsMigration = false;
     Map<dynamic, T> existingData = {};
