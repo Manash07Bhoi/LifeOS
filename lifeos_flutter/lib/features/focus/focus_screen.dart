@@ -248,27 +248,37 @@ class _DurationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        decoration: BoxDecoration(
-          color: isActive
-              ? AppTheme.primaryPurple.withValues(alpha: 0.2)
-              : Colors.transparent,
-          border: Border.all(
-            color: isActive
-                ? AppTheme.primaryPurple
-                : AppTheme.textSecondary.withValues(alpha: 0.3),
-          ),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Text(
-          '$minutes',
-          style: TextStyle(
-            color: isActive ? AppTheme.primaryPurple : AppTheme.textSecondary,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+    return Semantics(
+      button: true,
+      selected: isActive,
+      label: '$minutes minutes',
+      child: Tooltip(
+        message: 'Set duration to $minutes minutes',
+        child: GestureDetector(
+          onTap: onTap,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            decoration: BoxDecoration(
+              color: isActive
+                  ? AppTheme.primaryPurple.withValues(alpha: 0.2)
+                  : Colors.transparent,
+              border: Border.all(
+                color: isActive
+                    ? AppTheme.primaryPurple
+                    : AppTheme.textSecondary.withValues(alpha: 0.3),
+              ),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Text(
+              '$minutes',
+              style: TextStyle(
+                color: isActive
+                    ? AppTheme.primaryPurple
+                    : AppTheme.textSecondary,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
       ),
