@@ -16,3 +16,7 @@
 ## 2024-05-18 - Semantic Labels for Custom Gesture Detectors
 **Learning:** Custom interactive widgets (like `GlowButton`) built using raw `GestureDetector` instances are not automatically recognized by screen readers as interactive buttons, causing accessibility tools to only read their inner text without context.
 **Action:** Always wrap custom gesture-based UI buttons in a `Semantics` widget with `button: true` and an appropriate `label` (e.g., `Semantics(button: true, label: widget.text, child: ...)`), ensuring they are properly announced to assistive technologies.
+
+## 2024-04-26 - Semantic States for Custom Selectable Buttons
+**Learning:** Custom selection buttons (like duration pickers or segmented controls) built with `GestureDetector` do not automatically announce their selected state to screen readers, causing users to be unaware of the active choice.
+**Action:** Always wrap custom selectable UI elements in a `Semantics` widget with both `button: true` and the `selected: isActive` property accurately reflecting the current state. Combine with `Tooltip` for mouse users.
