@@ -111,30 +111,41 @@ class _AddEditHabitScreenState extends ConsumerState<AddEditHabitScreen> {
             children: ['Daily', 'Weekly', 'Custom'].map((t) {
               final isSelected = _frequencyType == t;
               return Expanded(
-                child: GestureDetector(
-                  onTap: () => setState(() => _frequencyType = t),
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 4),
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    decoration: BoxDecoration(
-                      color: isSelected
-                          ? AppTheme.neonCyan.withValues(alpha: 0.2)
-                          : AppTheme.surfaceElevated,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: isSelected
-                            ? AppTheme.neonCyan
-                            : Colors.transparent,
-                      ),
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      t,
-                      style: TextStyle(
-                        color: isSelected
-                            ? AppTheme.neonCyan
-                            : AppTheme.textSecondary,
-                        fontWeight: FontWeight.bold,
+                child: Semantics(
+                  button: true,
+                  selected: isSelected,
+                  label: 'Frequency type: $t',
+                  child: Tooltip(
+                    message: 'Set frequency type to $t',
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: () => setState(() => _frequencyType = t),
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 4),
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            color: isSelected
+                                ? AppTheme.neonCyan.withValues(alpha: 0.2)
+                                : AppTheme.surfaceElevated,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: isSelected
+                                  ? AppTheme.neonCyan
+                                  : Colors.transparent,
+                            ),
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            t,
+                            style: TextStyle(
+                              color: isSelected
+                                  ? AppTheme.neonCyan
+                                  : AppTheme.textSecondary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
