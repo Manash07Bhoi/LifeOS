@@ -6,6 +6,7 @@ import '../../shared/widgets/neon_text.dart';
 import 'theme_preview_screen.dart';
 import 'about_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import '../../core/security/encryption_service.dart';
 import '../../data/models/goal.dart';
 import '../../data/models/habit.dart';
 import '../../data/models/focus_session.dart';
@@ -63,11 +64,24 @@ class SettingsScreen extends ConsumerWidget {
       if (confirmed == true) {
         try {
           // Step 1: Clear all Hive boxes (preserves encryption ciphers)
-          await Hive.box<Goal>('goalsBox').clear();
-          await Hive.box<Habit>('habitsBox').clear();
-          await Hive.box<FocusSession>('sessionsBox').clear();
-          await Hive.box<CommandHistory>('commandHistoryBox').clear();
-          await Hive.box('settingsBox').clear();
+          await Hive.box<Goal>('goalsBox').deleteFromDisk();
+          await Hive.box<Habit>('habitsBox').deleteFromDisk();
+          await Hive.box<FocusSession>('sessionsBox').deleteFromDisk();
+          await Hive.box<CommandHistory>('commandHistoryBox').deleteFromDisk();
+          await Hive.box('settingsBox').deleteFromDisk();
+
+          final cipher = await EncryptionService.getCipher();
+          await Hive.openBox<Goal>('goalsBox', encryptionCipher: cipher);
+          await Hive.openBox<Habit>('habitsBox', encryptionCipher: cipher);
+          await Hive.openBox<FocusSession>(
+            'sessionsBox',
+            encryptionCipher: cipher,
+          );
+          await Hive.openBox<CommandHistory>(
+            'commandHistoryBox',
+            encryptionCipher: cipher,
+          );
+          await Hive.openBox('settingsBox', encryptionCipher: cipher);
 
           // Step 2: Invalidate Riverpod Providers
           ref.invalidate(goalsProvider);

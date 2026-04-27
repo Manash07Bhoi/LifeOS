@@ -8,6 +8,7 @@ import '../analytics/analytics_screen.dart';
 import 'command_dictionary_screen.dart';
 import 'hacker_log_overlay.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import '../../core/security/encryption_service.dart';
 import '../../data/models/command_history.dart';
 import '../../providers/goals_provider.dart';
 import '../../providers/habits_provider.dart';
@@ -172,7 +173,12 @@ class _CommandScreenState extends ConsumerState<CommandScreen> {
         },
       );
     } else if (lower == 'clear') {
-      await Hive.box<CommandHistory>('commandHistoryBox').clear();
+      await Hive.box<CommandHistory>('commandHistoryBox').deleteFromDisk();
+      final cipher = await EncryptionService.getCipher();
+      await Hive.openBox<CommandHistory>(
+        'commandHistoryBox',
+        encryptionCipher: cipher,
+      );
       finishProcess(true, ['Clearing terminal buffer...', 'Buffer cleared.']);
     } else if (lower == 'history') {
       finishProcess(true, ['Accessing command history...']);
