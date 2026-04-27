@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'core/theme/app_theme.dart';
 import 'core/security/encryption_service.dart';
+import 'core/security/security_logger.dart';
 import 'data/models/goal.dart';
 import 'data/models/habit.dart';
 import 'data/models/focus_session.dart';
@@ -49,7 +50,11 @@ void main() async {
       runApp(const ProviderScope(child: LifeOSApp()));
     },
     (error, stack) {
-      // Log securely in production. Omit debugPrint logic to comply with security hardening.
+      SecurityLogger.logError(
+        error,
+        stackTrace: stack,
+        message: 'Uncaught application error',
+      );
     },
   );
 }
