@@ -20,3 +20,6 @@
 ## 2024-04-26 - Semantic States for Custom Selectable Buttons
 **Learning:** Custom selection buttons (like duration pickers or segmented controls) built with `GestureDetector` do not automatically announce their selected state to screen readers, causing users to be unaware of the active choice.
 **Action:** Always wrap custom selectable UI elements in a `Semantics` widget with both `button: true` and the `selected: isActive` property accurately reflecting the current state. Combine with `Tooltip` for mouse users.
+## 2024-04-27 - Accessibility for Custom Gesture Controls
+**Learning:** Custom interactive elements built with `GestureDetector` lack native semantic meaning, making them invisible to screen readers and difficult to use with mice (no hover cursor) or keyboards.
+**Action:** Always wrap custom gesture-based UI buttons (e.g., `GestureDetector` or `Container` taps) in a `Semantics` widget with `button: true` and an appropriate `label`. For selectable states, include the `selected` property. Combine with `Tooltip` and `MouseRegion(cursor: SystemMouseCursors.click)` to ensure full accessibility across all input devices.
