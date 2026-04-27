@@ -89,11 +89,7 @@ class FakeBox<T> implements Box<T> {
 
   @override
   Future<Iterable<int>> addAll(Iterable<T> values) async {
-    final keys = <int>[];
-    for (var value in values) {
-      keys.add(await add(value));
-    }
-    return keys;
+    return Future.wait(values.map((value) => add(value)));
   }
 
   @override
