@@ -29,11 +29,12 @@ android {
     }
 
     defaultConfig {
+        // Unique Application ID for the application.
         applicationId = "com.life.os"
         minSdk = flutter.minSdkVersion
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0.0"
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutterVersionCode.toInt()
+        versionName = flutterVersionName
         multiDexEnabled = true
     }
 
