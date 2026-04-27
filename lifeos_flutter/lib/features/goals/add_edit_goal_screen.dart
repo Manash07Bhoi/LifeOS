@@ -107,30 +107,41 @@ class _AddEditGoalScreenState extends ConsumerState<AddEditGoalScreen> {
             children: ['Low', 'Medium', 'High'].map((p) {
               final isSelected = _priority == p;
               return Expanded(
-                child: GestureDetector(
-                  onTap: () => setState(() => _priority = p),
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 4),
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    decoration: BoxDecoration(
-                      color: isSelected
-                          ? AppTheme.primaryPurple.withValues(alpha: 0.2)
-                          : AppTheme.surfaceElevated,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: isSelected
-                            ? AppTheme.primaryPurple
-                            : Colors.transparent,
-                      ),
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      p,
-                      style: TextStyle(
-                        color: isSelected
-                            ? AppTheme.primaryPurple
-                            : AppTheme.textSecondary,
-                        fontWeight: FontWeight.bold,
+                child: Semantics(
+                  button: true,
+                  selected: isSelected,
+                  label: 'Priority level: $p',
+                  child: Tooltip(
+                    message: 'Set priority level to $p',
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: () => setState(() => _priority = p),
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 4),
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          decoration: BoxDecoration(
+                            color: isSelected
+                                ? AppTheme.primaryPurple.withValues(alpha: 0.2)
+                                : AppTheme.surfaceElevated,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: isSelected
+                                  ? AppTheme.primaryPurple
+                                  : Colors.transparent,
+                            ),
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            p,
+                            style: TextStyle(
+                              color: isSelected
+                                  ? AppTheme.primaryPurple
+                                  : AppTheme.textSecondary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -148,30 +159,45 @@ class _AddEditGoalScreenState extends ConsumerState<AddEditGoalScreen> {
             ),
           ),
           const SizedBox(height: 8),
-          GestureDetector(
-            onTap: () => _selectDate(context),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-              decoration: BoxDecoration(
-                color: AppTheme.surfaceElevated,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    AppDateFormats.standard.format(_targetDate),
-                    style: const TextStyle(
-                      color: AppTheme.textPrimary,
-                      fontSize: 16,
+          Semantics(
+            button: true,
+            label: 'Select target date',
+            child: Tooltip(
+              message: 'Select target date',
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: GestureDetector(
+                  onTap: () => _selectDate(context),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 16,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppTheme.surfaceElevated,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: Colors.white.withValues(alpha: 0.05),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          AppDateFormats.standard.format(_targetDate),
+                          style: const TextStyle(
+                            color: AppTheme.textPrimary,
+                            fontSize: 16,
+                          ),
+                        ),
+                        const Icon(
+                          Icons.calendar_today,
+                          color: AppTheme.primaryPurple,
+                        ),
+                      ],
                     ),
                   ),
-                  const Icon(
-                    Icons.calendar_today,
-                    color: AppTheme.primaryPurple,
-                  ),
-                ],
+                ),
               ),
             ),
           ),
