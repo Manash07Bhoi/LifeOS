@@ -12,3 +12,8 @@
 **Vulnerability:** The `FlutterSecureStorage` implementation used to store the master AES key for Hive did not explicitly enable `encryptedSharedPreferences: true` for Android in `EncryptionService`.
 **Learning:** On Android, without explicitly setting this option, `flutter_secure_storage` defaults to older, less secure storage methods depending on the Android API version, potentially leaving the encryption key vulnerable. When transitioning from non-encrypted to encrypted shared preferences, the existing keys must be migrated otherwise existing users will lose access to their encrypted data.
 **Prevention:** Always initialize `FlutterSecureStorage` with `aOptions: const AndroidOptions(encryptedSharedPreferences: true)` on Android platforms to ensure maximum security for stored secrets. Implement migration logic when rolling out this change to production applications.
+
+## 2024-05-25 - Silent Failure and Inadequate Logging for Database Corruption
+**Vulnerability:** Corrupted Hive boxes were being deleted and recreated without logging the original corruption error or the fallback failure. This silent failure pattern masks potential security issues or filesystem health problems.
+**Learning:** Empty catch blocks or comments like 'omit print in prod' hinder diagnostics. Security-sensitive operations must have diagnostic visibility that doesn't compromise production hardening.
+**Prevention:** Centralize security and error logging through a `SecurityLogger` that utilizes `dart:developer.log`. This allows developers to inspect critical failures via DevTools without leaking info to standard output or the end-user UI.

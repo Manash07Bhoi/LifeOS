@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'security_logger.dart';
 
 class EncryptionService {
   static const String _keyName = 'hive_encryption_key';
@@ -94,12 +95,15 @@ class EncryptionService {
     } catch (e) {
       // If it fails WITH encryption, the box might be corrupted.
       // The instructions say: IF FAILURE: Log error safely. Fallback: clear box (LAST RESORT ONLY)
-      // Log error securely
-      // omit print in prod - simulated safe logging
+      SecurityLogger.logError(e, message: 'Box corruption detected: $name');
       try {
         await Hive.deleteBoxFromDisk(name);
         return await Hive.openBox<T>(name, encryptionCipher: cipher);
       } catch (fallbackError) {
+        SecurityLogger.logError(
+          fallbackError,
+          message: 'Critical: Fallback box recreation failed for: $name',
+        );
         rethrow;
       }
     }
